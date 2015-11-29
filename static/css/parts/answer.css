@@ -1,0 +1,35 @@
+.answer .cell {
+    padding: 10px;
+    font-size: 12px;
+    line-height: 120%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.answer .no {
+    font-size: 9px;
+    line-height: 9px;
+    font-weight: 500;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #ccc;
+    padding: 2px 5px 2px 5px;
+}
+
+.answer .fr {
+    float: right;
+    text-align: right;
+}
+
+.answer .sep5 {
+    height: 5px;
+}
+
+.answer .fade_answer {
+    color: #ccc;
+}
+
+.answer .sep3 {
+    height: 3px;
+}

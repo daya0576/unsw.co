@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}About{% endblock %}
+
+{% block body_block %}
+    <div class="edit-area">
+        {{ form }}
+    </div>
+
+
+    <div class="page-header">
+        <h1>About</h1>
+    </div>
+    <div>
+        <p></strong>.</p>
+
+        <img width="300px" src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" /> <!-- New line -->
+
+        <p> visits: {{ visits }}</p>
+    </div>
+{% endblock %}

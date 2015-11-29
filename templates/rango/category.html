@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block body_block %}
+    <h1>{{ category.name }}</h1>
+    {% if category %}
+        <!--like button-->
+        <div class="underline">
+            {% include 'rango/parts/cat_like.html' %}
+        </div>
+
+        <div class="">
+            {% include 'rango/parts/cat_pages.html' %}
+        </div>
+
+        <div class="answer">
+            <h3>Anwsers</h3>
+            {% include 'rango/parts/answer.html' %}
+
+
+            <form id="category_form" method="post" action="/rango/category/{{ category_name_slug }}/add_answer/">
+                {% csrf_token %}
+                {{ editor.media }}
+
+                {% bootstrap_form editor %}
+                <!--<input type="submit" name="submit" value="Create Category" />-->
+                <button class="btn btn-primary" type="submit" name="submit">submit</button>
+            </form>
+
+        </div>
+
+    {% else %}
+        The specified category {{ . }} does not exist!
+    {% endif %}
+
+
+
+{% endblock %}

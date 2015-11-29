@@ -1,0 +1,11 @@
+
+{% for c in cats %}
+    {% if c == act_cat %}
+        <li class="active cat" >{% else  %} <li class="cat">
+    {% endif %}
+    <a href="{% url 'category'  c.slug %}">
+        <strong>{{ c.no }}</strong>({{ c.likes }} likes)<br>
+                {{ c.name }}
+    </a></li>
+{% endfor %}
+<li><a href="{% url 'add_category' %}"><strong>More..</strong></a></li>

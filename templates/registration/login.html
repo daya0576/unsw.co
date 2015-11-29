@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+
+{% block body_block %}
+
+    <script>
+        {% if form.message.errors %}
+            alert("{{ form.message.errors }}");
+        {% endif %}
+
+    </script>
+
+    <form method="post" action=".">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% bootstrap_icon "ok-circle" %} Submit
+            </button>
+            <button type="reset" class="btn btn-default">
+                {% bootstrap_icon "ok-default" %} Reset
+            </button>
+        {% endbuttons %}
+        <br>
+        <u><a href="{% url 'auth_password_reset' %}">Forget password?</a></u>
+        <!--<input type="submit" value="Submit" />-->
+        <!--<button class="btn btn-primary" type="submit" name="submit">Login</button>-->
+    </form>
+
+{% endblock %}

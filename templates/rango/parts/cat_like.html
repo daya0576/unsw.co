@@ -1,0 +1,29 @@
+
+{% load staticfiles %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+
+{% if user.is_authenticated %}
+    <button id="liked" style="display:none" data-catid="{{category.id}}" class="btn btn-info btn-xs active">
+        <span class="glyphicon glyphicon-heart"></span> liked
+    </button>
+    <button  id="likes" style="display:none" data-catid="{{category.id}}" class="btn btn-primary btn-xs active">
+        <span class="glyphicon glyphicon-heart"></span> like
+    </button>
+{% endif %}
+
+{% if category.likes > 1 %}
+    <strong id="like_count">{{ category.likes }}</strong> people like
+{% elif category.likes == 1 %}
+    <strong id="like_count">{{ category.likes }}</strong> people likes
+{% else  %}
+    <strong id="like_count">{{ category.likes }}</strong> T^T no one likes
+{% endif %}
+
+
+<script>
+    {% if is_liked %}
+        $('#likes').hide();$('#liked').show();
+    {% else %}
+        $('#liked').hide();$('#likes').show();
+    {% endif %}
+</script>

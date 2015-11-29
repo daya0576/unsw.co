@@ -1,0 +1,43 @@
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.grey{
+    background-background:#eee;
+}
+.search_pointer{
+    cursor:pointer;
+}
+.underline{
+    border-bottom: 1px solid rgba(0,0,0,0.13);
+
+    padding: 4px 0 8px 0;
+}
+
+
+.nav-sidebar{
+    margin-top: -20px;
+}
+
+.sidebar{
+    top: 50px;
+}
+
+#nav_search a{
+    background-color: #204d74;
+    color:grey;
+    /*border-bottom:1px green solid;*/
+}
+#nav_search_content a{
+    background-color: #204d74;
+    padding: 7px 10px 7px 15px;
+}
+#nav_search_content input{
+    height: 26px;
+}
+
+
+.content{
+    background-color: #e2e2e2;
+}

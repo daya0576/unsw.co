@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+
+{% block body_block %}
+  <h1>Register Here</h1>
+  <form method="post" action=".">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+          <button type="submit" class="btn btn-primary">
+              {% bootstrap_icon "ok-circle" %} Register
+          </button>
+      {% endbuttons %}
+
+      <!--<input type="submit" value="Submit" />-->
+      <!--<button class="btn btn-primary" type="submit" name="submit">Login</button>-->
+  </form>
+{% endblock %}
