@@ -2,21 +2,19 @@
 {% load staticfiles %}
 <script src="{% static 'js/jquery.min.js' %}"></script>
 
-{% if user.is_authenticated %}
-    <button id="liked" style="display:none" data-catid="{{category.id}}" class="btn btn-info btn-xs active">
-        <span class="glyphicon glyphicon-heart"></span> liked
-    </button>
-    <button  id="likes" style="display:none" data-catid="{{category.id}}" class="btn btn-primary btn-xs active">
-        <span class="glyphicon glyphicon-heart"></span> like
-    </button>
-{% endif %}
+<button id="liked" style="display:none" data-catid="{{category.id}}" class="btn btn-info btn-xs active">
+    <span class="glyphicon glyphicon-heart"></span> liked
+</button>
+<button  id="likes" style="display:none" data-catid="{{category.id}}" class="btn btn-primary btn-xs active">
+    <span class="glyphicon glyphicon-heart"></span> like
+</button>
 
 {% if category.likes > 1 %}
     <strong id="like_count">{{ category.likes }}</strong> people like
 {% elif category.likes == 1 %}
     <strong id="like_count">{{ category.likes }}</strong> people likes
 {% else  %}
-    <strong id="like_count">{{ category.likes }}</strong> T^T no one likes
+    <strong id="like_count"></strong> T^T no one likes
 {% endif %}
 
 
@@ -26,4 +24,35 @@
     {% else %}
         $('#liked').hide();$('#likes').show();
     {% endif %}
+
+
+    // likes function
+    {% if user.is_authenticated %}
+        $('#likes').click(function(){
+            var catid;
+            catid = $(this).attr("data-catid");
+            $.get('/rango/like_category/', {category_id: catid}, function(data){
+               $('#like_count').html(data);
+               $('#likes').hide();
+               $('#liked').show();
+               alert('thank u for your like~');
+            });
+        });
+
+        $('#liked').click(function(){
+            var catid;
+            catid = $(this).attr("data-catid");
+            $.get('/rango/dislike_category/', {category_id: catid}, function(data){
+               $('#like_count').html(data);
+               $('#liked').hide();
+               $('#likes').show();
+               alert('Hoping u can like me again~')
+            });
+        });
+    {% else %}
+        $('#likes').click(function(){
+            alert("Login to like this course.")
+        });
+    {% endif %}
+
 </script>
