@@ -126,7 +126,7 @@ def add_page(request, category_name_slug):
 
             if form.is_valid():
                 page = form.save(commit=False)
-                page.author = request.user
+                page.user = request.user
                 page.category = cat
                 page.views = 0
                 page.save()

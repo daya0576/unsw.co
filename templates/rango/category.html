@@ -5,37 +5,42 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block body_block %}
-    <h1>{{ category.name }}</h1>
-    {% if category %}
-        <!--like button-->
-        <div class="underline">
-            {% include 'rango/parts/cat_like.html' %}
-        </div>
+    <div class="blur" style="height:100%; width:100%;position:relative"></div>
+    <div class="cat_content">
+        {% if category %}
+            <div class="box">
+                <h1>{{ category.name }}</h1>
+                <div class="underline">
+                    {% include 'rango/parts/cat_like.html' %}
+                </div>
 
-        <div class="">
-            {% include 'rango/parts/cat_pages.html' %}
-        </div>
+                <div class="">
+                    {% include 'rango/parts/cat_pages.html' %}
+                </div>
+            </div>
+            <div class="sep20"></div>
 
-        <div class="answer">
-            <h3>Anwsers</h3>
-            {% include 'rango/parts/answer.html' %}
+            <div class="box">
+                <div class="answer">
+                    {% include 'rango/parts/answer.html' %}
+                </div>
+            </div>
+            <div class="sep20"></div>
 
+            <div class="box">
+                <form id="category_form" method="post" action="/rango/category/{{ category_name_slug }}/add_answer/">
+                        {% csrf_token %}
+                        {{ editor.media }}
 
-            <form id="category_form" method="post" action="/rango/category/{{ category_name_slug }}/add_answer/">
-                {% csrf_token %}
-                {{ editor.media }}
+                        {% bootstrap_form editor %}
+                        <!--<input type="submit" name="submit" value="Create Category" />-->
+                        <button class="btn btn-primary" type="submit" name="submit">submit</button>
+                    </form>
+            </div>
+        {% else %}
+            The specified category {{ . }} does not exist!
+        {% endif %}
 
-                {% bootstrap_form editor %}
-                <!--<input type="submit" name="submit" value="Create Category" />-->
-                <button class="btn btn-primary" type="submit" name="submit">submit</button>
-            </form>
-
-        </div>
-
-    {% else %}
-        The specified category {{ . }} does not exist!
-    {% endif %}
-
-
+    </div>
 
 {% endblock %}

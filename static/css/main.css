@@ -1,20 +1,36 @@
-.h1, .h2, .h3, h1, h2, h3 {
+h1, h2, h3, h4 {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
+}
+.container-fluid{
+    padding:0px;
+}
+.navbar-right{
+    margin-right: 0px;
+}
+.navbar-brand{
+
 }
 
-.grey{
-    background-background:#eee;
+.sep20{
+    height: 20px;
 }
+
+
 .search_pointer{
     cursor:pointer;
 }
 .underline{
     border-bottom: 1px solid rgba(0,0,0,0.13);
-
     padding: 4px 0 8px 0;
 }
-
+.box {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #e2e2e2;
+    padding:10px;
+}
 
 .nav-sidebar{
     margin-top: -20px;
@@ -37,7 +53,13 @@
     height: 26px;
 }
 
+body{
+    background-color: #eee;
+}
 
-.content{
-    background-color: #e2e2e2;
+.blur {
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);
+            filter: blur(10px);
 }

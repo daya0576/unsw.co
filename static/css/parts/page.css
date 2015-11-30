@@ -1,0 +1,15 @@
+.more{
+    color: inherit;
+    font-size: inherit;
+    display: inline-block!important;
+    font-size: .9em;
+    color: #999;
+}
+
+.page{
+    margin-top: 15px;
+}
+
+.list-group{
+    margin-bottom: 8px;
+}

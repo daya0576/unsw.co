@@ -1,4 +1,5 @@
 
+
 {% load staticfiles %}
 <script src="{% static 'js/jquery.min.js' %}"></script>
 
@@ -10,11 +11,17 @@
 </button>
 
 {% if category.likes > 1 %}
-    <strong id="like_count">{{ category.likes }}</strong> people like
+    <span class="more">
+        <strong id="like_count">{{ category.likes }}</strong>
+        people like this course
+    </span>
 {% elif category.likes == 1 %}
-    <strong id="like_count">{{ category.likes }}</strong> people likes
+    <span class="more">
+        <strong id="like_count">{{ category.likes }}</strong>
+        people likes this course
+    </span>
 {% else  %}
-    <strong id="like_count"></strong> T^T no one likes
+    <span class="more"><strong id="like_count"></strong> T^T no one likes</span>
 {% endif %}
 
 

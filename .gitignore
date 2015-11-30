@@ -7,3 +7,4 @@ rango/urls.pyc
 tango_with_django_project/urls.pyc
 rango/forms.pyc
 *.pyc
+rango/keys.py

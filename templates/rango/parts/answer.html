@@ -2,7 +2,7 @@
 {% load tz %}
 <link href="{% static 'css/parts/answer.css' %}" rel="stylesheet">
 
-
+<h3>Anwsers</h3>
 {% if answers %}
 {% for answer in answers %}
     <div class="cell">
@@ -31,7 +31,7 @@
     </div>
 {% endfor %}
 {% else %}
-    <strong>No answers currently in this class.</strong>
+    <span class="more">No answers currently in this class.</span>
 {% endif %}
 
 
