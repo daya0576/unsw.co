@@ -8,6 +8,23 @@ from django.conf import settings
 from DjangoUeditor.commands import UEditorButtonCommand,UEditorComboCommand
 from DjangoUeditor.commands import UEditorEventHandler
 
+
+class Subject(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    school_cn = models.CharField(max_length=100, blank=True)
+    school_en = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(unique=True)
+    url = models.URLField()
+
+    views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Subject, self).save(*args, **kwargs)
+
+
+
 class Category(models.Model):
     no = models.CharField(max_length=20)
     name = models.CharField(max_length=50, unique=True)
@@ -20,6 +37,8 @@ class Category(models.Model):
     url = models.URLField()
     description = models.CharField(max_length=128)
 
+    subject = models.ForeignKey(Subject)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Category, self).save(*args, **kwargs)
@@ -28,7 +47,7 @@ class Category(models.Model):
         return self.name
 
 
-class Page(models.Model):
+class CatPage(models.Model):
     title = models.CharField(max_length=128)
     category = models.ForeignKey(Category)
     url = models.URLField()
@@ -39,16 +58,15 @@ class Page(models.Model):
         return self.title
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+class SubPage(models.Model):
+    title = models.CharField(max_length=128)
+    subject = models.ForeignKey(Subject)
+    url = models.URLField()
+    views = models.IntegerField(default=0)
+    user = models.ForeignKey(User)
 
-    website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
-        return self.user.username
-    pass
+        return self.title
 
 
 class BaiduEditor(models.Model):
@@ -97,7 +115,4 @@ class Answers(models.Model):
 class CategoryUserLikes(models.Model):
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
-
-
-
 

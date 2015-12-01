@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 h1, h2, h3, h4 {
     margin-top: 10px;
     margin-bottom: 3px;
@@ -9,8 +11,10 @@ h1, h2, h3, h4 {
     margin-right: 0px;
 }
 .navbar-brand{
-
+    margin-left: 15px;
 }
+
+
 
 .sep20{
     height: 20px;
@@ -54,12 +58,9 @@ h1, h2, h3, h4 {
 }
 
 body{
-    background-color: #eee;
+    //background-color: #eee;
+    //background: rgba(66,139,202,.1);
+    background: url(/static/images/bg/noise_fw.gif) #DFDFDF;
+    -webkit-font-smoothing: antialiased;
 }
 
-.blur {
-    -webkit-filter: blur(10px); /* Chrome, Opera */
-       -moz-filter: blur(10px);
-        -ms-filter: blur(10px);
-            filter: blur(10px);
-}

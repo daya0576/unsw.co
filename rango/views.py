@@ -3,11 +3,10 @@
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
-from rango.models import Category, Page, Answers, CategoryUserLikes
-from rango.forms import CategoryForm, PageForm, UserForm, UserProfileForm, TestUeditorModelForm
+from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject
+from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from rango.bing_search import run_query
 from forms import TestUeditorModelForm
 from django.http import JsonResponse
 
@@ -18,9 +17,10 @@ from django.http import JsonResponse
 #     return HttpResponse("Rango says hey there world<br>"
 #                         "<a href='/rango/about'>About</a>")
 
+
 def index(request):
     category_list = Category.objects.order_by('-likes')[0:5]
-    page_list = Page.objects.order_by('-views')[0:5]
+    page_list = CatPage.objects.order_by('-views')[0:5]
 
     context_dict = {'categories': category_list, 'pages': page_list}
 
@@ -65,12 +65,13 @@ def about(request):
     return render(request, 'rango/about.html', content_dict)
 
 
-def category(request, category_name_slug):
+def category(request, cat_name_slug):
     context_dict = {}
 
     try:
-        category = Category.objects.get(slug=category_name_slug)
-        pages = Page.objects.filter(category=category)
+        category = Category.objects.get(slug=cat_name_slug)
+        print cat_name_slug
+        pages = CatPage.objects.filter(category=category)
         answers = Answers.objects.filter(category=category)
         user = request.user
         if user.is_authenticated():
@@ -78,20 +79,37 @@ def category(request, category_name_slug):
         else:
             is_liked = None
         # print is_liked
+
+        context_dict['pages'] = pages
+        context_dict['answers'] = answers
+        context_dict['category'] = category
+        context_dict['cat_name_slug'] = cat_name_slug
+
+        editor = TestUeditorModelForm()
+        context_dict['editor'] = editor
+
+        context_dict['is_liked'] = is_liked
+
+        context_dict['subject'] = category.subject
+
     except Category.DoesNotExist:
-        category = None
-
-    context_dict['pages'] = pages
-    context_dict['answers'] = answers
-    context_dict['category'] = category
-    context_dict['category_name_slug'] = category_name_slug
-
-    editor = TestUeditorModelForm()
-    context_dict['editor'] = editor
-
-    context_dict['is_liked'] = is_liked
+        context_dict = {}
 
     return render(request, 'rango/category.html', context_dict)
+
+
+def subject(request, sub_name_slug):
+    context_dict = {}
+
+    try:
+        subject = Subject.objects.get(slug=sub_name_slug)
+
+        context_dict['subject'] = subject
+        # context_dict['act_sub'] = subject
+    except Subject.DoesNotExist:
+        context_dict = {}
+
+    return render(request, 'rango/subject.html', context_dict)
 
 
 def add_category(request):
@@ -110,7 +128,7 @@ def add_category(request):
         return render(request, 'rango/add_category.html', {'form': form})
 
 
-def add_page(request, category_name_slug):
+def add_cat_page(request, category_name_slug):
 
     try:
         cat = Category.objects.get(slug=category_name_slug)
@@ -122,7 +140,7 @@ def add_page(request, category_name_slug):
             pass
             # return HttpResponse("you can't post it again.")
         else:
-            form = PageForm(request.POST)
+            form = CatPageForm(request.POST)
 
             if form.is_valid():
                 page = form.save(commit=False)
@@ -139,7 +157,7 @@ def add_page(request, category_name_slug):
 
     else:
 
-        form = PageForm()
+        form = CatPageForm()
 
         context_dict = {'form': form, 'category': cat, 'category_name_slug': category_name_slug}
         response = render(request, 'rango/add_page.html', context_dict)
@@ -149,89 +167,16 @@ def add_page(request, category_name_slug):
     # return HttpResponseRedirect('/rango/category/'+category_name_slug)
 
 
-def register(request):
-    registered = False
-
-    if request.method == 'POST':
-        user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid:
-            user = user_form.save()
-
-            user.set_password(user.password)
-            user.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-
-            profile.save()
-
-            registered = True
-
-        else:
-            print user_form.errors, profile_form.errors
-
-    else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-
-    return render(request,
-                  'rango/register.html',
-                  {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
-
-
-def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-
-        if user:
-            login(request, user)
-            return HttpResponseRedirect('/rango/')
-        else:
-            # return HttpResponse("login fails")
-            msg = {"login_info": "login fails"}
-            return render(request, 'rango/login.html', msg)
-
-    else:
-        return render(request, 'rango/login.html', {})
-
-
 @login_required
 def restricted(request):
     # return HttpResponse("Since you're logged in, you can see this text!")
     return render(request, 'rango/restricted.html', {})
 
 
-@login_required
-def user_logout(request):
-    logout(request)
-
-    return HttpResponseRedirect('/rango/')
-
-
-def search(request):
-    result_list = []
-
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-
-        if query:
-            result_list = run_query(query)
-
-    return render(request, 'rango/search.html', {'result_list': result_list})
-
-
 def track_url(request):
     if "page_id" in request.GET:
         page_id = request.GET['page_id']
-        page = Page.objects.get(id=page_id)
+        page = CatPage.objects.get(id=page_id)
 
         page.views += 1
         page.save()
@@ -307,12 +252,11 @@ def suggest_category(request):
         cat_search_keyword = request.GET['suggestion']
 
     if cat_search_keyword != '' and cat_search_keyword is not None:
-        cat_list = get_category_list(8, cat_search_keyword)
+        cat_list = get_category_list(0, cat_search_keyword)
     else:
         cat_list = Category.objects.order_by('-likes')[0:5]
 
-
-    return render(request, 'rango/category_list.html', {'cats': cat_list})
+    return render(request, 'rango/parts/nav/cats_search_list.html', {'cats': cat_list})
     # return render(request, 'rango/cats.html', {'cats': cat_list})
     # return HttpResponse({'cat_list': cat_list})
 
@@ -355,18 +299,34 @@ def add_answer(request, category_name_slug):
 
 
 @login_required
-def delete_page(request):
+def delete_cat_page(request):
     page_id = None
     if request.method == 'GET':
         page_id = request.GET['page_id']
 
     return_code = -1
     if page_id:
-        print page_id
-        page = Page.objects.get(id=int(page_id))
+        page = CatPage.objects.get(id=int(page_id))
 
         page.delete()
         return_code = 1
 
     date = {"return_code": return_code}
     return JsonResponse(date)
+
+
+def get_subject_list(max_results=0, cat_search_keyword=''):
+    cat_list = []
+    if cat_search_keyword:
+        sub_list = Subject.objects.filter(name__contains=cat_search_keyword)
+        # print cat_list
+        sub_list = Subject.objects.filter(no__contains=cat_search_keyword)
+        sub_list = list(set(cat_list))
+    else:
+        sub_list = Subject.objects.all()
+
+    if max_results > 0:
+        if len(cat_list) > max_results:
+            cat_list = cat_list[:max_results]
+
+    return cat_list

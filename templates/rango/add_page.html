@@ -7,7 +7,7 @@
 {% block title %}Add Page{% endblock %}
 
 {% block body_block %}
-    <form id="category_page" method="post" action="/rango/category/{{ category_name_slug }}/add_page/">
+    <form id="category_page" method="post" action="/rango/category/{{ category_name_slug }}/add_cat_page/">
         {% if category %}
             <h2 class="form-signin-heading">Add a Page to <a href="/rango/category/{{category.slug}}/"> {{ category.name }}</a></h2>
 

@@ -5,7 +5,7 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block body_block %}
-    <div class="blur" style="height:100%; width:100%;position:relative"></div>
+    <div class="blur" style="height:100%; width"></div>
     <div class="cat_content">
         {% if category %}
             <div class="box">
@@ -28,7 +28,7 @@
             <div class="sep20"></div>
 
             <div class="box">
-                <form id="category_form" method="post" action="/rango/category/{{ category_name_slug }}/add_answer/">
+                <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
                         {% csrf_token %}
                         {{ editor.media }}
 

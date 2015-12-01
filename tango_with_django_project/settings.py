@@ -173,12 +173,3 @@ UEDITOR_SETTINGS={
        #这里放php/config.json里面的配置项.......
     }
 }
-
-
-BOOTSTRAP3 = {
-    # Label class to use in horizontal forms
-    'horizontal_label_class': 'col-md-3',
-
-    # Field class to use in horizontal forms
-    'horizontal_field_class': 'col-md-5',
-}
