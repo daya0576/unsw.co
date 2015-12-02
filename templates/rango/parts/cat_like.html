@@ -11,17 +11,15 @@
 </button>
 
 {% if category.likes > 1 %}
-    <span class="more">
-        <strong id="like_count">{{ category.likes }}</strong>
-        people like this course
+    <span id="like_count" class="more">
+        <strong>{{ category.likes }}</strong> people like this course
     </span>
 {% elif category.likes == 1 %}
-    <span class="more">
-        <strong id="like_count">{{ category.likes }}</strong>
-        people likes this course
+    <span id="like_count" class="more">
+        <strong>{{ category.likes }}</strong> people likes this course
     </span>
 {% else  %}
-    <span class="more"><strong id="like_count"></strong> T^T no one likes me</span>
+    <span id="like_count" class="more"> T^T no one likes me</span>
 {% endif %}
 
 
@@ -39,10 +37,19 @@
             var catid;
             catid = $(this).attr("data-catid");
             $.get('/rango/like_category/', {category_id: catid}, function(data){
-               $('#like_count').html(data);
-               $('#likes').hide();
-               $('#liked').show();
-               alert('thank u for your like~');
+                var like_str = '';
+                if(data==0){
+                    like_str = '&nbsp;T^T no one likes me';
+                }else if(data==1){
+                    like_str = '<strong>&nbsp;'+data+'</strong> people likes this course';
+                }else{
+                    like_str = '<strong>&nbsp;'+data+'</strong> people like this course';
+                }
+                $('#like_count').html(like_str);
+
+                $('#likes').hide();
+                $('#liked').show();
+                alert('thank u for your like~');
             });
         });
 
@@ -50,10 +57,19 @@
             var catid;
             catid = $(this).attr("data-catid");
             $.get('/rango/dislike_category/', {category_id: catid}, function(data){
-               $('#like_count').html(data);
-               $('#liked').hide();
-               $('#likes').show();
-               alert('Hoping u can like me again~')
+                var like_str = '';
+                if(data==0){
+                    like_str = '&nbsp;T^T no one likes me';
+                }else if(data==1){
+                    like_str = '<strong>&nbsp;'+data+'</strong> people likes this course';
+                }else{
+                    like_str = '<strong>&nbsp;'+data+'</strong> people like this course';
+                }
+                $('#like_count').html(like_str);
+
+                $('#liked').hide();
+                $('#likes').show();
+                alert('Hoping u can like me again~')
             });
         });
     {% else %}

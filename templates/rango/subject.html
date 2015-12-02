@@ -10,19 +10,15 @@
         {% if subject %}
             <div class="box">
                 <h1>{{ subject.name }}</h1>
-                <div class="underline">
-                    {% include 'rango/parts/cat_like.html' %}
-                </div>
-
                 <div class="">
-                    {% include 'rango/parts/sub_pages.html' %}
+                    <h4><a href="{{ subject.url }}" target="_blank">Major Homepage</a></h4>
                 </div>
             </div>
             <div class="sep20"></div>
 
             <div class="box">
                 <div class="cats">
-                    {% include 'rango/parts/cats.html' %}
+                    {% include 'rango/parts/subject/cats.html' %}
                 </div>
             </div>
             <div class="sep20"></div>

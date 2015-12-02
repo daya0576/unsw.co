@@ -15,7 +15,7 @@
             {% if c == act_cat %}
                 <li class="active cat" > {% else  %} <li class="cat">
             {% endif %}
-            <a href="{% url 'category'  c.slug %}">
+            <a href="{% url 'category' c.slug %}">
                 <strong>{{ c.no }}</strong>
                 <span class="likes">({{ c.likes }} likes)</span><br>
                 {{ c.name }}
@@ -23,7 +23,7 @@
         {% endfor %}
         <li><a class="search_pointer"><strong class="grey">Search for more..</strong></a>
 {% else %}
-    <li> <strong >There are no category present.</strong></li>
+    <li> <strong >There are no course present.</strong></li>
     </ul>
 {% endif %}
 

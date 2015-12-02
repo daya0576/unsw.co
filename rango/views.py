@@ -103,8 +103,11 @@ def subject(request, sub_name_slug):
 
     try:
         subject = Subject.objects.get(slug=sub_name_slug)
+        cats = Category.objects.filter(subject=subject)
 
         context_dict['subject'] = subject
+        context_dict['cats'] = cats
+        context_dict['sub_name_slug'] = sub_name_slug
         # context_dict['act_sub'] = subject
     except Subject.DoesNotExist:
         context_dict = {}
@@ -112,20 +115,30 @@ def subject(request, sub_name_slug):
     return render(request, 'rango/subject.html', context_dict)
 
 
-def add_category(request):
+def add_category(request, sub_name_slug):
+    context_dict = {}
+
+    # try:
+    #     subject = Subject.objects.get(slug=sub_name_slug)
+    # except Subject.DoesNotExist:
+    #     print "Subject does not exit!"
+
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
         if form.is_valid():
             form.save(commit=True)
-            return index(request)
+            return subject(request, sub_name_slug)
         else:
             print "form.errors", form.errors
 
         return HttpResponseRedirect('/rango/')
     else:
         form = CategoryForm()
-        return render(request, 'rango/add_category.html', {'form': form})
+        context_dict['form'] = CategoryForm()
+        context_dict['sub_name_slug'] = sub_name_slug
+
+        return render(request, 'rango/add_category.html', context_dict)
 
 
 def add_cat_page(request, category_name_slug):
@@ -234,9 +247,8 @@ def dislike_category(request):
 def get_category_list(max_results=0, cat_search_keyword=''):
     cat_list = []
     if cat_search_keyword:
-        cat_list = Category.objects.filter(name__contains=cat_search_keyword)
-        # print cat_list
-        cat_list = Category.objects.filter(no__contains=cat_search_keyword)
+        cat_list = list(Category.objects.filter(name__contains=cat_search_keyword))
+        cat_list += list(Category.objects.filter(no__contains=cat_search_keyword))
         cat_list = list(set(cat_list))
     if max_results > 0:
         if len(cat_list) > max_results:
@@ -246,19 +258,21 @@ def get_category_list(max_results=0, cat_search_keyword=''):
 
 
 def suggest_category(request):
-    cat_list = []
+    cats = []
     cat_search_keyword = ''
     if request.method == 'GET':
         cat_search_keyword = request.GET['suggestion']
 
-    if cat_search_keyword != '' and cat_search_keyword is not None:
-        cat_list = get_category_list(0, cat_search_keyword)
-    else:
-        cat_list = Category.objects.order_by('-likes')[0:5]
+        if cat_search_keyword != '' and cat_search_keyword is not None:
+            cats = get_category_list(0, cat_search_keyword)
+            context_dict = {'cats': cats}
+        else:
+            subs = Subject.objects.all()
+            context_dict = {'subs': subs}
 
-    return render(request, 'rango/parts/nav/cats_search_list.html', {'cats': cat_list})
-    # return render(request, 'rango/cats.html', {'cats': cat_list})
-    # return HttpResponse({'cat_list': cat_list})
+        return render(request, 'rango/parts/navbar/cats_li.html', context_dict)
+        # return render(request, 'rango/cats.html', {'cats': cat_list})
+        # return HttpResponse({'cat_list': cat_list})
 
 
 def edit_description_view(request):

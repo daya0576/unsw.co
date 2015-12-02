@@ -1,8 +1,6 @@
-{% if subs %}
-    {% include 'rango/parts/nav_search.html' %}
-
-    <ul class="nav nav-sidebar" id="subs">
-        <!--<li><a><strong class="grey">Hottest Courses</strong></a></li>-->
+<ul class="nav nav-sidebar" id="nav_content">
+    <!--<li><a><strong class="grey">Hottest Courses</strong></a></li>-->
+    {% if subs %}
         {% for c in subs %}
             {% if c == act_sub %}
                 <li class="active cat" > {% else  %} <li class="cat">
@@ -14,7 +12,8 @@
             </a></li>
         {% endfor %}
         <li><a class="search_pointer"><strong class="grey">Search for courses..</strong></a>
-{% else %}
-        <li> <strong >There are no category present.</strong></li>
-    </ul>
-{% endif %}
+    {% else %}
+        <li> <strong >There are no major present.</strong></li>
+    {% endif %}
+
+</ul>

@@ -1,0 +1,25 @@
+
+#sub_cats_container a {
+    padding: 15px;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    display:block;
+    //width: 100%; height: auto;
+    margin-bottom: 5px;
+}
+
+.grid.effect-4 {
+	perspective: 1300px;
+}
+
+.grid.effect-4 li {
+	transform-style: preserve-3d;
+}
+
+.grid.effect-4 li.animate {
+	transform: translateZ(400px) translateY(300px) rotateX(-90deg);
+	animation: fallPerspective .8s ease-in-out forwards;
+}
+
+@keyframes fallPerspective {
+	100% { transform: translateZ(0px) translateY(0px) rotateX(0deg); opacity: 1; }
+}

@@ -5,8 +5,9 @@
 {% block title %}Add Category{% endblock %}
 
 {% block body_block %}
-    <form id="category_form" method="post" action="{% url 'add_category' %}">
+    <form id="category_form" method="post" action="{% url 'add_category' sub_name_slug %}">
         <h2 class="form-signin-heading">Add a new course</a></h2>
+        <br>
         {% csrf_token %}
 
         <!--{% for hidden in form.hidden_fields %}-->
@@ -20,7 +21,7 @@
         <!--{% endfor %}-->
         <!--<br>-->
 
-        {% bootstrap_form form %}
+        {% bootstrap_form form layout='inline' %}
 
         <!--<input type="submit" name="submit" value="Create Category" />-->
         <button class="btn btn-primary" type="submit" name="submit">Create Category</button>

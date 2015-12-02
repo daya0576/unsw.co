@@ -34,10 +34,6 @@
             {% else %}
                 <strong>There are no categories present.</strong>
             {% endif %}
-
-            {% if user.is_authenticated %}
-                <a href="{% url 'add_category' %}">(Add a New Category)</a><br />
-            {% endif %}
         </div>
 
 

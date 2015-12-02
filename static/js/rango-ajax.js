@@ -3,7 +3,7 @@ $('#suggestion').keyup(function(){
     var query;
     query = $(this).val();
     $.get('/rango/suggest_category/', {suggestion: query}, function(data){
-        $('#subs').html(data);
+        $('#nav_content').html(data);
     });
 });
 
