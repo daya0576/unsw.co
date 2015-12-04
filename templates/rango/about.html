@@ -6,19 +6,15 @@
 {% block title %}About{% endblock %}
 
 {% block body_block %}
-    <div class="edit-area">
-        {{ form }}
-    </div>
-
-
     <div class="page-header">
         <h1>About</h1>
     </div>
+
     <div>
-        <p></strong>.</p>
 
-        <img width="300px" src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" /> <!-- New line -->
+        <h4>My home page:<a target="_blank" href="http://changchen.me/about/"> changchen.me</a></h4>
 
+        <img width="480px" src="{% static 'images/avatar/me.png' %}">
         <p> visits: {{ visits }}</p>
     </div>
 {% endblock %}

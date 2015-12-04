@@ -28,6 +28,7 @@ h1, h2, h3, h4 {
     border-bottom: 1px solid rgba(0,0,0,0.13);
     padding: 4px 0 8px 0;
 }
+
 .box {
     background-color: #fff;
     border-radius: 3px;
@@ -47,7 +48,6 @@ h1, h2, h3, h4 {
 #nav_search a{
     background-color: #204d74;
     color:grey;
-    /*border-bottom:1px green solid;*/
 }
 #nav_search_content a{
     background-color: #204d74;
@@ -58,9 +58,5 @@ h1, h2, h3, h4 {
 }
 
 body{
-    //background-color: #eee;
-    //background: rgba(66,139,202,.1);
     background: url(/static/images/bg/noise_fw.gif) #DFDFDF;
-    -webkit-font-smoothing: antialiased;
 }
-

@@ -17,13 +17,13 @@
             {% if user.is_authenticated %}
                 <li>
                     <!--<a href="/rango/subject/{{ sub_name_slug }}/add_category/">-->
-                    <a href="{% url 'add_category' sub_name_slug %}">
+                    <a class="small_box" href="{% url 'add_category' sub_name_slug %}">
                         <strong>Add a new course</strong>
                     </a>
                 </li>
             {% else %}
                 <li>
-                    <a href="{% url 'auth_login' %}">
+                    <a class="small_box" href="{% url 'auth_login' %}">
                         <strong>Login to add a new course</strong>
                     </a>
                 </li>
@@ -31,7 +31,7 @@
             {% if cats %}
                 {% for c in cats %}
                     <li>
-                        <a href="{% url 'category' c.slug %}">
+                        <a class="small_box" href="{% url 'category' c.slug %}">
                             <strong>{{ c.no }}</strong>
                             <span class="likes">({{ c.likes }} likes)</span><br>
                             {{ c.name }}

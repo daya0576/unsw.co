@@ -1,38 +1,7 @@
-/* General Demo Style */
-@import url(latofont.css);
 
-@font-face {
-	font-family: 'codropsicons';
-	src:url('../fonts/codropsicons/codropsicons.eot');
-	src:url('../fonts/codropsicons/codropsicons.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/codropsicons/codropsicons.woff') format('woff'),
-		url('../fonts/codropsicons/codropsicons.ttf') format('truetype'),
-		url('../fonts/codropsicons/codropsicons.svg#codropsicons') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-
-*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
-
-
-/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
-.clearfix:before, .clearfix:after { content: " "; display: table; }
-.clearfix:after { clear: both; }
-
-body {
-	font-family: 'Lato', Calibri, Arial, sans-serif;
-	//color: #6b7381;
-	//background: #f2f2f2;
-}
-
-a {
-	//color: #aaa;
-	text-decoration: none;
-}
 
 a:hover,
 a:active {
     text-decoration: none;
-	background: #f2f2f2;
 	color: #333;
 }

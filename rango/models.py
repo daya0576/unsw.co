@@ -24,7 +24,6 @@ class Subject(models.Model):
         super(Subject, self).save(*args, **kwargs)
 
 
-
 class Category(models.Model):
     no = models.CharField(max_length=20)
     name = models.CharField(max_length=50, unique=True)

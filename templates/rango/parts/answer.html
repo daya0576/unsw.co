@@ -4,13 +4,14 @@
 
 <h3>Anwsers</h3>
 {% if answers %}
+<div style="border-bottom:1px solid #e2e2e2;"></div>
 {% for answer in answers %}
     <div class="cell">
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
             <tbody>
                 <tr>
                     <td width="48" valign="top" align="center">
-                        <img src="" class="avatar" border="0" align="default">
+                        <img src="{% static 'images/avatar/default.png' %}" class="avatar" border="0" align="default">
                     </td>
                     <td width="10" valign="top"></td>
                     <td width="auto" valign="top" align="left">
