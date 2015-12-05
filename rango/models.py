@@ -23,6 +23,9 @@ class Subject(models.Model):
         self.slug = slugify(self.name)
         super(Subject, self).save(*args, **kwargs)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Category(models.Model):
     no = models.CharField(max_length=20)
@@ -36,7 +39,7 @@ class Category(models.Model):
     url = models.URLField()
     description = models.CharField(max_length=128)
 
-    subject = models.ForeignKey(Subject)
+    subject = models.ForeignKey(Subject, default=Subject.objects.get(id='1'))
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
