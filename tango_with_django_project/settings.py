@@ -23,6 +23,7 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#931l#hlt@!kkp-z1u&(kzyn_z(i7ngf-=&85ex#z97vcf=3yf'
+SECURE_HSTS_SECONDS = 0
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
