@@ -39,7 +39,7 @@ class Category(models.Model):
     url = models.URLField()
     description = models.CharField(max_length=128)
 
-    subject = models.ForeignKey(Subject, default=Subject.objects.get(id='1'))
+    subject = models.ForeignKey(Subject)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)

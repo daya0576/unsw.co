@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'rango',
     'registration',
     # 'registration_email',
-    'bootstrap_toolkit',
     'DjangoUeditor',
     'bootstrap3',
 )
