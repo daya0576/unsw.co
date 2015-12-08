@@ -28,14 +28,19 @@
             <div class="sep20"></div>
 
             <div class="box">
-                <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
+                {% if user.is_authenticated %}
+                    <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
                         {% csrf_token %}
                         {{ editor.media }}
 
                         {% bootstrap_form editor %}
                         <!--<input type="submit" name="submit" value="Create Category" />-->
                         <button class="btn btn-primary" type="submit" name="submit">submit</button>
-                </form>
+                    </form>
+                {% else %}
+                    <strong>(login to add description.) </strong>
+                {% endif %}
+
             </div>
         {% else %}
             The specified category {{ . }} does not exist!
