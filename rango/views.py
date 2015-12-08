@@ -20,9 +20,10 @@ from django.http import JsonResponse
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[0:5]
-    page_list = CatPage.objects.order_by('-views')[0:5]
+    # page_list = CatPage.objects.order_by('-views')[0:5]
+    subject_list = Subject.objects.order_by('-likes')[0:5]
 
-    context_dict = {'categories': category_list, 'pages': page_list}
+    context_dict = {'categories': category_list, 'subs': subject_list}
 
     visits = request.session.get('visits')
     if not visits:
@@ -70,7 +71,6 @@ def category(request, cat_name_slug):
 
     try:
         category = Category.objects.get(slug=cat_name_slug)
-        print cat_name_slug
         pages = CatPage.objects.filter(category=category)
         answers = Answers.objects.filter(category=category)
         user = request.user
@@ -117,22 +117,22 @@ def subject(request, sub_name_slug):
 
 def add_category(request, sub_name_slug):
     context_dict = {}
-
-    # try:
-    #     subject = Subject.objects.get(slug=sub_name_slug)
-    # except Subject.DoesNotExist:
-    #     print "Subject does not exit!"
+    try:
+        subject = Subject.objects.get(slug=sub_name_slug)
+    except Subject.DoesNotExist:
+        print "Subject does not exit!"
 
     if request.method == 'POST':
         form = CategoryForm(request.POST)
 
         if form.is_valid():
-            form.save(commit=True)
-            return subject(request, sub_name_slug)
+            cat = form.save(commit=False)
+            cat.subject = subject
+            cat.save()
         else:
             print "form.errors", form.errors
 
-        return HttpResponseRedirect('/rango/')
+        return HttpResponseRedirect('/rango/'+'subject/'+sub_name_slug)
     else:
         form = CategoryForm()
         context_dict['form'] = CategoryForm()
@@ -280,7 +280,7 @@ def edit_description_view(request):
     form = TestUeditorModelForm()
     return render(request, 'rango/edit-description.html', {"form": form})
 
-
+@login_required
 def add_answer(request, category_name_slug):
     answered = False
 
@@ -293,7 +293,6 @@ def add_answer(request, category_name_slug):
 
             cat = Category.objects.get(slug=category_name_slug)
             user = request.user
-            print user
             title = request.POST.get('title')
             content = request.POST.get('content')
             current_time = timezone.now()

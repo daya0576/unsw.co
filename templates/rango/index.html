@@ -17,7 +17,27 @@
         <div class="col-xs-12 col-sm-6 placeholder">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Categories</h3>
+                    <h3 class="panel-title">Majors</h3>
+                </div>
+            </div>
+
+            {% if subs %}
+                <ul  class="list-group">
+                    {% for sub in subs %}
+                        <li class="list-group-item">
+                            <a href="{% url 'subject' sub.slug %}">{{ sub.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <strong>There are no Majors present.</strong>
+            {% endif %}
+        </div>
+
+        <div class="col-xs-12 col-sm-6 placeholder">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Courses</h3>
                 </div>
             </div>
             {% if categories %}
@@ -25,33 +45,14 @@
                     {% for category in categories %}
                         <li class="list-group-item">
                             <a href="{% url 'category' category.slug %}">
-                                <strong>{{ category.no }}</strong>
                                 {{ category.name }}
+                                <strong>{{ category.no }}</strong>
                             </a>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
                 <strong>There are no categories present.</strong>
-            {% endif %}
-        </div>
-
-
-        <div class="col-xs-12 col-sm-6 placeholder">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Pages</h3>
-                </div>
-            </div>
-
-            {% if pages %}
-                <ul  class="list-group">
-                    {% for page in pages %}
-                    <li class="list-group-item"><a href="{{page.url}}">{{ page.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no Pages present.</strong>
             {% endif %}
         </div>
 

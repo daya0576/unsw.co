@@ -1,10 +1,2 @@
-rango/migrations/__init__.pyc
-tango_with_django_project/settings.pyc
-rango/views.pyc
-rango/__init__.pyc
-rango/models.pyc
-rango/urls.pyc
-tango_with_django_project/urls.pyc
-rango/forms.pyc
 *.pyc
 rango/keys.py
