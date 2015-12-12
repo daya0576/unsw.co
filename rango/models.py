@@ -75,31 +75,14 @@ class BaiduEditor(models.Model):
     title = models.CharField(max_length=100, blank=True)
     content = UEditorField(u'', width='100%', height=300,
                      toolbars="full",
-                     imagePath=settings.MEDIA_ROOT + 'Comment_images',
-                     filePath=settings.MEDIA_ROOT + 'Comment_files',
-                     upload_settings={"imageMaxSize": 1204000},
+                     imagePath='Comment_images/',
+                     filePath='Comment_files/%(basename)s_%(datetime)s.%(extname)s',
+                     upload_settings={
+                         "imageMaxSize": 1204000},
                      settings={},
                      command=None,
                      # event_handler=myEventHander(),
                      blank=True)
-
-
-    class myEventHander(UEditorEventHandler):
-        def on_selectionchange(self):
-            return """
-                function getButton(btnName){
-                    var items=%(editor)s.ui.toolbars[0].items;
-                    for(item in items){
-                        if(items[item].name==btnName){
-                            return items[item];
-                        }
-                    }
-                }
-                var btn=getButton("mybtn1");
-                var selRanage=id_Description.selection.getRange()
-                btn.setDisabled(selRanage.startOffset == selRanage.endOffset);
-
-            """
 
 
 class Answers(models.Model):

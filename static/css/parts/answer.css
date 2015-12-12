@@ -40,3 +40,8 @@
 .answer .sep3 {
     height: 3px;
 }
+
+.answer p{
+    margin-bottom:0px;
+
+}

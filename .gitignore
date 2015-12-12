@@ -1,2 +1,3 @@
 *.pyc
 rango/keys.py
+.idea/workspace.xml

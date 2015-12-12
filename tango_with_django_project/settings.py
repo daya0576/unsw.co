@@ -167,9 +167,11 @@ SITE_ID = 3
 # baidu editor
 UEDITOR_SETTINGS={
     "config":{
+        # 'toolbars': 'mini'
        #这里放ueditor.config.js里面的配置项.......
     },
     "upload":{
+
        #这里放php/config.json里面的配置项.......
     }
 }

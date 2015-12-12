@@ -34,18 +34,32 @@
         ,catchRemoteImageEnable:false
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
-            'fullscreen', 'source', '|', 'undo', 'redo', '|',
-            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
-            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
-            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
-            'directionalityltr', 'directionalityrtl', 'indent', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
-            'link', 'unlink', 'anchor', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
-            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
-            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
-            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts', '|',
-            'print', 'preview', 'searchreplace', 'help', 'drafts'
+            'fullscreen', 'source', '|', 'undo', 'redo',
+            '|','bold', 'italic', 'underline', 'strikethrough', 'autotypeset',
+            '|', 'forecolor', 'fontfamily', 'fontsize', 'backcolor', 'link',
+            '|', 'insertorderedlist', 'insertunorderedlist',  'cleardoc',
+//            '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify',
+//            '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter',
+            '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment',
+            '|', 'map', 'gmap',  'insertcode', 'template',
+            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|',
         ]]
+
+//        , toolbars: [[
+//            'fullscreen', 'source', '|', 'undo', 'redo', '|',
+//            'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript',
+//            'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain',
+//            '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
+//            'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+//            'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
+//            'directionalityltr', 'directionalityrtl', 'indent', '|',
+//            //'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|', 'touppercase', 'tolowercase', '|',
+//            'link', '|', 'imagenone', 'imageleft', 'imageright', 'imagecenter', '|',
+//            'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment', 'map', 'gmap', 'insertframe', 'insertcode', 'webapp', 'pagebreak', 'template', 'background', '|',
+//            'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
+//            'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts'
+//            //, '|','print', 'preview', 'searchreplace', 'help', 'drafts'
+//        ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -74,7 +88,7 @@
 
         //,textarea:'editorValue' // 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
 
-        //,initialContent:'欢迎使用ueditor!'    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
+        ,initialContent:''    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
 
         //,autoClearinitialContent:true //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
 
@@ -99,7 +113,7 @@
         //启用自动保存
         //,enableAutoSave: true
         //自动保存间隔时间， 单位ms
-        //,saveInterval: 500
+        ,saveInterval: 1000
 
         //,fullscreen : false //是否开启初始化时即全屏，默认关闭
 
@@ -243,7 +257,7 @@
         //]
 
         //快捷菜单
-        //,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
+        ,shortcutMenu:["fontfamily", "fontsize", "bold", "italic", "underline", "forecolor", "backcolor", "insertorderedlist", "insertunorderedlist"]
 
         //elementPathEnabled
         //是否启用元素路径，默认是显示
@@ -329,9 +343,9 @@
         //,sourceEditor:"codemirror"
         //如果sourceEditor是codemirror，还用配置一下两个参数
         //codeMirrorJsUrl js加载的路径，默认是 URL + "third-party/codemirror/codemirror.js"
-        //,codeMirrorJsUrl:URL + "third-party/codemirror/codemirror.js"
-        //codeMirrorCssUrl css加载的路径，默认是 URL + "third-party/codemirror/codemirror.css"
-        //,codeMirrorCssUrl:URL + "third-party/codemirror/codemirror.css"
+        ,codeMirrorJsUrl:URL + "third-party/codemirror/codemirror.js"
+//        codeMirrorCssUrl css加载的路径，默认是 URL + "third-party/codemirror/codemirror.css"
+        ,codeMirrorCssUrl:URL + "third-party/codemirror/codemirror.css"
         //编辑器初始化完成后是否进入源码模式，默认为否。
         //,sourceEditorFirst:false
 
