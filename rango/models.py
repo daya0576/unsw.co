@@ -75,7 +75,7 @@ class BaiduEditor(models.Model):
     title = models.CharField(max_length=100, blank=True)
     content = UEditorField(u'', width='100%', height=300,
                      toolbars="full",
-                     imagePath='Comment_images/',
+                     imagePath='Comment_images/%(basename)s_%(datetime)s.%(extname)s',
                      filePath='Comment_files/%(basename)s_%(datetime)s.%(extname)s',
                      upload_settings={
                          "imageMaxSize": 1204000},

@@ -23,7 +23,6 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#931l#hlt@!kkp-z1u&(kzyn_z(i7ngf-=&85ex#z97vcf=3yf'
-SECURE_HSTS_SECONDS = 0
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,6 +44,7 @@ INSTALLED_APPS = (
     'rango',
     'registration',
     # 'registration_email',
+    'bootstrap_toolkit',
     'DjangoUeditor',
     'bootstrap3',
 )
@@ -111,7 +111,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
-
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
@@ -119,7 +118,7 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # Absolute path to the media directory
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Auth
 # LOGIN_URL = '/rango/login/'
@@ -167,11 +166,9 @@ SITE_ID = 3
 # baidu editor
 UEDITOR_SETTINGS={
     "config":{
-        # 'toolbars': 'mini'
        #这里放ueditor.config.js里面的配置项.......
     },
     "upload":{
-
        #这里放php/config.json里面的配置项.......
     }
 }
