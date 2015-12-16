@@ -41,10 +41,10 @@
 
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'restricted' %}">{{ user.username }}</a></li>
-                        <li><a href="{% url 'auth_logout' %}?next=/rango/">Logout</a></li>
+                        <li><a href="{% url 'auth_logout' %}?next={{request.path}}">Logout</a></li>
                     {% else %}
-                        <li><a href="{% url 'registration_register' %}">Register Here</a></li>
-                        <li><a href="{% url 'auth_login' %}">Login</a></li>
+                        <li><a href="{% url 'registration_register' %}?next={{request.path}}">Register Here</a></li>
+                        <li><a href="{% url 'auth_login' %}?next={{request.path}}">Login</a></li>
                     {% endif %}
 
                     <li><a href="{% url 'about' %}">About</a></li>

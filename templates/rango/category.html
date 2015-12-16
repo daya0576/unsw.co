@@ -38,7 +38,7 @@
                         <button class="btn btn-primary" type="submit" name="submit">submit</button>
                     </form>
                 {% else %}
-                    <a href="{% url 'auth_login' %}?page_id={{page.id}}">
+                    <a href="{% url 'auth_login' %}?next={{request.path}}">
                         <strong>(login to add description.) </strong>
                     </a>
                 {% endif %}

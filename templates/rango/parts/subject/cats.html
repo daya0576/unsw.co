@@ -23,7 +23,7 @@
                 </li>
             {% else %}
                 <li>
-                    <a class="small_box" href="{% url 'auth_login' %}">
+                    <a class="small_box" href="{% url 'auth_login' %}?next={{request.path}}">
                         <strong>Login to add a new course</strong>
                     </a>
                 </li>

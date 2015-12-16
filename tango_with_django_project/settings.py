@@ -73,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "django.core.context_processors.request",
+
             ],
         },
     },
@@ -134,7 +136,7 @@ REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged
 # SEND_ACTIVATION_EMAIL = True
 REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 
-LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in
+# LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'
 
 # more settings see: http://django-registration-redux.readthedocs.org/en/latest/
