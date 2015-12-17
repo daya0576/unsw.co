@@ -2,6 +2,7 @@
 
 from django import forms
 from django.contrib.auth.models import User
+import django.forms.widgets
 from rango.models import Category, CatPage, SubPage, BaiduEditor
 from DjangoUeditor.forms import UEditorField
 
@@ -23,7 +24,10 @@ class CategoryForm(forms.ModelForm):
 
 class CatPageForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the page.")
-    url = forms.URLField(max_length=200, help_text="Please enter the URL of the page.")
+    url = forms.URLField(max_length=200,
+                         help_text="Please enter the URL of the page.",
+                         initial="http://")
+
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
     class Meta:
@@ -33,6 +37,7 @@ class CatPageForm(forms.ModelForm):
         fields = ('title', 'url')
 
     def clean(self):
+        # print "cleaning"
         cleaned_data = self.cleaned_data
         url = cleaned_data.get('url')
 

@@ -161,13 +161,13 @@ def add_cat_page(request, category_name_slug):
                 page.category = cat
                 page.views = 0
                 page.save()
-                # response = category(request, category_name_slug)
-                response = HttpResponseRedirect('/rango/category/'+category_name_slug)
-
                 # response.set_cookie("postToken",value='disable')
+                response = HttpResponseRedirect('/rango/category/'+category_name_slug)
             else:
-                print "form.errors", form.errors
+                # print "form.errors", form.errors
 
+                context_dict = {'form': form, 'category': cat, 'category_name_slug': category_name_slug}
+                response = render(request, 'rango/add_page.html', context_dict)
     else:
 
         form = CatPageForm()
