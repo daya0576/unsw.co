@@ -89,4 +89,5 @@ class UserProfileForm(forms.ModelForm):
 class TestUeditorModelForm(forms.ModelForm):
     class Meta:
         model = BaiduEditor
-        fields = ('title', 'content')
+        # fields = ('title', 'content')
+        fields = ('content',)

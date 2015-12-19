@@ -18,3 +18,4 @@ $("#suggestion").blur(function(){
     $('#nav_search').show();
     $("#nav_search_content").hide();
 });
+

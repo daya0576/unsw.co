@@ -277,7 +277,11 @@ def suggest_category(request):
 
 def edit_description_view(request):
     # form = TestUEditorForm()
-    form = TestUeditorModelForm()
+    form = TestUeditorModelForm(
+        initial={
+            'content': '1234',
+        },
+    )
     return render(request, 'rango/edit-description.html', {"form": form})
 
 @login_required
@@ -343,3 +347,41 @@ def get_subject_list(max_results=0, cat_search_keyword=''):
             cat_list = cat_list[:max_results]
 
     return cat_list
+
+
+@login_required
+def delete_answer(request):
+    answer_id = None
+    if request.method == 'GET':
+        answer_id = request.GET['answer_id']
+    return_code = -1
+    if answer_id:
+        answer = Answers.objects.get(id=int(answer_id))
+
+        answer.delete()
+        return_code = 1
+
+    date = {"return_code": return_code}
+    return JsonResponse(date)
+
+
+def edit_answer_editor(request):
+    if request.method == 'GET':
+        answer_id = request.GET['answer_id']
+        answer = Answers.objects.get(id=int(answer_id))
+
+        form = TestUeditorModelForm(
+            initial={
+                'content': answer.content,
+            },
+        )
+
+
+    return
+
+
+def edit_answer():
+    current_time = timezone.now()
+
+    return
+

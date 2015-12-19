@@ -1,5 +1,6 @@
 {% load staticfiles %}
 {% load tz %}
+<script src="{% static 'js/parts/answer.js' %}"></script>
 <link href="{% static 'css/parts/answer.css' %}" rel="stylesheet">
 
 <h3>Anwsers</h3>
@@ -22,8 +23,13 @@
                         <strong><a href="/member/joshz" class="dark">{{ answer.author }}</a></strong>&nbsp; &nbsp;
                         <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
                         <div class="sep5"></div>
-                        <div class="">
+                        <div class="reply_content">
                             {{ answer.content|safe }}
+
+                        </div>
+                        <div class="edit">
+                            <a href="#" onclick="edit_answer({{ answer.id }})">edit</a>
+                            <a href="#" onclick="delete_answer({{ answer.id }})">delete</a>
                         </div>
                     </td>
                 </tr>
