@@ -285,7 +285,7 @@ def edit_description_view(request):
     )
 
     context = {"form": form}
-    print render(request, 'rango/edit-description.html', context)
+    # print render(request, 'rango/edit-description.html', context)
 
     return render(request, 'rango/edit-description.html', context)
 

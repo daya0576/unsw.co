@@ -166,8 +166,20 @@ EMAIL_USE_TLS = True
 SITE_ID = 3
 
 # baidu editor
+TOOLBARS_SETTINGS = {
+    "daya1":[[
+            'fullscreen', 'source', '|', 'undo', 'redo',
+            '|','bold', 'italic', 'underline', 'strikethrough', 'autotypeset',
+            '|', 'forecolor', 'fontfamily', 'fontsize', 'backcolor', 'link',
+            '|', 'insertorderedlist', 'insertunorderedlist',  'cleardoc',
+            '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment',
+            '|', 'map', 'gmap',  'insertcode', 'template',
+            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']]
+}
+
 UEDITOR_SETTINGS={
     "config":{
+        #这里放ueditor.config.js里面的配置项.......
         "toolbars" : [[
             'fullscreen', 'source', '|', 'undo', 'redo',
             '|','bold', 'italic', 'underline', 'strikethrough', 'autotypeset',
@@ -176,9 +188,11 @@ UEDITOR_SETTINGS={
             '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment',
             '|', 'map', 'gmap',  'insertcode', 'template',
             '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']]
-       #这里放ueditor.config.js里面的配置项.......
+
+
     },
     "upload":{
-       #这里放php/config.json里面的配置项.......
+        #这里放php/config.json里面的配置项.......
+        "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".PNG", ".JPG", ".JPEG", ".GIF", ".BMP"]
     }
 }
