@@ -2,12 +2,10 @@
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
 from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject
 from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
-from forms import TestUeditorModelForm
 from django.http import JsonResponse
 
 # def index(request):
@@ -275,14 +273,22 @@ def suggest_category(request):
         # return HttpResponse({'cat_list': cat_list})
 
 
+# @login_required
 def edit_description_view(request):
-    # form = TestUEditorForm()
+    answer_id = request.GET['answer_id']
+    answer = Answers.objects.get(id=int(answer_id))
+
     form = TestUeditorModelForm(
         initial={
-            'content': '1234',
-        },
+            'content': answer.content,
+        }
     )
-    return render(request, 'rango/edit-description.html', {"form": form})
+
+    context = {"form": form}
+    print render(request, 'rango/edit-description.html', context)
+
+    return render(request, 'rango/edit-description.html', context)
+
 
 @login_required
 def add_answer(request, category_name_slug):
@@ -297,7 +303,6 @@ def add_answer(request, category_name_slug):
 
             cat = Category.objects.get(slug=category_name_slug)
             user = request.user
-            title = request.POST.get('title')
             content = request.POST.get('content')
             current_time = timezone.now()
             # current_time = datetime.now()
@@ -305,7 +310,6 @@ def add_answer(request, category_name_slug):
             answer = Answers(
                 category=cat,
                 author=user,
-                title=title,
                 content=content,
                 post_date=current_time
             )
@@ -365,22 +369,7 @@ def delete_answer(request):
     return JsonResponse(date)
 
 
-def edit_answer_editor(request):
-    if request.method == 'GET':
-        answer_id = request.GET['answer_id']
-        answer = Answers.objects.get(id=int(answer_id))
-
-        form = TestUeditorModelForm(
-            initial={
-                'content': answer.content,
-            },
-        )
-
-
-    return
-
-
-def edit_answer():
+def edit_answer(request):
     current_time = timezone.now()
 
     return

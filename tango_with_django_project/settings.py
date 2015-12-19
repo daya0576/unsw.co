@@ -168,6 +168,14 @@ SITE_ID = 3
 # baidu editor
 UEDITOR_SETTINGS={
     "config":{
+        "toolbars" : [[
+            'fullscreen', 'source', '|', 'undo', 'redo',
+            '|','bold', 'italic', 'underline', 'strikethrough', 'autotypeset',
+            '|', 'forecolor', 'fontfamily', 'fontsize', 'backcolor', 'link',
+            '|', 'insertorderedlist', 'insertunorderedlist',  'cleardoc',
+            '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment',
+            '|', 'map', 'gmap',  'insertcode', 'template',
+            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']]
        #这里放ueditor.config.js里面的配置项.......
     },
     "upload":{

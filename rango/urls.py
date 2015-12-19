@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^edit_description_view/', views.edit_description_view, name='editor'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_answer/$', views.add_answer, name='add_answer'),
     url(r'^delete_answer/$', views.delete_answer, name='delete_answer'),
+    url(r'^edit_answer/$', views.edit_answer, name='edit_answer'),
 )
 
 

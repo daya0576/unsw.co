@@ -72,7 +72,7 @@ class SubPage(models.Model):
 
 
 class BaiduEditor(models.Model):
-    title = models.CharField(max_length=100, blank=True)
+    # title = models.CharField(max_length=100, blank=True, )
     content = UEditorField(u'', width='100%', height=300,
                      toolbars="full",
                      imagePath='Comment_images/%(basename)s_%(datetime)s.%(extname)s',
@@ -88,7 +88,6 @@ class BaiduEditor(models.Model):
 class Answers(models.Model):
     category = models.ForeignKey(Category)
     author = models.ForeignKey(User)
-    title = models.CharField(max_length=100, blank=True)
     content = models.CharField(max_length=10000, blank=True)
     post_date = models.DateTimeField()
     likes = models.IntegerField(default=0)

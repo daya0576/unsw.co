@@ -1,7 +1,9 @@
 {% load staticfiles %}
 {% load tz %}
+
 <script src="{% static 'js/parts/answer.js' %}"></script>
 <link href="{% static 'css/parts/answer.css' %}" rel="stylesheet">
+
 
 <h3>Anwsers</h3>
 {% if answers %}
@@ -23,13 +25,14 @@
                         <strong><a href="/member/joshz" class="dark">{{ answer.author }}</a></strong>&nbsp; &nbsp;
                         <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
                         <div class="sep5"></div>
-                        <div class="reply_content">
+                        <div id="answer_content{{ answer.id }}" class="reply_content">
                             {{ answer.content|safe }}
-
-                        </div>
-                        <div class="edit">
-                            <a href="#" onclick="edit_answer({{ answer.id }})">edit</a>
-                            <a href="#" onclick="delete_answer({{ answer.id }})">delete</a>
+                            {% if user == answer.author %}
+                                <div class="edit">
+                                    <a style="cursor:pointer" onclick="show_editor(this, {{ answer.id }})">edit</a>
+                                    <a style="cursor:pointer" onclick="delete_answer({{ answer.id }})">delete</a>
+                                </div>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>
