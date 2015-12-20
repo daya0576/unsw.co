@@ -13,7 +13,9 @@ h1, h2, h3, h4 {
 .navbar-brand{
     margin-left: 15px;
 }
-
+.navbar-nav{
+    margin:0;
+}
 
 
 .sep20{
