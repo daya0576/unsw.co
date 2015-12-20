@@ -311,7 +311,8 @@ def add_answer(request, category_name_slug):
                 category=cat,
                 author=user,
                 content=content,
-                post_date=current_time
+                post_date=current_time,
+                edit_date=current_time
             )
             answer.save()
             answered = True

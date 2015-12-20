@@ -90,10 +90,11 @@ class Answers(models.Model):
     author = models.ForeignKey(User)
     content = models.CharField(max_length=10000, blank=True)
     post_date = models.DateTimeField()
+    edit_date = models.DateTimeField()
     likes = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.title
+        return self.content
 
 
 class CategoryUserLikes(models.Model):
