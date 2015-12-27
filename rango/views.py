@@ -17,36 +17,38 @@ from django.http import JsonResponse
 
 
 def index(request):
-    category_list = Category.objects.order_by('-likes')[0:5]
-    # page_list = CatPage.objects.order_by('-views')[0:5]
-    subject_list = Subject.objects.order_by('-likes')[0:5]
+    # category_list = Category.objects.order_by('-likes')[0:5]
+    # # page_list = CatPage.objects.order_by('-views')[0:5]
+    # subject_list = Subject.objects.order_by('-likes')[0:5]
+    #
+    # context_dict = {'categories': category_list, 'subs': subject_list}
+    #
+    # visits = request.session.get('visits')
+    # if not visits:
+    #     visits = 1
+    # reset_last_visit_time = False
+    #
+    # last_visit = request.session.get('last_visit')
+    # if last_visit:
+    #     last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
+    #
+    #     if(datetime.now() - last_visit_time).seconds > 0:
+    #         visits += 1
+    #         reset_last_visit_time = True
+    # else:
+    #     reset_last_visit_time = True
+    #
+    # if reset_last_visit_time:
+    #     last_visit_time = str(datetime.now())
+    #     request.session['last_visit'] = last_visit_time
+    #     request.session['visits'] = visits
+    #
+    # context_dict['last_visit'] = last_visit
+    # context_dict['visits'] = visits
 
-    context_dict = {'categories': category_list, 'subs': subject_list}
-
-    visits = request.session.get('visits')
-    if not visits:
-        visits = 1
-    reset_last_visit_time = False
-
-    last_visit = request.session.get('last_visit')
-    if last_visit:
-        last_visit_time = datetime.strptime(last_visit[:-7], "%Y-%m-%d %H:%M:%S")
-
-        if(datetime.now() - last_visit_time).seconds > 0:
-            visits += 1
-            reset_last_visit_time = True
-    else:
-        reset_last_visit_time = True
-
-    if reset_last_visit_time:
-        last_visit_time = str(datetime.now())
-        request.session['last_visit'] = last_visit_time
-        request.session['visits'] = visits
-
-    context_dict['last_visit'] = last_visit
-    context_dict['visits'] = visits
-
-    response = render(request, 'rango/index.html', context_dict)
+    # response = render(request, 'rango/index.html', context_dict)
+    response = HttpResponseRedirect('/rango/subject/master-of-information-technology/')
+    # response = category(request, "master-of-information-technology")
 
     return response
 
@@ -101,7 +103,15 @@ def subject(request, sub_name_slug):
 
     try:
         subject = Subject.objects.get(slug=sub_name_slug)
-        cats = Category.objects.filter(subject=subject)
+        # cats = Category.objects.filter(subject=subject).order_by('-likes', 'level')
+
+        cats = Category.objects.filter(subject=subject).extra(
+            select={
+                'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+            },
+        ).order_by('-answer_count', '-likes', 'level')
+        # cats = Category.objects.filter(subject=subject)
+
 
         context_dict['subject'] = subject
         context_dict['cats'] = cats

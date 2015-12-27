@@ -33,8 +33,11 @@
                     <li>
                         <a class="small_box" href="{% url 'category' c.slug %}">
                             <strong>{{ c.no }}</strong>
-                            <span class="likes">({{ c.likes }} likes)</span><br>
-                            {{ c.name }}
+                            <span class="likes">(
+                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}&nbsp
+                                <i class="fa fa-commenting-o"></i> {{ c.answer_count }})
+                            </span><br>
+                                {{ c.name }}
                         </a>
                     </li>
                 {% endfor %}
