@@ -29,7 +29,7 @@
                             {{ answer.content|safe }}
                             {% if user == answer.author %}
                                 <div class="edit">
-                                    <a style="cursor:pointer" onclick="show_editor(this, {{ answer.id }})">edit</a>
+                                    <a href="{% url 'editor' %}?answer_id={{ answer.id }}&next={{request.path}}">edit</a>
                                     <a style="cursor:pointer" onclick="delete_answer({{ answer.id }})">delete</a>
                                 </div>
                             {% endif %}

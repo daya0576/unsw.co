@@ -72,7 +72,7 @@ def category(request, cat_name_slug):
     try:
         category = Category.objects.get(slug=cat_name_slug)
         pages = CatPage.objects.filter(category=category)
-        answers = Answers.objects.filter(category=category)
+        answers = Answers.objects.filter(category=category).order_by('-edit_date')
         user = request.user
         if user.is_authenticated():
             is_liked = CategoryUserLikes.objects.filter(category=category).filter(user=request.user)
@@ -283,23 +283,6 @@ def suggest_category(request):
         # return HttpResponse({'cat_list': cat_list})
 
 
-# @login_required
-def edit_description_view(request):
-    answer_id = request.GET['answer_id']
-    answer = Answers.objects.get(id=int(answer_id))
-
-    form = TestUeditorModelForm(
-        initial={
-            'content': answer.content,
-        }
-    )
-
-    context = {"form": form}
-    # print render(request, 'rango/edit-description.html', context)
-
-    return render(request, 'rango/edit-description.html', context)
-
-
 @login_required
 def add_answer(request, category_name_slug):
     answered = False
@@ -380,8 +363,44 @@ def delete_answer(request):
     return JsonResponse(date)
 
 
-def edit_answer(request):
-    current_time = timezone.now()
+# @login_required
+def edit_description_view(request):
+    answer_id = request.GET['answer_id']
+    next_page = request.GET['next']
+    answer = Answers.objects.get(id=int(answer_id))
 
-    return
+    form = TestUeditorModelForm(
+        initial={
+            'content': answer.content,
+        }
+    )
+
+    context = {"form": form, "answer_id": answer_id, "next_page":next_page}
+
+    return render(request, 'rango/edit-description.html', context)
+
+
+@login_required
+def edit_answer(request):
+    if request.method == 'POST':
+
+        form = TestUeditorModelForm(request.POST)
+        # answer_id = request.GET['answer_id']
+        # next_page = request.GET['next']
+
+        if form.is_valid():
+
+            next_page = request.POST.get('next_page')
+            answer_id = request.POST.get('answer_id')
+            answer = Answers.objects.get(id=int(answer_id))
+
+            content = request.POST.get('content')
+            current_time = timezone.now()
+
+            answer.content = content
+            answer.edit_date = current_time
+            answer.save()
+
+            return HttpResponseRedirect(next_page)
+
 

@@ -1,12 +1,22 @@
+{% extends 'base.html' %}
+
 {% load bootstrap3 %}
 {% load staticfiles %}
 
 {{ form.media }}
 
-<form id="category_form" method="post" action="/rango/">
-    {% csrf_token %}
+{% block title %}Edit{% endblock %}
 
-    {{ form }}
-    <!--<input type="submit" name="submit" value="Create Category" />-->
-    <button class="btn btn-primary" type="submit" name="submit">submit</button>
-</form>
+{% block body_block %}
+    <form id="category_form" method="post" action="{% url 'edit_answer' %}">
+        {% csrf_token %}
+
+        {{ form }}
+        <!--<input type="submit" name="submit" value="Create Category" />-->
+        <input type="hidden" name="answer_id" value="{{ answer_id }}">
+        <input type="hidden" name="next_page" value="{{ next_page }}">
+        <br>
+        <button class="btn btn-primary" type="submit" name="submit">submit</button>
+    </form>
+{% endblock %}
+

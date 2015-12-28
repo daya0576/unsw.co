@@ -34,8 +34,9 @@
                         <a class="small_box" href="{% url 'category' c.slug %}">
                             <strong>{{ c.no }}</strong>
                             <span class="likes">(
-                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}&nbsp
-                                <i class="fa fa-commenting-o"></i> {{ c.answer_count }})
+                                <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
+                                &nbsp
+                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }})
                             </span><br>
                                 {{ c.name }}
                         </a>
