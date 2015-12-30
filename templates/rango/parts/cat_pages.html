@@ -6,20 +6,31 @@
     <div class="page">
         <ul class="list-group">
             {% for page in pages %}
-            <li class="list-group-item">
-                <span class="badge">view:{{ page.views }}</span>
-                <a target="_blank" href="{% url 'goto' %}?page_id={{page.id}}">
-                <!--<a target="_blank" href="{{page.url}}">-->
-                    {{ page.title }}
-                </a>
-                {% if user == page.user %}
-                    <a href="#" onclick="delete_page(this, {{ page.id }}, '{{ page.title }}')"
-                       data-pageid="{{page.id}}">
-                        <span style="" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <li class="list-group-item">
+                    <span class="badge">view:{{ page.views }}</span>
+                    <a target="_blank" href="{% url 'goto' %}?page_id={{page.id}}">
+                    <!--<a target="_blank" href="{{page.url}}">-->
+                        {{ page.title }}
                     </a>
+                    {% if user == page.user %}
+                        <a href="#" onclick="delete_page(this, '{{ page.id }}', '{{ page.title }}')"
+                           data-pageid="{{page.id}}">
+                            <span style="" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+
+            <li class="list-group-item">
+                {% if user.is_authenticated %}
+                    <a class="more" href="/rango/category/{{ cat_name_slug }}/add_cat_page/">
+                        (Add a New Page)
+                    </a>
+                    <br/>
+                {% else %}
+                    <strong>(login to add pages.) </strong>
                 {% endif %}
             </li>
-            {% endfor %}
         </ul>
     </div>
 {% else %}
@@ -27,14 +38,7 @@
 {% endif %}
 
 
-{% if user.is_authenticated %}
-    <a href="/rango/category/{{ cat_name_slug }}/add_cat_page/">
-        <span class="glyphicon glyphicon-plus"></span>Add a New Page
-    </a>
-    <br/>
-{% else %}
-    <strong>(login to add pages.) </strong>
-{% endif %}
+
 
 
 <script>

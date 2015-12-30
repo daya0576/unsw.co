@@ -9,7 +9,7 @@
     <div id="zh-answers-filter" class="answers-sorter">
 
     </div>
-    <h3 data-num="23" id="zh-question-answer-num">23 answers</h3>
+    <h3 data-num="{{ answers|length }}" id="zh-question-answer-num">{{ answers|length }} answers</h3>
 </div>
 
 
@@ -27,34 +27,30 @@
             </button>
         </div>
 
+        <div>
+            <div class="fr">
+                &nbsp; &nbsp;
+                <span class="no">{{ forloop.counter }}</span>
+            </div>
 
-        <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tbody>
-                <tr>
-                    <td width="auto" valign="top" align="left">
-                        <div class="fr"> &nbsp; &nbsp;   
-                            <span class="no">{{ forloop.counter }}</span>
-                        </div>
-                        <div class="sep3"></div>
-                        <strong><a href="/member/joshz" class="dark">{{ answer.author }}</a></strong>&nbsp; &nbsp;
-                        <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
-                        <div class="sep5"></div>
-                        <div id="answer_content{{ answer.id }}" class="reply_content">
-                            {{ answer.content|safe }}
-                            {% if user == answer.author %}
-                                <div class="edit">
-                                    <a href="{% url 'editor' %}?answer_id={{ answer.id }}&next={{request.path}}">
-                                        <i class="fa fa-pencil-square-o"></i>edit</a>
-                                    &nbsp;
-                                    <a style="cursor:pointer" onclick="delete_answer({{ answer.id }})">
-                                        <i class="fa fa-times"></i>delete</a>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            <strong><a href="/member/joshz" class="dark">{{ answer.author }}</a></strong>&nbsp; &nbsp;
+            <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
+        </div>
+
+        <div class="sep5"></div>
+        <div id="answer_content{{ answer.id }}" class="reply_content">
+            {{ answer.content|safe }}
+        </div>
+
+        {% if user == answer.author %}
+        <div class="edit">
+            <a href="{% url 'editor' %}?answer_id={{ answer.id }}&next={{request.path}}">
+                <i class="fa fa-pencil-square-o"></i>edit</a>
+            &nbsp;
+            <a style="cursor:pointer" onclick="delete_answer({{ answer.id }})">
+                <i class="fa fa-times"></i>delete</a>
+        </div>
+        {% endif %}
     </div>
 {% endfor %}
 {% else %}

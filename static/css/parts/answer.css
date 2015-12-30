@@ -32,19 +32,17 @@
     color: #aaa;
 }
 
-.answer .sep3 {
-    height: 3px;
-}
-
 .answer p{
     margin-bottom:0px;
 }
 
 .answer .reply_content img{
-    max-width:450px;
+    max-width:1000px;
 }
 
 .reply_content{
+    width:100%;
+    overflow: auto;
     word-break: break-all;
     word-wrap: break-word;
 }
@@ -93,8 +91,7 @@
     border-radius: 3px;
     border: 0;
     cursor: pointer;
-    background: #eff6fa;
-    font-weight: 700;
+    background: #efefef;
     font-weight: 500;
     text-align: center;
     position: relative;
@@ -115,7 +112,6 @@
     border: 6px solid transparent;
     font-size: 0;
     _border-style: dashed;
-    background-image: none;
 }
 .zm-votebar.version-classic .down .vote-arrow {
     border-bottom-width: 0;
@@ -129,7 +125,7 @@
     background-color:#31b0d5;
     color: white;
 }
-.zm-votebar.version-classic .down:hover .vote-arrow{
+.zm-votebar.version-classic button:hover .vote-arrow{
     border-bottom-color: #fff;
     border-top-color: #fff;
 }
