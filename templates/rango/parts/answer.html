@@ -1,7 +1,7 @@
 {% load staticfiles %}
 {% load tz %}
 
-<script src="{% static 'js/parts/answer.js' %}"></script>
+<script src="{% static 'js/parts/answer.js' %}" type="text/javascript"></script>
 <link href="{% static 'css/parts/answer.css' %}" rel="stylesheet">
 
 {% if answers %}
@@ -16,11 +16,20 @@
 {% for answer in answers %}
     <div class="cell">
         <div class="zm-votebar version-classic" data-version="classic">
-            <button onclick="button_up(this)" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
-                <i class="icon vote-arrow"></i>
-                <span class="count">0</span>
-                <span class="label sr-only">赞同</span>
-            </button>
+            {% if user.is_authenticated %}
+                {% if answer.is_liked > 0 %}
+                    <button onclick="button_up(this)" class="up pressed" data-ans_id="{{ answer.id }}" aria-pressed="true" title="赞同">
+                {% else %}
+                    <button onclick="button_up(this)" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
+                {% endif %}
+            {% else %}
+                    <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
+            {% endif %}
+                            <i class="icon vote-arrow"></i>
+                            <span class="count">{{ answer.answer_likes }}</span>
+                            <span class="label sr-only">赞同</span>
+                        </button>
+
             <button onclick="button_down(this)" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
                 <i class="icon vote-arrow"></i>
                 <span class="label sr-only">反对，不会显示你的姓名</span>
@@ -37,7 +46,7 @@
             <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
         </div>
 
-        <div class="sep5"></div>
+        <div style="height:12px"></div>
         <div id="answer_content{{ answer.id }}" class="reply_content">
             {{ answer.content|safe }}
         </div>
@@ -53,10 +62,9 @@
         {% endif %}
     </div>
 {% endfor %}
+
 {% else %}
     <span class="more">No answers currently in this class.</span>
 {% endif %}
-
-
 
 

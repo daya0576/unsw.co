@@ -2,7 +2,7 @@
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject
+from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes
 from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -70,10 +70,23 @@ def category(request, cat_name_slug):
     context_dict = {}
 
     try:
+        user = request.user
+        if user.is_authenticated():
+            user_id = user.id
+        else:
+            user_id = -1
         category = Category.objects.get(slug=cat_name_slug)
         pages = CatPage.objects.filter(category=category)
-        answers = Answers.objects.filter(category=category).order_by('-edit_date')
-        user = request.user
+        answers = Answers.objects.filter(category=category).extra(
+            select={
+                'answer_likes': 'select count(*) from rango_answeruserlikes where rango_answers.id = rango_answeruserlikes.answer_id'
+            },
+        ).extra(
+            select={
+                'is_liked': 'select count(*) from rango_answeruserlikes where rango_answers.id = rango_answeruserlikes.answer_id and rango_answeruserlikes.user_id = ' + str(user_id)
+            },
+        ).order_by('-edit_date')
+
         if user.is_authenticated():
             is_liked = CategoryUserLikes.objects.filter(category=category).filter(user=request.user)
         else:
@@ -402,5 +415,66 @@ def edit_answer(request):
             answer.save()
 
             return HttpResponseRedirect(next_page)
+
+
+def answer_up(request):
+    likes_count = 0
+    return_code = -1
+    date = {}
+
+    if request.method == 'GET':
+        answer_id = request.GET['answer_id']
+        if answer_id:
+            user = request.user
+            answer = Answers.objects.get(id=int(answer_id))
+            current_time = timezone.now()
+
+            answer_like = AnswerUserLikes(
+                answer=answer,
+                user=user,
+                time=current_time
+            )
+
+            likes = AnswerUserLikes.objects.filter(answer=answer).filter(user=user)
+            likes_count = likes.count()+1
+
+            answer.likes = likes_count
+
+            answer.save()
+            answer_like.save()
+
+            return_code = 1
+
+    date["return_code"] = return_code
+    date["likes_count"] = likes_count
+
+    return JsonResponse(date)
+
+
+def answer_up_off(request):
+    likes_count = 0
+    return_code = -1
+    date = {}
+
+    if request.method == 'GET':
+        answer_id = request.GET['answer_id']
+        if answer_id:
+            user = request.user
+            answer = Answers.objects.get(id=int(answer_id))
+
+            likes = AnswerUserLikes.objects.filter(answer=answer).filter(user=user)
+            likes_count = likes.count()-1
+
+            answer.likes = likes_count
+
+            answer.save()
+            likes.delete()
+
+            return_code = 1
+
+    date["return_code"] = return_code
+    date["likes_count"] = likes_count
+
+    return JsonResponse(date)
 
 

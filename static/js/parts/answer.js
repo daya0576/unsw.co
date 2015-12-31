@@ -26,38 +26,79 @@ function show_editor(obj, answer_id){
 
 
 var test;
+function button_up_css_on(obj){
+    $(obj).css("background-color", "#31b0d5");
+    $(obj).css("color", "#fff");
+    $(obj).children(".vote-arrow").css("border-bottom-color", "white");
+    $(obj).attr("aria-pressed", "true");
+}
+function button_up_css_off(obj){
+    $(obj).css("background-color", "#efefef");
+    $(obj).css("color", "#337ab7");
+    $(obj).children(".vote-arrow").css("border-bottom-color", "#337ab7");
+    $(obj).attr("aria-pressed", "false");
+}
+function button_down_css_on(obj){
+    $(obj).css("background-color", "#31b0d5");
+    $(obj).children(".vote-arrow").css("border-top-color", "white");
+    $(obj).attr("aria-pressed", "true");
+}
+function button_down_css_off(obj){
+    $(obj).css("background-color", "#efefef");
+    $(obj).children(".vote-arrow").css("border-top-color", "#337ab7");
+    $(obj).attr("aria-pressed", "false");
+}
 
+
+var test;
 function button_up(obj){
     test = obj;
+    var answer_id = $(obj).attr("data-ans_id");
     if($(obj).attr("aria-pressed") == "false"){
-        $(obj).css("background-color", "#31b0d5");
-        $(obj).css("color", "#fff");
-        $(obj).children(".vote-arrow").css("border-bottom-color", "white");
-        $(obj).attr("aria-pressed", "true");
+        if($(obj).next().attr("aria-pressed") == "true")
+            button_down_css_off($(obj).next());
+        button_up_css_on(obj);
 
 
+        $.getJSON('/rango/answer_up/', {answer_id: answer_id}, function(data){
+            var return_code = data['return_code'];
+            var likes_count = data['likes_count'];
 
+            if(return_code == 1){
+                $(obj).children(".count").html(likes_count);
+                alert('Thanks for your support!');
+            }else{
+                alert("Something goes wrong. Sorry, try again.")
+                location.reload();
+            }
+        });
     }else{
-        $(obj).css("background-color", "#efefef");
-        $(obj).css("color", "#337ab7");
-        $(obj).children(".vote-arrow").css("border-bottom-color", "#337ab7");
-        $(obj).attr("aria-pressed", "false");
+        if(window.confirm('Are u sure to get back your love?')){
+            button_up_css_off(obj);
+            $.getJSON('/rango/answer_up_off/', {answer_id: answer_id}, function(data){
+                var return_code = data['return_code'];
+                var likes_count = data['likes_count'];
 
+                if(return_code == 1){
+                    $(obj).children(".count").html(likes_count);
+                    alert('T^T sad for this decision, but I did it for u.');
+                }else{
+                    alert("Something goes wrong. Sorry, try again.")
+                    location.reload();
+                }
+            });
+        }
     }
 
 }
 
 function button_down(obj){
-
-
     if($(obj).attr("aria-pressed") == "false"){
-        $(obj).css("background-color", "#31b0d5");
-        $(obj).children(".vote-arrow").css("border-top-color", "white");
-        $(obj).attr("aria-pressed", "true");
+        if($(obj).prev().attr("aria-pressed") == "true")
+            button_up_css_off($(obj).prev());
+        button_down_css_on(obj);
     }else{
-        $(obj).css("background-color", "#efefef");
-        $(obj).children(".vote-arrow").css("border-top-color", "#337ab7");
-        $(obj).attr("aria-pressed", "false");
+        button_down_css_off(obj);
     }
 
 }

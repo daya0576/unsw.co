@@ -27,7 +27,6 @@
 .answer .sep5 {
     height: 5px;
 }
-
 .answer .fade_answer {
     color: #aaa;
 }
@@ -45,6 +44,7 @@
     overflow: auto;
     word-break: break-all;
     word-wrap: break-word;
+    min-height: 45px;
 }
 .answer .edit a{
     color:gray;
@@ -128,4 +128,13 @@
 .zm-votebar.version-classic button:hover .vote-arrow{
     border-bottom-color: #fff;
     border-top-color: #fff;
+}
+
+
+.zm-votebar.version-classic .up.pressed, .down.pressed {
+    background-color: #31b0d5;
+    color: white;
+}
+.zm-votebar.version-classic .up.pressed .vote-arrow {
+    border-bottom-color: #fff;
 }

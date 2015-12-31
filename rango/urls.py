@@ -22,6 +22,9 @@ urlpatterns = patterns('',
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_answer/$', views.add_answer, name='add_answer'),
     url(r'^delete_answer/$', views.delete_answer, name='delete_answer'),
     url(r'^edit_answer/$', views.edit_answer, name='edit_answer'),
+
+    url(r'^answer_up/$', views.answer_up, name='answer_up'),
+    url(r'^answer_up_off/$', views.answer_up_off, name='answer_up_off'),
 )
 
 

@@ -101,3 +101,8 @@ class CategoryUserLikes(models.Model):
     category = models.ForeignKey(Category)
     user = models.ForeignKey(User)
 
+
+class AnswerUserLikes(models.Model):
+    answer = models.ForeignKey(Answers)
+    user = models.ForeignKey(User)
+    time = models.DateTimeField()
