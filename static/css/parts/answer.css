@@ -138,3 +138,6 @@
 .zm-votebar.version-classic .up.pressed .vote-arrow {
     border-bottom-color: #fff;
 }
+.zm-votebar.version-classic .down.pressed .vote-arrow {
+    border-top-color: #fff;
+}

@@ -25,6 +25,8 @@ urlpatterns = patterns('',
 
     url(r'^answer_up/$', views.answer_up, name='answer_up'),
     url(r'^answer_up_off/$', views.answer_up_off, name='answer_up_off'),
+    url(r'^answer_down/$', views.answer_down, name='answer_down'),
+    url(r'^answer_down_off/$', views.answer_down_off, name='answer_down_off'),
 )
 
 

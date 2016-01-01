@@ -12,11 +12,13 @@
                 <span class="badge">view:{{ page.views }}</span>
                 <a target="_blank" href="{% url 'goto' %}?page_id={{page.id}}">
                 <!--<a target="_blank" href="{{page.url}}">-->
+                    <i class="fa fa-link"></i>
                     {{ page.title }}
                 </a>
                 {% if user == page.user %}
                     <a href="#" onclick="delete_page(this, '{{ page.id }}', '{{ page.title }}')"
                        data-pageid="{{page.id}}">
+                        &nbsp;
                         <span style="" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                     </a>
                 {% endif %}

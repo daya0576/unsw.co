@@ -26,14 +26,22 @@
                     <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
             {% endif %}
                             <i class="icon vote-arrow"></i>
-                            <span class="count">{{ answer.answer_likes }}</span>
+                            <span class="count">{{ answer.answer_likes_count }}</span>
                             <span class="label sr-only">赞同</span>
                         </button>
 
-            <button onclick="button_down(this)" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
-                <i class="icon vote-arrow"></i>
-                <span class="label sr-only">反对，不会显示你的姓名</span>
-            </button>
+            {% if user.is_authenticated %}
+                {% if answer.is_disliked > 0 %}
+                    <button onclick="button_down(this)" class="down pressed" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+                {% else %}
+                    <button onclick="button_down(this)" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+                {% endif %}
+            {% else %}
+                    <button onclick="alert('Login to like this answer');" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+            {% endif %}
+                        <i class="icon vote-arrow"></i>
+                        <span class="label sr-only">反对，不会显示你的姓名</span>
+                    </button>
         </div>
 
         <div>
@@ -47,6 +55,7 @@
         </div>
 
         <div style="height:12px"></div>
+
         <div id="answer_content{{ answer.id }}" class="reply_content">
             {{ answer.content|safe }}
         </div>
