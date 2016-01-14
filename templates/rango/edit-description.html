@@ -8,7 +8,7 @@
 {% block title %}Edit{% endblock %}
 
 {% block body_block %}
-    <form id="category_form" method="post" action="{% url 'edit_answer' %}">
+    <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/edit_answer/{{ answer_id }}">
         {% csrf_token %}
 
         {{ form }}

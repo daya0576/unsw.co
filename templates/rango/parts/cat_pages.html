@@ -6,37 +6,37 @@
 <div class="page">
     <ul class="list-group">
         {% if pages %}
-        {% for page in pages %}
+            {% for page in pages %}
 
-            <li class="list-group-item">
-                <span class="badge">view:{{ page.views }}</span>
-                <a target="_blank" href="{% url 'goto' %}?page_id={{page.id}}">
-                <!--<a target="_blank" href="{{page.url}}">-->
-                    <i class="fa fa-link"></i>
-                    {{ page.title }}
-                </a>
-                {% if user == page.user %}
-                    <a href="#" onclick="delete_page(this, '{{ page.id }}', '{{ page.title }}')"
-                       data-pageid="{{page.id}}">
-                        &nbsp;
-                        <span style="" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <li class="list-group-item">
+                    <span class="badge">view:{{ page.views }}</span>
+                    <a target="_blank" href="{% url 'goto' %}?page_id={{page.id}}">
+                    <!--<a target="_blank" href="{{page.url}}">-->
+                        {{ page.title }}
                     </a>
-                {% endif %}
-            </li>
-        {% endfor %}
-        {% else %}
-            <li class="list-group-item">
-                {% if user.is_authenticated %}
-                    <strong><a href="/rango/category/{{ cat_name_slug }}/add_cat_page/">
-                        (Add a New Page)
-                    </a></strong>
-                {% else %}
-                    <a href="{% url 'auth_login' %}?next={{request.path}}">
-                        <strong>(login to add links.) </strong>
-                    </a>
-                {% endif %}
-            </li>
+                    {% if user == page.user %}
+                        <a href="#" onclick="delete_page(this, '{{ page.id }}', '{{ page.title }}')"
+                           data-pageid="{{page.id}}">
+                            &nbsp;
+                            <span style="" class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        </a>
+                    {% endif %}
+                </li>
+
+            {% endfor %}
         {% endif %}
+
+        <li class="list-group-item">
+            {% if user.is_authenticated %}
+                <strong><a href="/rango/category/{{ cat_name_slug }}/add_cat_page/">
+                    (Add a New Page)
+                </a></strong>
+            {% else %}
+                <a href="{% url 'auth_login' %}?next={{request.path}}">
+                    <strong>(login to add links.) </strong>
+                </a>
+            {% endif %}
+        </li>
     </ul>
 </div>
 

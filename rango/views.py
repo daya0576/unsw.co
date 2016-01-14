@@ -66,7 +66,7 @@ def about(request):
     return render(request, 'rango/about.html', content_dict)
 
 
-def category(request, cat_name_slug):
+def get_category(request, cat_name_slug):
     context_dict = {}
 
     try:
@@ -79,14 +79,14 @@ def category(request, cat_name_slug):
         category = Category.objects.get(slug=cat_name_slug)
         pages = CatPage.objects.filter(category=category)
         answers = Answers.objects.filter(category=category).extra(
-            select={
-                'answer_likes': 'select count(*) from rango_answeruserlikes where rango_answers.id = rango_answeruserlikes.answer_id'
-            },
-        ).extra(
-            select={
-                'answer_dislikes': 'select count(*) from rango_answeruserdislikes where rango_answers.id = rango_answeruserdislikes.answer_id'
-            },
-        ).extra(
+        #     select={
+        #         'answer_likes': 'select count(*) from rango_answeruserlikes where rango_answers.id = rango_answeruserlikes.answer_id'
+        #     },
+        # ).extra(
+        #     select={
+        #         'answer_dislikes': 'select count(*) from rango_answeruserdislikes where rango_answers.id = rango_answeruserdislikes.answer_id'
+        #     },
+        # ).extra(
             select={
                 'is_liked': 'select count(*) from rango_answeruserlikes where rango_answers.id = rango_answeruserlikes.answer_id and rango_answeruserlikes.user_id = ' + str(user_id)
             },
@@ -103,19 +103,42 @@ def category(request, cat_name_slug):
         # print is_liked
 
         # like persons.
-        for answer in answers:
-            answer.answer_likes_count = answer.answer_likes - answer.answer_dislikes
+        # for answer in answers:
+        #     answer.answer_likes_count = answer.answer_likes - answer.answer_dislikes
 
         context_dict['pages'] = pages
         context_dict['answers'] = answers
         context_dict['category'] = category
         context_dict['cat_name_slug'] = cat_name_slug
 
-        editor = TestUeditorModelForm()
-        context_dict['editor'] = editor
+        if request.method == 'POST':
+            editor_form = TestUeditorModelForm(request.POST)
 
+            if editor_form.is_valid():
+                content = editor_form.save(commit=True)
+                content.save()
+
+                cat = Category.objects.get(slug=cat_name_slug)
+                user = request.user
+                content = request.POST.get('content')
+                current_time = timezone.now()
+                # current_time = datetime.now()
+
+                answer = Answers(
+                    category=cat,
+                    author=user,
+                    content=content,
+                    post_date=current_time,
+                    edit_date=current_time
+                )
+                answer.save()
+            else:
+                print "form.errors", editor_form.errors
+        else:
+            editor_form = TestUeditorModelForm()
+
+        context_dict['editor'] = editor_form
         context_dict['is_liked'] = is_liked
-
         context_dict['subject'] = category.subject
 
     except Category.DoesNotExist:
@@ -311,7 +334,6 @@ def suggest_category(request):
 
 @login_required
 def add_answer(request, category_name_slug):
-    answered = False
 
     if request.method == 'POST':
         form = TestUeditorModelForm(request.POST)
@@ -334,9 +356,11 @@ def add_answer(request, category_name_slug):
                 edit_date=current_time
             )
             answer.save()
-            answered = True
+        else:
+            print "form.errors", form.errors
 
-            return HttpResponseRedirect('/rango/category/'+category_name_slug)
+        return HttpResponseRedirect('/rango/category/'+category_name_slug)
+
 
 
 @login_required
@@ -389,25 +413,9 @@ def delete_answer(request):
     return JsonResponse(date)
 
 
-# @login_required
-def edit_description_view(request):
-    answer_id = request.GET['answer_id']
-    next_page = request.GET['next']
-    answer = Answers.objects.get(id=int(answer_id))
-
-    form = TestUeditorModelForm(
-        initial={
-            'content': answer.content,
-        }
-    )
-
-    context = {"form": form, "answer_id": answer_id, "next_page":next_page}
-
-    return render(request, 'rango/edit-description.html', context)
-
-
 @login_required
-def edit_answer(request):
+def add_answer(request, cat_name_slug):
+
     if request.method == 'POST':
 
         form = TestUeditorModelForm(request.POST)
@@ -415,9 +423,45 @@ def edit_answer(request):
         # next_page = request.GET['next']
 
         if form.is_valid():
+            content = form.save(commit=True)
+            content.save()
 
-            next_page = request.POST.get('next_page')
-            answer_id = request.POST.get('answer_id')
+            cat = Category.objects.get(slug=cat_name_slug)
+            user = request.user
+            content = request.POST.get('content')
+            current_time = timezone.now()
+            # current_time = datetime.now()
+
+            answer = Answers(
+                category=cat,
+                author=user,
+                content=content,
+                post_date=current_time,
+                edit_date=current_time
+            )
+            answer.save()
+        else:
+            print "form.errors", form.errors
+
+        return HttpResponseRedirect('/rango/category/'+cat_name_slug)
+    else:
+        form = TestUeditorModelForm()
+
+    context = {"form": form, "cat_name_slug": cat_name_slug}
+
+    return render(request, 'rango/edit-description.html', context)
+
+
+@login_required
+def edit_answer(request, cat_name_slug, answer_id):
+
+    if request.method == 'POST':
+
+        form = TestUeditorModelForm(request.POST)
+        # answer_id = request.GET['answer_id']
+        # next_page = request.GET['next']
+
+        if form.is_valid():
             answer = Answers.objects.get(id=int(answer_id))
 
             content = request.POST.get('content')
@@ -427,7 +471,19 @@ def edit_answer(request):
             answer.edit_date = current_time
             answer.save()
 
-            return HttpResponseRedirect(next_page)
+            return HttpResponseRedirect('/rango/category/'+cat_name_slug)
+
+    else:
+        answer = Answers.objects.get(id=int(answer_id))
+        form = TestUeditorModelForm(
+            initial={
+                'content': answer.content,
+            }
+        )
+
+    context = {"form": form, "answer_id": answer_id, "cat_name_slug": cat_name_slug}
+
+    return render(request, 'rango/edit-description.html', context)
 
 
 def answer_up(request):
@@ -481,13 +537,13 @@ def answer_up_off(request):
 
             dislikes = AnswerUserDislikes.objects.filter(answer=answer)
             likes = AnswerUserLikes.objects.filter(answer=answer)
-            likes_count = likes.count() - dislikes.count() - 1
-
-            answer.likes = likes_count
-            answer.save()
 
             user_likes = AnswerUserLikes.objects.filter(answer=answer).filter(user=user)
             user_likes.delete()
+
+            likes_count = likes.count() - dislikes.count()
+            answer.likes = likes_count
+            answer.save()
 
             return_code = 1
 
@@ -548,13 +604,13 @@ def answer_down_off(request):
 
             dislikes = AnswerUserDislikes.objects.filter(answer=answer)
             likes = AnswerUserLikes.objects.filter(answer=answer)
-            likes_count = likes.count() - dislikes.count() + 1
-
-            answer.likes = likes_count
-            answer.save()
 
             user_dislikes = AnswerUserDislikes.objects.filter(answer=answer).filter(user=user)
             user_dislikes.delete()
+
+            likes_count = likes.count() - dislikes.count()
+            answer.likes = likes_count
+            answer.save()
 
             return_code = 1
 
@@ -562,3 +618,6 @@ def answer_down_off(request):
     date["likes_count"] = likes_count
 
     return JsonResponse(date)
+
+
+

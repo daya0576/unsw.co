@@ -25,7 +25,7 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = '#931l#hlt@!kkp-z1u&(kzyn_z(i7ngf-=&85ex#z97vcf=3yf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["u.changchen.me", "127.0.0.1"]
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'DjangoUeditor',
     'bootstrap3',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -196,3 +197,11 @@ UEDITOR_SETTINGS={
         "imageAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".PNG", ".JPG", ".JPEG", ".GIF", ".BMP"]
     }
 }
+
+
+# ReCapthcha
+RECAPTCHA_PUBLIC_KEY = '6LcWThUTAAAAAKS7B2Ox16ylUCTQ72Dls9__aLva'
+RECAPTCHA_PRIVATE_KEY = '6LcWThUTAAAAAEF-nGUHbmuQ0XdwLqc5a7RBFsPw'
+
+NOCAPTCHA = True
+RECAPTCHA_USE_SSL = True

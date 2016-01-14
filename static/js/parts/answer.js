@@ -16,7 +16,7 @@ function delete_answer(answer_id){
 function show_editor(obj, answer_id){
 
     $("#answer_content"+answer_id).html("<img scr='/images/favicon.ico'></img>");
-    $.get('/rango/edit_description_view/', {answer_id: answer_id}, function(data){
+    $.get('/rango/edit_answer/', {answer_id: answer_id}, function(data){
 //        $("#answer_content"+answer_id).html(data);
 //        $("#answer_content"+answer_id).load("/rango/edit_description_view/?answer_id=9");
 //        $("#answer_content"+answer_id).html('<script id="container" name="content" type="text/plain">这里写你的初始化内容</script>')
@@ -27,7 +27,7 @@ function show_editor(obj, answer_id){
 
 var test;
 function button_up_css_on(obj){
-    $(obj).css("background-color", "#31b0d5");
+    $(obj).css("background-color", "#337ab7");
     $(obj).css("color", "#fff");
     $(obj).children(".vote-arrow").css("border-bottom-color", "white");
     $(obj).attr("aria-pressed", "true");
@@ -39,7 +39,7 @@ function button_up_css_off(obj){
     $(obj).attr("aria-pressed", "false");
 }
 function button_down_css_on(obj){
-    $(obj).css("background-color", "#31b0d5");
+    $(obj).css("background-color", "#337ab7");
     $(obj).children(".vote-arrow").css("border-top-color", "white");
     $(obj).attr("aria-pressed", "true");
 }
@@ -128,10 +128,10 @@ function button_up(obj){
 function button_down(obj){
     var answer_id = $(obj).prev().attr("data-ans_id");
     if($(obj).attr("aria-pressed") == "false"){
-        if($(obj).prev().attr("aria-pressed") == "true"){
-            button_up_css_off($(obj).prev());
-        }
         if(window.confirm('Is this answer useless?')){
+            if($(obj).prev().attr("aria-pressed") == "true"){
+                button_up_css_off($(obj).prev());
+            }
             button_down_css_on(obj);
             answer_down(answer_id, obj);
         }

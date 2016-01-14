@@ -122,7 +122,7 @@
 }
 
 .zm-votebar.version-classic button:hover {
-    background-color:#31b0d5;
+    background-color:#337ab7;
     color: white;
 }
 .zm-votebar.version-classic button:hover .vote-arrow{
@@ -132,7 +132,7 @@
 
 
 .zm-votebar.version-classic .up.pressed, .down.pressed {
-    background-color: #31b0d5;
+    background-color: #337ab7;
     color: white;
 }
 .zm-votebar.version-classic .up.pressed .vote-arrow {

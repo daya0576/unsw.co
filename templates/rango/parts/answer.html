@@ -26,7 +26,7 @@
                     <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
             {% endif %}
                             <i class="icon vote-arrow"></i>
-                            <span class="count">{{ answer.answer_likes_count }}</span>
+                            <span class="count">{{ answer.likes }}</span>
                             <span class="label sr-only">赞同</span>
                         </button>
 
@@ -62,7 +62,7 @@
 
         {% if user == answer.author %}
         <div class="edit">
-            <a href="{% url 'editor' %}?answer_id={{ answer.id }}&next={{request.path}}">
+            <a href="/rango/category/{{ cat_name_slug }}/edit_answer/{{ answer.id }}">
                 <i class="fa fa-pencil-square-o"></i>edit</a>
             &nbsp;
             <a style="cursor:pointer" onclick="delete_answer({{ answer.id }})">
