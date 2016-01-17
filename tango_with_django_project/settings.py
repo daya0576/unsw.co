@@ -134,7 +134,7 @@ SESSION_COOKIE_AGE = 60*60*24*30
 ACCOUNT_ACTIVATION_DAYS = 7     # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
 
-# SEND_ACTIVATION_EMAIL = True
+SEND_ACTIVATION_EMAIL = False
 REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 
 # LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in

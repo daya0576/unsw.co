@@ -3,7 +3,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
-from rango.models import Category, CatPage, SubPage, BaiduEditor
+from rango.models import Category, CatPage, SubPage, BaiduEditor, UserProfile
 
 from captcha.fields import ReCaptchaField
 
@@ -31,7 +31,8 @@ class CatPageForm(forms.ModelForm):
     captcha = ReCaptchaField(
         public_key=settings.RECAPTCHA_PUBLIC_KEY,
         private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True
+        use_ssl=True,
+        attrs={'theme': 'clean'}
     )
 
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
@@ -98,8 +99,8 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        # model = UserProfile
-        fields = ('website', 'picture')
+        model = UserProfile
+        fields = ('gender', 'facebook', 'wechat', 'picture')
 
 
 class TestUeditorModelForm(forms.ModelForm):

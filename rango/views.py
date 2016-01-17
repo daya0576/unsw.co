@@ -2,7 +2,7 @@
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes,AnswerUserDislikes
+from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes, AnswerUserDislikes, User
 from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
@@ -68,6 +68,7 @@ def about(request):
 
 def get_category(request, cat_name_slug):
     context_dict = {}
+    return_code = 1
 
     try:
         user = request.user
@@ -103,8 +104,8 @@ def get_category(request, cat_name_slug):
         # print is_liked
 
         # like persons.
-        # for answer in answers:
-        #     answer.answer_likes_count = answer.answer_likes - answer.answer_dislikes
+        for answer in answers:
+            answer.user_id = answer.author.id
 
         context_dict['pages'] = pages
         context_dict['answers'] = answers
@@ -132,14 +133,18 @@ def get_category(request, cat_name_slug):
                     edit_date=current_time
                 )
                 answer.save()
+                return HttpResponseRedirect('/rango/category/'+cat_name_slug)
             else:
                 print "form.errors", editor_form.errors
+                return_code = -1
         else:
             editor_form = TestUeditorModelForm()
+            return_code = 0
 
         context_dict['editor'] = editor_form
         context_dict['is_liked'] = is_liked
         context_dict['subject'] = category.subject
+        context_dict['return_code'] = return_code
 
     except Category.DoesNotExist:
         context_dict = {}
@@ -360,7 +365,6 @@ def add_answer(request, category_name_slug):
             print "form.errors", form.errors
 
         return HttpResponseRedirect('/rango/category/'+category_name_slug)
-
 
 
 @login_required
@@ -620,4 +624,13 @@ def answer_down_off(request):
     return JsonResponse(date)
 
 
+def member(request, author):
+    tar_user = User.objects.get(username=author)
+    cur_user = request.user
 
+    if tar_user == cur_user:
+        form = UserProfileForm()
+    else:
+        code = 2
+
+    return HttpResponse(code)

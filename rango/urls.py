@@ -19,12 +19,14 @@ urlpatterns = patterns('',
     # url(r'^ueditor/', include('DjangoUeditor.urls')),
     url(r'^delete_answer/$', views.delete_answer, name='delete_answer'),
     url(r'^category/(?P<cat_name_slug>[\w\-]+)/edit_answer/(?P<answer_id>[\d]+)$', views.edit_answer, name='edit_answer'),
-    url(r'^category/(?P<cat_name_slug>[\w\-]+)/add_answer/$', views.add_answer, name='add_answer'),
+    url(r'^category/(?P<cat_name_slug>[\w\-]+)/add_answer/$', views.get_category, name='add_answer'),
 
     url(r'^answer_up/$', views.answer_up, name='answer_up'),
     url(r'^answer_up_off/$', views.answer_up_off, name='answer_up_off'),
     url(r'^answer_down/$', views.answer_down, name='answer_down'),
     url(r'^answer_down_off/$', views.answer_down_off, name='answer_down_off'),
+
+    url(r'^member/(?P<author>[\w]+)/$', views.member, name='member'),
 )
 
 

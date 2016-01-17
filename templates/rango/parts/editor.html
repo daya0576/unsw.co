@@ -1,16 +1,29 @@
 {% load bootstrap3 %}
 
+
+<h4 style="padding-bottom:10px">Your Answer</h4>
 {% if user.is_authenticated %}
     <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
         {% csrf_token %}
         {{ editor.media }}
 
-        {% bootstrap_form editor %}
+        {% bootstrap_form editor layout='inline' %}
         <!--<input type="submit" name="submit" value="Create Category" />-->
-        <button class="btn btn-primary" type="submit" name="submit">submit</button>
+        <button class="btn btn-primary" type="submit" name="submit">Post Your Answer</button>
     </form>
 {% else %}
     <a href="{% url 'auth_login' %}?next={{request.path}}">
-        <strong>(login to add description.) </strong>
+        <strong>(Login to Post Your Answer.) </strong>
     </a>
 {% endif %}
+
+
+
+
+<script>
+    {% if return_code = 1 %}
+        alert("Thanks for your answer!");
+    {% elif return_code = -1 %}
+        alert("Do you tick the captcha??");
+    {% endif %}
+</script>

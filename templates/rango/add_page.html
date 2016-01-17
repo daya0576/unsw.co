@@ -11,7 +11,7 @@
         {% if category %}
             <h2 class="form-signin-heading">Add a Page to <a href="/rango/category/{{category.slug}}/"> {{ category.name }}</a></h2>
 
-
+            <script>alert({% bootstrap_form_errors form %});</script>
             {% csrf_token %}
             {% bootstrap_form_errors form %}
 
@@ -25,6 +25,7 @@
                 <!--{{ field }}<br/>-->
             <!--{% endfor %}-->
 
+            {% bootstrap_form_errors form %}
             {% bootstrap_form form %}
             <br>
 
