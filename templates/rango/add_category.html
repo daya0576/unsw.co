@@ -7,6 +7,7 @@
 {% block body_block %}
     <form id="category_form" method="post" action="{% url 'add_category' sub_name_slug %}">
         <h2 class="form-signin-heading">Add a new course</a></h2>
+        <h4><b>Be careful</b>: Search on the navbar before you add it!</h4>
         <br>
         {% csrf_token %}
 

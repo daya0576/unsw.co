@@ -28,12 +28,6 @@ class CatPageForm(forms.ModelForm):
     url = forms.URLField(max_length=200,
                          help_text="Please enter the URL of the page.",
                          initial="http://")
-    captcha = ReCaptchaField(
-        public_key=settings.RECAPTCHA_PUBLIC_KEY,
-        private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True,
-        attrs={'theme': 'clean'}
-    )
 
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
 
@@ -41,7 +35,7 @@ class CatPageForm(forms.ModelForm):
         # Provide an association between the ModelForm and a model
         model = CatPage
 
-        fields = ('title', 'url', 'captcha')
+        fields = ('title', 'url')
 
     def clean(self):
         # print "cleaning"
@@ -60,17 +54,12 @@ class SubPageForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text="Please enter the title of the page.")
     url = forms.URLField(max_length=200, help_text="Please enter the URL of the page.")
     views = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
-    captcha = ReCaptchaField(
-        public_key=settings.RECAPTCHA_PUBLIC_KEY,
-        private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True
-    )
 
     class Meta:
         # Provide an association between the ModelForm and a model
         model = SubPage
 
-        fields = ('title', 'url', 'captcha', )
+        fields = ('title', 'url', )
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -86,15 +75,10 @@ class SubPageForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    captcha = ReCaptchaField(
-        public_key=settings.RECAPTCHA_PUBLIC_KEY,
-        private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True
-    )
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'captcha', )
+        fields = ('username', 'email', 'password', )
 
 
 class UserProfileForm(forms.ModelForm):
@@ -104,15 +88,10 @@ class UserProfileForm(forms.ModelForm):
 
 
 class TestUeditorModelForm(forms.ModelForm):
-    captcha = ReCaptchaField(
-        public_key=settings.RECAPTCHA_PUBLIC_KEY,
-        private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True
-    )
 
     class Meta:
         model = BaiduEditor
-        fields = ('content', 'captcha')
+        fields = ('content',)
 
 
 class FormWithCaptcha(forms.Form):

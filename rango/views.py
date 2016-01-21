@@ -104,7 +104,10 @@ def get_category(request, cat_name_slug):
         # print is_liked
 
         # like persons.
+        is_answered = False
         for answer in answers:
+            if answer.author == user:
+                is_answered = True
             answer.user_id = answer.author.id
 
         context_dict['pages'] = pages
@@ -143,7 +146,9 @@ def get_category(request, cat_name_slug):
 
         context_dict['editor'] = editor_form
         context_dict['is_liked'] = is_liked
+        context_dict['is_answered'] = is_answered
         context_dict['subject'] = category.subject
+
         context_dict['return_code'] = return_code
 
     except Category.DoesNotExist:
