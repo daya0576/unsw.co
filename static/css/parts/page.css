@@ -7,9 +7,13 @@
 }
 
 .page{
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 .list-group{
     margin-bottom: 8px;
+}
+
+.cat_content .likes{
+    padding:4px 0 8px 0;
 }

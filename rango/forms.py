@@ -3,7 +3,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
-from rango.models import Category, CatPage, SubPage, BaiduEditor, UserProfile
+from rango.models import Category, CatPage, SubPage, BaiduEditor, UserProfile, UserOOXX
 
 from captcha.fields import ReCaptchaField
 
@@ -100,4 +100,12 @@ class FormWithCaptcha(forms.Form):
         private_key=settings.RECAPTCHA_PRIVATE_KEY,
         use_ssl=True
     )
+
+
+class UserOOXXForm(forms.ModelForm):
+
+    class Meta:
+        model = UserOOXX
+        fields = ('name', 'attr', )
+
 

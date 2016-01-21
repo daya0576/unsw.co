@@ -9,12 +9,12 @@
     <div class="cat_content">
         {% if category %}
             <div class="box">
-                <h1>{{ category.no }}-{{ category.name }}</h1>
-                <div class="underline">
+                <h1>{{ category.name }} &nbsp;<small>{{ category.no }}</small></h1>
+                <div class="likes">
                     {% include 'rango/parts/cat_like.html' %}
                 </div>
 
-                <div class="">
+                <div>
                     {% include 'rango/parts/cat_pages.html' %}
                 </div>
             </div>

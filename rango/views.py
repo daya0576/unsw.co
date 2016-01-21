@@ -2,8 +2,8 @@
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
-from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes, AnswerUserDislikes, User
-from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm
+from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes, AnswerUserDislikes, User, UserOOXX
+from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm, UserOOXXForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.http import JsonResponse
@@ -633,9 +633,24 @@ def member(request, author):
     tar_user = User.objects.get(username=author)
     cur_user = request.user
 
-    if tar_user == cur_user:
-        form = UserProfileForm()
-    else:
-        code = 2
+    user_details = UserOOXX.objects.filter(user=tar_user)
 
-    return HttpResponse(code)
+    if request.method == 'POST':
+
+        form = TestUeditorModelForm(request.POST)
+        # answer_id = request.GET['answer_id']
+        # next_page = request.GET['next']
+
+        if form.is_valid():
+            mem_ooxx = form.save(commit=False)
+            mem_ooxx.user = request.user
+            mem_ooxx.save()
+    else:
+        if tar_user == cur_user:
+            form = UserOOXXForm()
+        else:
+            form = None
+
+    context = {"form": form, "member": tar_user, "user_details": user_details}
+
+    return render(request, 'rango/member.html', context)

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title %}{{ member.username }}{% endblock %}
+
+{% block body_block %}
+    <h1>{{ member.username }}<small>{{ member.email }}</small></h1>
+
+    {% if form %}
+        <form id="mem_form" method="post" action="{% url 'member' member.username %}">
+            <h2 class="form-signin-heading">Complete your detail.<small>such as facebood and phone number</small></h2>
+                <br>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+
+            <!--<input type="submit" name="submit" value="Create Category" />-->
+            <button class="btn btn-primary" type="submit" name="submit">Create</button>
+        </form>
+    {% endif %}
+{% endblock %}
