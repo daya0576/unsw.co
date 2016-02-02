@@ -1,9 +1,10 @@
 {% load staticfiles %}
 
 h1, h2, h3, h4 {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 3px;
 }
+
 .container-fluid{
     padding:0px;
 }
@@ -29,6 +30,9 @@ h1, h2, h3, h4 {
 .underline{
     border-bottom: 1px solid rgba(0,0,0,0.13);
     padding: 4px 0 8px 0;
+}
+.underline_no{
+    border-bottom: 1px solid rgba(0,0,0,0.13);
 }
 
 .box {
@@ -61,4 +65,8 @@ h1, h2, h3, h4 {
 
 body{
     background: url(/static/images/bg/noise_fw.gif) #DFDFDF;
+}
+
+.profile_list{
+    padding-top: 5px;
 }

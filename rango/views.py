@@ -632,12 +632,12 @@ def answer_down_off(request):
 def member(request, author):
     tar_user = User.objects.get(username=author)
     cur_user = request.user
+    returncode = 0
 
     user_details = UserOOXX.objects.filter(user=tar_user)
 
     if request.method == 'POST':
-
-        form = TestUeditorModelForm(request.POST)
+        form = UserOOXXForm(request.POST)
         # answer_id = request.GET['answer_id']
         # next_page = request.GET['next']
 
@@ -645,12 +645,23 @@ def member(request, author):
             mem_ooxx = form.save(commit=False)
             mem_ooxx.user = request.user
             mem_ooxx.save()
+            returncode = 1
+            form = UserOOXXForm()
     else:
         if tar_user == cur_user:
             form = UserOOXXForm()
         else:
             form = None
 
-    context = {"form": form, "member": tar_user, "user_details": user_details}
+    context = {"form": form, "member": tar_user, "user_details": user_details, "returncode": returncode}
 
     return render(request, 'rango/member.html', context)
+
+
+def member_detail_delete(request, detail_id):
+    member = UserOOXX.objects.get(id=int(detail_id))
+    member.delete()
+    returncode = 1
+
+    date = {"return_code": returncode}
+    return JsonResponse(date)

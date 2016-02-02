@@ -5,17 +5,46 @@
 {% block title %}{{ member.username }}{% endblock %}
 
 {% block body_block %}
-    <h1>{{ member.username }}<small>{{ member.email }}</small></h1>
+    <script src="{% static 'js/parts/member.js' %}"></script>
 
-    {% if form %}
-        <form id="mem_form" method="post" action="{% url 'member' member.username %}">
-            <h2 class="form-signin-heading">Complete your detail.<small>such as facebood and phone number</small></h2>
-                <br>
-            {% csrf_token %}
-            {% bootstrap_form form %}
-
-            <!--<input type="submit" name="submit" value="Create Category" />-->
-            <button class="btn btn-primary" type="submit" name="submit">Create</button>
-        </form>
+    {% if returncode == 1 %}
+        <script>alert("Detail has been added! ");</script>
     {% endif %}
+
+    <div class="box">
+        <h1>Detail</h1>
+        <div class="underline_no"></div>
+        <div class="profile_list">
+            <h3>name:  {{ member.username }}</h3>
+            <h3>email: {{ member.email }}</h3>
+            {% for detail in user_details %}
+                <h3>
+                    {% if form %}
+                        <a style="cursor:pointer" onclick="delete_member('{{ detail.id }}')">
+                            {{ detail.name }}: </a>
+                        {{ detail.attr }}
+                    {% else %}
+                        <a style="cursor:pointer" href="javascript:;">{{ detail.name }}: </a>
+                        {{ detail.attr }}
+                    {% endif %}
+                </h3>
+            {% endfor%}
+        </div>
+    </div>
+
+    <div class="sep20"></div>
+    {% if form %}
+        <div class="box" style="">
+            <form id="mem_form" method="post" action="{% url 'member' member.username %}">
+                <h2 class="form-signin-heading">
+                    Add Contact<small>(wechat: daya0576)</small>
+                </h2>
+                {% csrf_token %}
+                {% bootstrap_form form layout='inline' %}
+                <!--<input type="submit" name="submit" value="Create Category" />-->
+                <button class="btn btn-primary" type="submit" name="submit">Add</button>
+            </form>
+        </div>
+    {% endif %}
+
 {% endblock %}

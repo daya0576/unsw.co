@@ -27,6 +27,7 @@ urlpatterns = patterns('',
     url(r'^answer_down_off/$', views.answer_down_off, name='answer_down_off'),
 
     url(r'^member/(?P<author>[\w]+)/$', views.member, name='member'),
+    url(r'^member/delete/(?P<detail_id>[\w]+)$', views.member_detail_delete, name='member_delete'),
 )
 
 

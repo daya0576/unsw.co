@@ -132,9 +132,9 @@ class UserProfile(models.Model):
 
 
 class UserOOXX(models.Model):
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
     name = models.CharField(max_length=20)
-    attr = models.CharField(max_length=20)
+    attr = models.CharField(max_length=50)
 
 
 
