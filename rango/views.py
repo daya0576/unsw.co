@@ -3,7 +3,7 @@
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes, AnswerUserDislikes, User, UserOOXX
-from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, UserProfileForm, TestUeditorModelForm, UserOOXXForm
+from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, TestUeditorModelForm, UserOOXXForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.http import JsonResponse

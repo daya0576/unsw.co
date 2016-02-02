@@ -114,21 +114,21 @@ class AnswerUserDislikes(models.Model):
     time = models.DateTimeField()
 
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-
-    GENDER_CHOICES = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
-    facebook = models.URLField(blank=True)
-    wechat = models.CharField(max_length=20, blank=True)
-    # picture = models.ImageField(upload_to='profile_images', blank=True)
-
-    # Override the __unicode__() method to return out something meaningful!
-    def __unicode__(self):
-        return self.user.username
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User)
+#
+#     GENDER_CHOICES = (
+#         ('M', 'Male'),
+#         ('F', 'Female'),
+#     )
+#     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+#     facebook = models.URLField(blank=True)
+#     wechat = models.CharField(max_length=20, blank=True)
+#     # picture = models.ImageField(upload_to='profile_images', blank=True)
+#
+#     # Override the __unicode__() method to return out something meaningful!
+#     def __unicode__(self):
+#         return self.user.username
 
 
 class UserOOXX(models.Model):

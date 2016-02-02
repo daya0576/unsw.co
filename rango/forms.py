@@ -3,7 +3,7 @@
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
-from rango.models import Category, CatPage, SubPage, BaiduEditor, UserProfile, UserOOXX
+from rango.models import Category, CatPage, SubPage, BaiduEditor, UserOOXX
 
 from captcha.fields import ReCaptchaField
 
@@ -81,10 +81,10 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password', )
 
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('gender', 'facebook', 'wechat', )
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = UserProfile
+#         fields = ('gender', 'facebook', 'wechat', )
 
 
 class TestUeditorModelForm(forms.ModelForm):
