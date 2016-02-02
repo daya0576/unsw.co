@@ -18,7 +18,7 @@
                 <li>
                     <!--<a href="/rango/subject/{{ sub_name_slug }}/add_category/">-->
                     <a class="small_box" href="{% url 'add_category' sub_name_slug %}">
-                        <strong>Add a new course</strong>
+                        <strong>Add course</strong>
                     </a>
                 </li>
             {% else %}
@@ -43,7 +43,7 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <!--<strong >There are no course present.</strong>-->
+                <strong >There are no course present.</strong>
             {% endif %}
         </ul>
     </div>

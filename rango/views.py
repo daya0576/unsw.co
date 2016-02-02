@@ -632,7 +632,7 @@ def answer_down_off(request):
 def member(request, author):
     tar_user = User.objects.get(username=author)
     cur_user = request.user
-    returncode = 0
+    return_code = 0
 
     user_details = UserOOXX.objects.filter(user=tar_user)
 
@@ -645,7 +645,7 @@ def member(request, author):
             mem_ooxx = form.save(commit=False)
             mem_ooxx.user = request.user
             mem_ooxx.save()
-            returncode = 1
+            return_code = 1
             form = UserOOXXForm()
     else:
         if tar_user == cur_user:
@@ -653,7 +653,7 @@ def member(request, author):
         else:
             form = None
 
-    context = {"form": form, "member": tar_user, "user_details": user_details, "returncode": returncode}
+    context = {"form": form, "member": tar_user, "user_details": user_details, "returncode": return_code}
 
     return render(request, 'rango/member.html', context)
 

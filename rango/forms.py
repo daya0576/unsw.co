@@ -84,7 +84,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('gender', 'facebook', 'wechat', 'picture')
+        fields = ('gender', 'facebook', 'wechat', )
 
 
 class TestUeditorModelForm(forms.ModelForm):
