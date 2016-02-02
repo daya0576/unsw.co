@@ -660,8 +660,7 @@ def member(request, author):
 
 def member_detail_delete(request, detail_id):
     member = UserOOXX.objects.get(id=int(detail_id))
+    username = member.user.username
     member.delete()
-    returncode = 1
 
-    date = {"return_code": returncode}
-    return JsonResponse(date)
+    return HttpResponseRedirect('/rango/member/'+username)
