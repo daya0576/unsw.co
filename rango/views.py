@@ -646,7 +646,7 @@ def member(request, author):
             mem_ooxx.user = request.user
             mem_ooxx.save()
             return_code = 1
-            form = UserOOXXForm()
+            return HttpResponseRedirect('/rango/member/'+tar_user.username)
     else:
         if tar_user == cur_user:
             form = UserOOXXForm()
@@ -660,7 +660,8 @@ def member(request, author):
 
 def member_detail_delete(request, detail_id):
     member = UserOOXX.objects.get(id=int(detail_id))
-    username = member.user.username
     member.delete()
+    returncode = 1
 
-    return HttpResponseRedirect('/rango/member/'+username)
+    date = {"return_code": returncode}
+    return JsonResponse(date)
