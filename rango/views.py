@@ -66,6 +66,39 @@ def about(request):
     return render(request, 'rango/about.html', content_dict)
 
 
+def get_answer_like_users(answer):
+    like_users_str = ""
+    users_like = AnswerUserLikes.objects.filter(answer=answer).order_by("-time")
+    users_dislike = AnswerUserDislikes.objects.filter(answer=answer)
+    users_like_num = len(users_like)
+    users_dislike_num = len(users_dislike)
+    if users_like_num == 0:
+        like_users_str = ""
+    elif users_like_num == 1:
+        like_users_str = users_like[0].user.username+" likes this"
+    elif 0 <= users_like_num <= 3:
+        like_users_str = ""
+        for i, user_like in enumerate(users_like):
+            if i == len(users_like)-1:
+                like_users_str += user_like.user.username+" "
+            else:
+                like_users_str += user_like.user.username+", "
+        like_users_str += "like this"
+    else:
+        like_users_str = users_like[0].user.username + ', ' + \
+                         users_like[1].user.username + ', ' + \
+                         users_like[2].user.username
+        like_users_str += ".. like this"
+
+    # print users_dislike_num, users_like_num
+    if users_dislike_num > 0 and users_like_num > 0:
+        like_users_str += ", %d person dislike" % users_dislike_num
+    elif users_dislike_num > 0 and users_like_num == 0:
+        like_users_str += "%d person dislike" % users_dislike_num
+
+    return like_users_str
+
+
 def get_category(request, cat_name_slug):
     context_dict = {}
     return_code = 1
@@ -95,19 +128,23 @@ def get_category(request, cat_name_slug):
             select={
                 'is_disliked': 'select count(*) from rango_answeruserdislikes where rango_answers.id = rango_answeruserdislikes.answer_id and rango_answeruserdislikes.user_id = ' + str(user_id)
             },
-        ).order_by('-edit_date')
+        )
+
+        answers.order_by('-edit_date')
 
         if user.is_authenticated():
             is_liked = CategoryUserLikes.objects.filter(category=category).filter(user=request.user)
         else:
             is_liked = None
-        # print is_liked
 
         # like persons.
         is_answered = False
         for answer in answers:
+            answer.like_users_str = get_answer_like_users(answer)
+
             if answer.author == user:
                 is_answered = True
+
             answer.user_id = answer.author.id
 
         context_dict['pages'] = pages
@@ -529,7 +566,7 @@ def answer_up(request):
 
     date["return_code"] = return_code
     date["likes_count"] = likes_count
-
+    date["likes_person"] = get_answer_like_users(answer)
     return JsonResponse(date)
 
 
@@ -558,6 +595,7 @@ def answer_up_off(request):
 
     date["return_code"] = return_code
     date["likes_count"] = likes_count
+    date["likes_person"] = get_answer_like_users(answer)
 
     return JsonResponse(date)
 
@@ -596,6 +634,7 @@ def answer_down(request):
 
     date["return_code"] = return_code
     date["likes_count"] = likes_count
+    date["likes_person"] = get_answer_like_users(answer)
 
     return JsonResponse(date)
 
@@ -625,6 +664,7 @@ def answer_down_off(request):
 
     date["return_code"] = return_code
     date["likes_count"] = likes_count
+    date["likes_person"] = get_answer_like_users(answer)
 
     return JsonResponse(date)
 

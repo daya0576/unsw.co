@@ -137,11 +137,3 @@ class UserOOXX(models.Model):
     attr = models.CharField(max_length=50)
 
 
-class Test(models.Model):
-    user = models.ForeignKey(User)
-    name = models.CharField(max_length=20)
-    attr = models.CharField(max_length=50)
-
-
-
-

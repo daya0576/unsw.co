@@ -4,6 +4,11 @@
 }
 
 .answer a.dark:link, a.dark:visited, a.dark:active {
+    color: #222;
+    text-decoration: none;
+}
+
+.answer a.likes_person{
     color: gray;
     text-decoration: none;
 }

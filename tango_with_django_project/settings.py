@@ -205,3 +205,26 @@ RECAPTCHA_PRIVATE_KEY = '6LcWThUTAAAAAEF-nGUHbmuQ0XdwLqc5a7RBFsPw'
 
 NOCAPTCHA = True
 RECAPTCHA_USE_SSL = True
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/debug.log',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    }
+}

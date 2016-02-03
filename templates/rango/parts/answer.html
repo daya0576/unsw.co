@@ -54,7 +54,11 @@
             <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
         </div>
 
-        <div style="height:12px"></div>
+        <div style="height:0px"></div>
+        <div>
+            <a class="likes_person">{{ answer.like_users_str }}</a>
+        </div>
+        <div style="height:3px"></div>
 
         <div id="answer_content{{ answer.id }}" class="reply_content">
             {{ answer.content|safe }}
