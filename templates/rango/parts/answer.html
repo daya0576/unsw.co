@@ -50,13 +50,15 @@
                 <span class="no">{{ forloop.counter }}</span>
             </div>
 
-            <strong><a href="/rango/member/{{ answer.author }}" class="dark">{{ answer.author }}</a></strong>&nbsp; &nbsp;
+            <strong><a href="/rango/member/{{ answer.author }}" class="dark">{{ answer.author }}</a></strong>&nbsp;
             <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
         </div>
 
         <div style="height:0px"></div>
         <div>
-            <a class="likes_person">{{ answer.like_users_str }}</a>
+            {% if answer.like_users_str %}
+                <a class="likes_person">{{ answer.like_users_str }}</a>
+            {% endif %}
         </div>
         <div style="height:3px"></div>
 
