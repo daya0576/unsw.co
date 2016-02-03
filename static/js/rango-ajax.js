@@ -19,3 +19,5 @@ $("#suggestion").blur(function(){
     $("#nav_search_content").hide();
 });
 
+
+

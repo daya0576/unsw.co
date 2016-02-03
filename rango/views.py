@@ -7,6 +7,8 @@ from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, TestUe
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.http import JsonResponse
+from django.db.models import Q
+
 
 # def index(request):
 #     print request.META
@@ -196,6 +198,15 @@ def get_category(request, cat_name_slug):
 
 def subject(request, sub_name_slug):
     context_dict = {}
+    if "order" in request.GET:
+        order = int(request.GET['order'])
+    else:
+        order = 0
+
+    if "keyword" in request.GET:
+        keyword = request.GET['keyword']
+    else:
+        keyword = ''
 
     try:
         subject = Subject.objects.get(slug=sub_name_slug)
@@ -205,13 +216,33 @@ def subject(request, sub_name_slug):
             select={
                 'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
             },
-        ).order_by('-answer_count', '-likes', 'level')
-        # cats = Category.objects.filter(subject=subject)
+        )
 
+        if keyword is not '':
+            cats = cats.filter(Q(name__contains=keyword) | Q(no__contains=keyword))
+            context_dict['keyword'] = keyword
+
+        if order == 0:
+            cats = cats.order_by('-answer_count')
+        elif order == 1:
+            cats = cats.order_by('-likes')
+        elif order == 2:
+            cats = cats.order_by('level')
+        elif order == 20:
+            cats = cats.filter(level=0).order_by('-answer_count')
+        elif order == 21:
+            cats = cats.filter(level=1).order_by('-answer_count')
+        elif order == 22:
+            cats = cats.filter(level=2).order_by('-answer_count')
+        elif order == 23:
+            cats = cats.filter(level=3).order_by('-answer_count')
+
+        # cats = Category.objects.filter(subject=subject)
 
         context_dict['subject'] = subject
         context_dict['cats'] = cats
         context_dict['sub_name_slug'] = sub_name_slug
+        context_dict['order'] = order
         # context_dict['act_sub'] = subject
     except Subject.DoesNotExist:
         context_dict = {}
@@ -705,3 +736,4 @@ def member_detail_delete(request, detail_id):
 
     date = {"return_code": returncode}
     return JsonResponse(date)
+

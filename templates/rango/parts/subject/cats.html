@@ -7,11 +7,6 @@
     <link href="{% static 'css/parts/subs_cats.css' %}" rel="stylesheet">
 </head>
 
-    <div>
-        {% if not cats %}
-            <strong >There are no course present.</strong>
-        {% endif %}
-    </div>
     <div id="sub_cats_container">
         <ul class="grid effect-2" id="grid">
             {% if user.is_authenticated %}
@@ -36,14 +31,16 @@
                             <span class="likes">(
                                 <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
                                 &nbsp
-                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }})
+                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
+                                &nbsp
+                                lvl {{ c.level }})
                             </span><br>
                                 {{ c.name }}
                         </a>
                     </li>
                 {% endfor %}
             {% else %}
-                <strong >There are no course present.</strong>
+                <!--<strong >There are no course present.</strong>-->
             {% endif %}
         </ul>
     </div>
