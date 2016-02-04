@@ -14,8 +14,16 @@
         {% if subject %}
             <div class="box">
                 <h1>{{ subject.name }}</h1>
-                <div class="">
+                <div>
                     <h4><a href="{{ subject.url }}" target="_blank">Major Homepage</a></h4>
+                </div>
+                <div
+                    style="float:right;margin-top: -20px;"
+                    class="fb-like"
+                    data-layout="button_count"
+                    data-action="like"
+                    data-show-faces="true"
+                    data-share="true">
                 </div>
             </div>
             <div class="sep20"></div>

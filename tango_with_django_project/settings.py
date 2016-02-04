@@ -47,7 +47,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'DjangoUeditor',
     'bootstrap3',
-    'captcha',
+    # 'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
