@@ -1,15 +1,10 @@
 <!--<a href="#" style="text-align:center" class="btn btn-default btn-block"><span class="glyphicon glyphicon-search"></span> Search</a>-->
-<div class="" style="float:right;max-width:250px">
-    <div class="input-group">
-        <input id="sub_keyword" type="text" class="form-control" placeholder="Search for...">
-        <span class="input-group-btn">
-            <button onclick="sub_search('{% url 'subject' sub_name_slug %}')" class="btn btn-default" type="button">Go!</button>
-        </span>
-    </div><!-- /input-group -->
+<div class="filter_search">
+    <button onclick="show_filter_search()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 </div><!-- /.col-lg-6 -->
 
 <!-- Single button -->
-<div style="float:left;padding-left:15px;" class="btn-group">
+<div class="btn-group filter_left">
     <div class="btn-group" role="group" aria-label="...">
         <a onclick="sub_filter(0)" id="filter_btn_0" class="btn btn-default" href="{% url 'subject' sub_name_slug %}?order=0" role="button">answers</a>
         <a onclick="sub_filter(1)" id="filter_btn_1" class="btn btn-default" href="{% url 'subject' sub_name_slug %}?order=1" role="button">likes</a>
@@ -32,7 +27,4 @@
 
 <script>
     sub_filter('{{ order }}');
-    {% if keyword %}
-        $("#sub_keyword").val('{{ keyword }}')
-    {% endif %}
 </script>

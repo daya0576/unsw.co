@@ -24,3 +24,14 @@ function sub_search(url){
     var key_word = $("#sub_keyword").val();
     window.open(url+"?keyword="+key_word,"_self")
 }
+
+function show_filter_search(){
+//    $(".filter_search_box").css('display', 'table');
+    if($(".filter_search_box").is(':hidden')){
+        $(".filter_search_box").show();
+        $("#sub_keyword").focus();
+    }else{
+        $(".filter_search_box").hide();
+    }
+
+}

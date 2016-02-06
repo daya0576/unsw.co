@@ -1,7 +1,21 @@
 .answer_filter{
-    height:30px;
+
 }
 
 .sep10{
     height:10px;
+}
+
+
+.answer_filter .filter_search{
+    float:right;
+    max-width:250px
+}
+
+.answer_filter .filter_left{
+    padding-left:7px;
+}
+
+.filter_search_box{
+    display:none;
 }

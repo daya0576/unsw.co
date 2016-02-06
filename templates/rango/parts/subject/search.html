@@ -1,0 +1,17 @@
+<!--<a href="#" style="text-align:center" class="btn btn-default btn-block"><span class="glyphicon glyphicon-search"></span> Search</a>-->
+<div class="filter_search">
+    <div class="input-group" id="search_input">
+        <input id="sub_keyword" type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+            <button onclick="sub_search('{% url 'subject' sub_name_slug %}')" class="btn btn-default" type="button">Go</button>
+        </span>
+    </div><!-- /input-group -->
+</div><!-- /.col-lg-6 -->
+
+
+<script>
+    {% if keyword %}
+        show_filter_search();
+        $("#sub_keyword").val('{{ keyword }}')
+    {% endif %}
+</script>
