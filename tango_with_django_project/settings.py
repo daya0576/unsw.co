@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     'DjangoUeditor',
     'bootstrap3',
     # 'captcha',
+    'social_auth'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -139,6 +140,7 @@ REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 
 # LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'
+LOGIN_ERROR_URL = '/'
 
 # more settings see: http://django-registration-redux.readthedocs.org/en/latest/
 # ---------------------------------------------------------
@@ -223,3 +225,20 @@ LOGGING = {
         },
     }
 }
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+FACEBOOK_APP_ID              = '1510020092635980'
+FACEBOOK_API_SECRET          = '94a8eef41d336cc09b955ed5e553db43'
+
+SOCIAL_AUTH_USER_MODEL = 'django.contrib.auth.models.User'
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
+SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
+SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16

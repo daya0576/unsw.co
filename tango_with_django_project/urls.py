@@ -39,6 +39,7 @@ urlpatterns = patterns('',
     url(r'^accounts/profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^ueditor/', include('DjangoUeditor.urls')),
+    url(r'', include('social_auth.urls')),
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:

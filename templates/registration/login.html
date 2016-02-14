@@ -27,7 +27,10 @@
 
         <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
 
+        <a href="{% url 'socialauth_begin' 'facebook' %}">Facebook Test</a><br><br><br>
 
+        {% url "socialauth_begin" "backend-name" %}
+        <a href="{% url 'socialauth_disconnect_individual' social.provider social.id %}">Disconnect {{ social.provider }}</a>
 
         <!--<a class="btn btn-default" href="{% url 'registration_register' %}">Register</a>-->
         <h3>No account?</h3>

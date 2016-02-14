@@ -17,11 +17,11 @@ class AnswersAdmin(admin.ModelAdmin):
 
 
 class AnswerUserLikesAdmin(admin.ModelAdmin):
-    list_display = ('answer', 'user', 'time')
+    list_display = ('user', 'time', 'answer')
 
 
 class AnswerUserDislikesAdmin(admin.ModelAdmin):
-    list_display = ('answer', 'user', 'time')
+    list_display = ('user', 'time', 'answer')
 
 
 admin.site.register(Category, CategoryAdmin)
