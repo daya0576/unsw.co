@@ -28,6 +28,7 @@
         <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
 
         <a href="{% url 'socialauth_begin' 'facebook' %}">Facebook Test</a><br><br><br>
+        {{ user.username }}
 
         <!--<a class="btn btn-default" href="{% url 'registration_register' %}">Register</a>-->
         <h3>No account?</h3>
