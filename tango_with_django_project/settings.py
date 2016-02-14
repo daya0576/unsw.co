@@ -141,7 +141,8 @@ REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 # LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL    = '/login-error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/login-error/'
 
 # more settings see: http://django-registration-redux.readthedocs.org/en/latest/
 # ---------------------------------------------------------
@@ -242,4 +243,4 @@ SOCIAL_AUTH_UID_LENGTH = 16
 SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
 SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
 SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
-
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

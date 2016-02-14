@@ -27,8 +27,9 @@
 
         <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
 
-        <a href="{% url 'socialauth_begin' 'facebook' %}">Facebook Test</a><br><br><br>
-        {{ user.username }}
+        <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+            Facebook
+        </a><br>
 
         <!--<a class="btn btn-default" href="{% url 'registration_register' %}">Register</a>-->
         <h3>No account?</h3>
