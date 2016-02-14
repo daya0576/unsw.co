@@ -140,7 +140,7 @@ REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 
 # LOGIN_REDIRECT_URL = '/rango/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'
-LOGIN_ERROR_URL = '/'
+# LOGIN_ERROR_URL = '/'
 
 # more settings see: http://django-registration-redux.readthedocs.org/en/latest/
 # ---------------------------------------------------------
