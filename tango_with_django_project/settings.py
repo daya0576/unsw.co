@@ -142,7 +142,7 @@ REGISTRATION_EMAIL_SUBJECT_PREFIX = '^^'
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-LOGIN_ERROR_URL = '/login-error/'
+# LOGIN_ERROR_URL = '/login-error/'
 
 # more settings see: http://django-registration-redux.readthedocs.org/en/latest/
 # ---------------------------------------------------------

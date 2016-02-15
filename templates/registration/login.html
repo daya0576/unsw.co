@@ -41,6 +41,19 @@
             </a>
         </div>
 
+        <div>
+          {% if messages %}
+            {% for msg in messages %}
+                <p class="error">{{ msg.message }} ({{ msg.extra_tags }})</p>
+            {% endfor %}
+          {% endif %}
+          {% if error_msg %}
+            <p>Details:</p>
+            <p class="error">{{ error_msg }}</p>
+            <p>Please try again <a href="/">Home</a></p>
+          {% endif %}
+        </div>
+
         <div class="accounts-modal__separator">
             <hr class="account-modal__separate-line">
             <span class="accounts-modal__separator-text">OR</span>
