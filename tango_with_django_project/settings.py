@@ -238,8 +238,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FACEBOOK_APP_ID              = '1510020092635980'
-FACEBOOK_API_SECRET          = '94a8eef41d336cc09b955ed5e553db43'
+FACEBOOK_APP_ID              = '1102179053146223'
+FACEBOOK_API_SECRET          = '09d3ec01c107ec3d5ffb798c503e5562'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 GITHUB_APP_ID                = '756187cfe31e4902b1dc'
