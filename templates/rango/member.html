@@ -15,8 +15,8 @@
         <h1>Detail</h1>
         <div class="underline_no"></div>
         <div class="profile_list">
-            <h3>name:  {{ member.username }}</h3>
-            <h3>email: {{ member.email }}</h3>
+            <h3>name:  {% if member.first_name %}{{ member.first_name }}{% else %}{{ member.username }}{% endif %}</h3>
+            {% if member.email %}<h3>email: {{ member.email }}</h3>{% endif %}
             {% for detail in user_details %}
                 <h3>
                     {% if form %}

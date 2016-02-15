@@ -9,7 +9,17 @@
     <meta property="wb:webmaster" content="28a0a9869da6aa36" />
     <link href="{% static 'css/parts/login.css' %}" rel="stylesheet">
 
-    <div style="width:400px; max-width:100%;text-align:center">
+    {% if user.is_authenticated %}
+        <h1 style="padding:8px 0">You have already login in!</h1>
+        <h3 style="padding-bottom:20px">
+            Redirect to index for 3 seconds..
+        </h3>
+        <script>
+            alert("Redirect to index for 2 seconds..");
+            window.setTimeout("window.open('/', '_self')", 2000);
+        </script>
+    {% else %}
+        <div style="width:400px; max-width:100%;text-align:center">
         <div style="">
             <h1 style="padding:8px 0">Log in to your account</h1>
             <h3 style="padding-bottom:20px">
@@ -85,6 +95,5 @@
         </form>
 
     </div>
-
-
+    {% endif %}
 {% endblock %}
