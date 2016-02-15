@@ -33,6 +33,9 @@
                 <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
                     <!--<i class="fa fa-instagram fa-4x"></i>-->
                 <!--</a>-->
+                <a href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                    <i class="fa fa-twitter-square fa-4x"></i>
+                </a>
                 <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
                     <i class="fa fa-weibo fa-4x"></i>
                 </a>-->
@@ -70,7 +73,7 @@
             {% bootstrap_form form layout='inline' %}
             {% buttons %}
                 <button type="submit" class="btn btn-primary">
-                    {% bootstrap_icon "ok-circle" %} Submit
+                    {% bootstrap_icon "ok-circle" %} Login
                 </button>
                 <input type="hidden" name="next" value="{{ next }}" />
                 <button type="reset" class="btn btn-default">

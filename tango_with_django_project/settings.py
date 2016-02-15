@@ -235,6 +235,9 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.google.GoogleOAuthBackend',
     'social_auth.backends.google.GoogleOAuth2Backend',
     'social_auth.backends.google.GoogleBackend',
+    # 'social_auth.backends.contrib.instagram.InstagramBackend',
+    'social_auth.backends.twitter.TwitterBackend',
+
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -249,6 +252,12 @@ GITHUB_EXTENDED_PERMISSIONS  = ['email']
 GOOGLE_OAUTH2_CLIENT_ID          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET       = 'SWJZlsVUT_kleTsIHD8lhvOo'
 GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = True
+
+INSTAGRAM_CLIENT_ID = 'be1ad52887c0478eb42b003470070f83'
+INSTAGRAM_CLIENT_SECRET = '4b33213387f94b5db985822e9532e29f'
+
+TWITTER_CONSUMER_KEY = 'B5NUwuqDN825BxTEkA2LRJ7jC'
+TWITTER_CONSUMER_SECRET = 'TKmKl94NyPO9P3hkOr7jYHpjHq7sepokHnXroedrJiIhHFVGTI'
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UID_LENGTH = 16
