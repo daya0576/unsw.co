@@ -75,7 +75,7 @@
     {% else %}
         $('#likes').click(function(){
             alert("Login to like this course.")
-
+            window.open("{% url 'auth_login' %}?next={{request.path}}", "_self")
         });
     {% endif %}
 
