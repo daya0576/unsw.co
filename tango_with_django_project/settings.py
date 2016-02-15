@@ -231,12 +231,24 @@ LOGGING = {
 
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
 FACEBOOK_APP_ID              = '1510020092635980'
 FACEBOOK_API_SECRET          = '94a8eef41d336cc09b955ed5e553db43'
 FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+
+GITHUB_APP_ID                = '756187cfe31e4902b1dc'
+GITHUB_API_SECRET            = 'ec97c8c8c2493a2ff14467dbf5f3a8db709c273d'
+GITHUB_EXTENDED_PERMISSIONS  = ['email']
+
+GOOGLE_OAUTH2_CLIENT_ID          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET       = 'SWJZlsVUT_kleTsIHD8lhvOo'
+GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = True
 
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UID_LENGTH = 16

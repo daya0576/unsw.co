@@ -1,40 +1,75 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
 
 {% block title %}Login{% endblock %}
 
 {% block body_block %}
 
-    <script>
-        {% if form.message.errors %}
-            alert("{{ form.message.errors }}");
-        {% endif %}
+    <meta property="wb:webmaster" content="28a0a9869da6aa36" />
+    <link href="{% static 'css/parts/login.css' %}" rel="stylesheet">
 
-    </script>
+    <div style="width:500px; max-width:100%">
+        <h1 style="padding:8px 0">Log in to your account</h1>
+        <h3 style="padding-bottom:20px">
+            Don't have an account?
+            <label><a href="{% url 'registration_register' %}" class="accounts-modal__link">
+                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                Sign up
+            </a></label>
+        </h3>
 
-    <form method="post" action=".">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% buttons %}
-            <button type="submit" class="btn btn-primary">
-                {% bootstrap_icon "ok-circle" %} Submit
-            </button>
-            <input type="hidden" name="next" value="{{ next }}" />
-            <button type="reset" class="btn btn-default">
-                {% bootstrap_icon "ok-default" %} Reset
-            </button>
-        {% endbuttons %}
+        <div class="login-icons">
+            <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                <i class="fa fa-facebook-square fa-4x"></i>
+            </a>
 
-        <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
+            <a href="{% url 'socialauth_begin' 'github' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                <i class="fa fa-github-square fa-4x"></i>
+            </a>
 
-        <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-            Facebook
-        </a><br>
+            <a href="{% url 'socialauth_begin' 'google-oauth2' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                <i class="fa fa-google-plus-square fa-4x"></i>
+            </a>
 
-        <!--<a class="btn btn-default" href="{% url 'registration_register' %}">Register</a>-->
-        <h3>No account?</h3>
-        <a href="{% url 'registration_register' %}" class="btn btn-primary btn-primary"><span class="glyphicon glyphicon-ok"></span> Sign up now</a>
+            <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
+                <!--<i class="fa fa-instagram fa-4x"></i>-->
+            <!--</a>-->
 
-    </form>
+            <a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                <i class="fa fa-weibo fa-4x"></i>
+            </a>
+        </div>
+
+        <div class="accounts-modal__separator">
+            <hr class="account-modal__separate-line">
+            <span class="accounts-modal__separator-text">OR</span>
+        </div>
+
+        <script>
+            {% if form.message.errors %}
+                alert("{{ form.message.errors }}");
+            {% endif %}
+
+        </script>
+
+        <form method="post" action=".">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "ok-circle" %} Submit
+                </button>
+                <input type="hidden" name="next" value="{{ next }}" />
+                <button type="reset" class="btn btn-default">
+                    {% bootstrap_icon "ok-default" %} Reset
+                </button>
+            {% endbuttons %}
+
+            <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
+        </form>
+
+    </div>
+
 
 {% endblock %}

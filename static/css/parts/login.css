@@ -1,0 +1,35 @@
+.accounts-modal__separator {
+    position: relative;
+    margin: 6px 0 12px 0px;
+}
+
+.account-modal__separate-line {
+    border-style: none;
+    border-top: 1px solid #ddd;
+    border-top-style: solid;
+}
+
+.accounts-modal__separator-text {
+    display: block;
+    position: absolute;
+    width: 56px;
+    height: 32px;
+    top: -16px;
+    left: 50%;
+    margin-left: -28px;
+    font-size: 21px;
+    font-weight: 700;
+    color: #9b9b9b;
+    line-height: 32px;
+    text-align: center;
+    background: #f7f7f7;
+}
+
+.login_icon{
+    padding: 15px 15px 0px 15px;
+
+}
+
+.login-icons i{
+    padding: 0px 8px
+}
