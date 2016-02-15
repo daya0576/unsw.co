@@ -70,10 +70,16 @@ def about(request):
 
 def get_answer_like_users(answer):
     like_users_str = ""
+
     users_like = AnswerUserLikes.objects.filter(answer=answer).order_by("-time")
     users_dislike = AnswerUserDislikes.objects.filter(answer=answer)
     users_like_num = len(users_like)
     users_dislike_num = len(users_dislike)
+
+    for i in range(len(users_like)):
+        if users_like[i].user.first_name != "" and users_like[i].user.first_name is not None:
+            users_like[i].user.username = users_like[i].user.first_name
+
     if users_like_num == 0:
         like_users_str = ""
     elif users_like_num == 1:

@@ -25,10 +25,10 @@
             {% else %}
                     <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
             {% endif %}
-                            <i class="icon vote-arrow"></i>
-                            <span class="count">{{ answer.likes }}</span>
-                            <span class="label sr-only">赞同</span>
-                        </button>
+                        <i class="icon vote-arrow"></i>
+                        <span class="count">{{ answer.likes }}</span>
+                        <span class="label sr-only">赞同</span>
+                    </button>
 
             {% if user.is_authenticated %}
                 {% if answer.is_disliked > 0 %}
@@ -50,7 +50,9 @@
                 <span class="no">{{ forloop.counter }}</span>
             </div>
 
-            <strong><a href="/rango/member/{{ answer.author }}" class="dark">{{ answer.author }}</a></strong>&nbsp;
+            <strong><a href="/rango/member/{{ answer.author }}" class="dark">
+                {% if answer.author.first_name %}{{ answer.author.first_name }}{% else %}{{ answer.author }}{% endif %}</a>
+            </strong>&nbsp;
             <span class="fade_answer small">{{ answer.post_date|localtime }}</span>
         </div>
 
