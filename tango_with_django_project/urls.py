@@ -25,6 +25,7 @@ from registration.forms import RegistrationFormUniqueEmail
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
     form_class = RegistrationFormUniqueEmail
+
     def get_success_url(self, request, user):
         return '/rango/'
 

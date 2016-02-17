@@ -149,3 +149,41 @@ function button_down(obj){
         answer_down_off(answer_id, obj);
     }
 }
+
+//fancybox
+$(document).ready(function() {
+    $('.reply_content img').each(function() {
+//        $(this).attr("alt") = "Click to see the full image.";
+
+        var height = $(this).attr("height");
+        var width = $(this).attr("width");
+
+        if(height != null || width != null){
+            if(height<width){
+                if(parseInt(width) > 480){
+//                    alert(1);
+                    $(this).css("width", "480px");
+                }
+            }else{
+                if(parseInt(height) > 480){
+//                    alert(2);
+                    $(this).css("width", "320px");
+                }
+            }
+        }
+
+        $(this).prop('title', 'Click to see the full image.');
+        $(this).wrap("<a class=\"fancybox\" href='" + this.src + "'/>");
+    });
+
+    $(".reply_content .fancybox").fancybox({
+    	openEffect	: 'elastic',
+    	closeEffect	: 'elastic',
+        helpers: {
+          title : {
+              type : 'float'
+          }
+        }
+    });
+
+});

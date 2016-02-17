@@ -41,7 +41,9 @@
 }
 
 .answer .reply_content img{
-    max-width:1000px;
+    max-width: 100%;
+    max-height:480px;
+    height: auto !important;
 }
 
 .reply_content{
