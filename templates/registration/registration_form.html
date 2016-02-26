@@ -1,19 +1,65 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load staticfiles %}
+
+{% block title %}Register{% endblock %}
 
 
 {% block body_block %}
-  <h1>Register Here</h1>
-  <form method="post" action=".">
-      {% csrf_token %}
-      {% bootstrap_form form %}
-      {% buttons %}
-          <button type="submit" class="btn btn-primary">
-              {% bootstrap_icon "ok-circle" %} Register
-          </button>
-      {% endbuttons %}
+    <link href="{% static 'css/parts/login.css' %}" rel="stylesheet">
+    {% if user.is_authenticated %}
+        <h1 style="padding:8px 0">You have already login in!</h1>
+        <h3 style="padding-bottom:20px">
+            Redirect to index for 3 seconds..
+        </h3>
+        <script>
+            alert("Redirect to index for 2 seconds..");
+            window.setTimeout("window.open('/', '_self')", 2000);
+        </script>
+    {% else %}
+        <div style="width:400px; max-width:100%;text-align:center">
+            <h1 style="padding:8px 0">Log in to your account</h1>
+            <div style="">
+                <div class="login-icons">
+                    <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-facebook-square fa-4x"></i>
+                    </a>
+                    <a href="{% url 'socialauth_begin' 'github' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-github-square fa-4x"></i>
+                    </a>
+                    <a href="{% url 'socialauth_begin' 'google-oauth2' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-google-plus-square fa-4x"></i>
+                    </a>
+                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
+                        <!--<i class="fa fa-instagram fa-4x"></i>-->
+                    <!--</a>-->
+                    <a href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-twitter-square fa-4x"></i>
+                    </a>
+                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-weibo fa-4x"></i>
+                    </a>-->
+                </div>
+            </div>
 
-      <!--<input type="submit" value="Submit" />-->
-      <!--<button class="btn btn-primary" type="submit" name="submit">Login</button>-->
-  </form>
+            <div class="accounts-modal__separator">
+                <hr class="account-modal__separate-line">
+                <span class="accounts-modal__separator-text">OR</span>
+            </div>
+
+            <h1 style="padding-bottom:8px">Register Here</h1>
+            <form method="post" action=".">
+                {% csrf_token %}
+                {% bootstrap_form form layout='inline' %}
+                {% buttons %}
+                  <button type="submit" class="btn btn-primary">
+                      {% bootstrap_icon "ok-circle" %} Register
+                  </button>
+                {% endbuttons %}
+
+                <!--<input type="submit" value="Submit" />-->
+                <!--<button class="btn btn-primary" type="submit" name="submit">Login</button>-->
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}
