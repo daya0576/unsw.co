@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rango.models import Category, CatPage, Answers, AnswerUserLikes, AnswerUserDislikes, User
+from rango.models import Category, CatPage, Answers, AnswerUserLikes, AnswerUserDislikes, User, Subject
 #, UserProfile
 
 
@@ -23,9 +23,14 @@ class AnswerUserLikesAdmin(admin.ModelAdmin):
 class AnswerUserDislikesAdmin(admin.ModelAdmin):
     list_display = ('user', 'time', 'answer')
 
+
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'email', 'first_name', 'last_name', 'is_superuser', 'date_joined', 'last_login')
     # list_filter = ('is_staff', 'is_superuser')
+
+
+class SubjectAdmin(admin.ModelAdmin):
+    list_display = ('school_en', 'slug', 'url', 'name')
 
 
 admin.site.unregister(User)
@@ -36,5 +41,8 @@ admin.site.register(CatPage, PageAdmin)
 admin.site.register(Answers, AnswersAdmin)
 admin.site.register(AnswerUserLikes, AnswerUserLikesAdmin)
 admin.site.register(AnswerUserDislikes, AnswerUserDislikesAdmin)
+admin.site.register(Subject, SubjectAdmin)
+
+
 
 # admin.site.register(UserProfile)
