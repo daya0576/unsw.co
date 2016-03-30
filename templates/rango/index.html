@@ -9,7 +9,10 @@
         {% if user.is_authenticated %}
                 <h1>Hello {{ user.username }}!</h1>
         {% else %}
-                <h1>Hello world!</h1>
+                <h1>Hello friend! &nbsp;
+                    <a style="text-decoration: underline;"
+                       href="{% url 'auth_login' %}?next={{request.path}}">Login now.</a>
+                </h1>
         {% endif %}
     </div>
 
