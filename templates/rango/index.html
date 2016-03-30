@@ -42,17 +42,25 @@
             </div>
             {% if categories %}
                 <ul class="list-group">
-                    {% for category in categories %}
+                    {% for c in categories %}
                         <li class="list-group-item">
-                            <a href="{% url 'category' category.slug %}">
+                            <a href="{% url 'category' c.slug %}">
                                 {{ category.name }}
-                                <strong>{{ category.no }}</strong>
+                               <strong>{{ c.no }}</strong>
+                                <span class="likes">(
+                                    <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
+                                    &nbsp
+                                    <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
+                                    &nbsp
+                                    lvl {{ c.level }})
+                                </span><br>
+                                    {{ c.name }}
                             </a>
                         </li>
                     {% endfor %}
                 </ul>
             {% else %}
-                <strong>There are no categories present.</strong>
+                <strong>There are no courses present.</strong>
             {% endif %}
         </div>
 

@@ -19,7 +19,11 @@ from django.db.models import Q
 
 
 def index(request):
-    category_list = Category.objects.order_by('-answers')[0:10]
+    category_list = Category.objects.extra(
+            select={
+                'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+            },
+        ).order_by('-answer_count')[0:10]
     # page_list = CatPage.objects.order_by('-views')[0:5]
     subject_list = Subject.objects.order_by('-likes')[0:5]
 
