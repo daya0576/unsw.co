@@ -5,13 +5,13 @@
 {% block title %}Index{% endblock %}
 
 {% block body_block %}
-    {% if user.is_authenticated %}
-        <div class="page-header">
-            <h1>Rango says... hello {{ user.username }}!</h1>
-    {% else %}
-            <h1>Rango says... hello world!</h1>
-    {% endif %}
-        </div>
+    <div class="page-header" style="">
+        {% if user.is_authenticated %}
+                <h1>Hello {{ user.username }}!</h1>
+        {% else %}
+                <h1>Hello world!</h1>
+        {% endif %}
+    </div>
 
     <div class="row placeholders">
         <div class="col-xs-12 col-sm-6 placeholder">
@@ -58,5 +58,4 @@
 
     </div>
 
-    <p> visits: {{ visits }}</p>
 {% endblock %}

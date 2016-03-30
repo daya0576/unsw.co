@@ -19,12 +19,12 @@ from django.db.models import Q
 
 
 def index(request):
-    # category_list = Category.objects.order_by('-likes')[0:5]
-    # # page_list = CatPage.objects.order_by('-views')[0:5]
-    # subject_list = Subject.objects.order_by('-likes')[0:5]
-    #
-    # context_dict = {'categories': category_list, 'subs': subject_list}
-    #
+    category_list = Category.objects.order_by('-answers')[0:10]
+    # page_list = CatPage.objects.order_by('-views')[0:5]
+    subject_list = Subject.objects.order_by('-likes')[0:5]
+
+    context_dict = {'categories': category_list, 'subs': subject_list}
+
     # visits = request.session.get('visits')
     # if not visits:
     #     visits = 1
@@ -48,8 +48,8 @@ def index(request):
     # context_dict['last_visit'] = last_visit
     # context_dict['visits'] = visits
 
-    # response = render(request, 'rango/index.html', context_dict)
-    response = HttpResponseRedirect('/rango/subject/master-of-information-technology/')
+    response = render(request, 'rango/index.html', context_dict)
+    # response = HttpResponseRedirect('/rango/subject/master-of-information-technology/')
     # response = category(request, "master-of-information-technology")
 
     return response
