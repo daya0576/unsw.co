@@ -25,7 +25,7 @@ def index(request):
             },
         ).order_by('-answer_count')[0:10]
     # page_list = CatPage.objects.order_by('-views')[0:5]
-    subject_list = Subject.objects.order_by('-likes')[0:5]
+    subject_list = Subject.objects.order_by('-likes').filter(~Q(slug="both"))
 
     context_dict = {'categories': category_list, 'subs': subject_list}
 
@@ -220,13 +220,21 @@ def subject(request, sub_name_slug):
 
     try:
         subject = Subject.objects.get(slug=sub_name_slug)
-        # cats = Category.objects.filter(subject=subject).order_by('-likes', 'level')
+        subject_both = Subject.objects.get(slug="both")
 
-        cats = Category.objects.filter(subject=subject).extra(
-            select={
-                'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
-            },
-        )
+        if subject.name == "UEEC":
+            cats = Category.objects.filter(subject=subject).extra(
+                select={
+                    'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+                },
+            )
+        else:
+            cats = Category.objects.filter(Q(subject=subject) | Q(subject=subject_both)).extra(
+                select={
+                    'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+                },
+            )
+
 
         if keyword is not '':
             cats = cats.filter(Q(name__contains=keyword) | Q(no__contains=keyword))
@@ -412,7 +420,7 @@ def suggest_category(request):
             cats = get_category_list(0, cat_search_keyword)
             context_dict = {'cats': cats}
         else:
-            subs = Subject.objects.all()
+            subs = Subject.objects.all().filter(~Q(slug="both"))
             context_dict = {'subs': subs}
 
         return render(request, 'rango/parts/navbar/cats_li.html', context_dict)
@@ -473,9 +481,10 @@ def get_subject_list(max_results=0, cat_search_keyword=''):
         sub_list = Subject.objects.filter(name__contains=cat_search_keyword)
         # print cat_list
         sub_list = Subject.objects.filter(no__contains=cat_search_keyword)
+        sub_list.filter(~Q(slug="both"))
         sub_list = list(set(cat_list))
     else:
-        sub_list = Subject.objects.all()
+        sub_list = Subject.objects.all().filter(~Q(slug="both"))
 
     if max_results > 0:
         if len(cat_list) > max_results:

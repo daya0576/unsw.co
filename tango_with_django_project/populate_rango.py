@@ -1,11 +1,11 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
-
+import urllib, urllib2
 import django
 django.setup()
 
 from rango.models import Category, Subject
-
+from bs4 import BeautifulSoup
 
 def populate():
     # python_cat = add_cat('0', 'Python', views=128, likes=64, level='0')
@@ -126,24 +126,66 @@ def add_page(cat, title, url, views=0):
 
 
 def add_cat(no, name, level, views, likes, description='', url=''):
-    c = Category.objects.get_or_create(name=name)[0]
+    c = Category.objects.filter(no=no)
+    if c.count() > 0:
+        c = Category.objects.get(no=no)
+        c.subject = Subject.objects.get(slug="both")
+    else:
+        c = Category(name=name)
 
-    c.no = no
-    c.level = level
-    c.views = views
-    c.likes = likes
-    c.description = description
-    c.url = url
-    c.subject = Subject.objects.get(id=1)
+        c.no = no
+        c.level = level
+        c.views = views
+        c.likes = likes
+        c.description = description
+        c.url = url
+        c.subject = Subject.objects.get(slug="cse-undergraduate")
 
     c.save()
+
     return c
 
+
+def undergraduate():
+    score_content = urllib.urlopen('http://www.handbook.unsw.edu.au/vbook2016/brCoursesBySubjectArea.jsp?studyArea=COMP&StudyLevel=Undergraduate').read()
+    soup = BeautifulSoup(score_content)
+    data = []
+
+    table_all = soup.find('table', class_="tabluatedInfo")
+    # table_body = table_all.find('tbody')
+
+    rows = table_all.find_all('tr')
+    for row in rows:
+        cols = row.find_all('td')
+
+        if len(cols) == 3:
+            href = cols[1].find_all('a')
+            href = href[0].get('href')
+            cols = [ele.text.strip() for ele in cols]
+
+            row_result = [ele for ele in cols if ele]
+            row_result.append(href)
+
+            data.append(row_result) # Get rid of empty values
+
+    # print data
+    # [u'COMP1000', u'Introduction to World Wide Web, Spreadsheets and Databases', u'6', u'http://www.handbook.unsw.edu.au/undergraduate/courses/2016/COMP1000.html']
+
+    for row in data:
+        print row
+        add_cat(row[0], row[1], views=0, likes=0, level='0', url=row[3])
+
+
+def delete_under():
+    subject = Subject.objects.get(slug="cse-undergraduate")
+    Category.objects.filter(subject=subject).delete()
+    subject = Subject.objects.get(slug="both")
+    Category.objects.filter(subject=subject).delete()
 
 
 # Start execution here!
 if __name__ == '__main__':
     print "Starting Rango population script..."
-    populate()
-    print 810*48*5
+    delete_under()
+    undergraduate()
 

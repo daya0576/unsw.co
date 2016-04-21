@@ -1,5 +1,6 @@
 from django import template
-from rango.models import Category, Subject
+from rango.models import Subject
+from django.db.models import Q
 
 register = template.Library()
 
@@ -12,5 +13,5 @@ register = template.Library()
 
 @register.inclusion_tag('rango/sidebar.html')
 def get_subject_list(subject=None):
-    subs = Subject.objects.order_by('-likes')
+    subs = Subject.objects.filter(~Q(slug="both"))
     return {'subs': subs,  'act_sub': subject}
