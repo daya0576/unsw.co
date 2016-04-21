@@ -5,16 +5,16 @@
 {% block title %}Index{% endblock %}
 
 {% block body_block %}
-    <!--<div class="page-header" style="">-->
-        <!--{% if user.is_authenticated %}-->
-                <!--<h1>Hello {{ user.username }}!</h1>-->
-        <!--{% else %}-->
-                <!--<h1>Hello friend! &nbsp;-->
-                    <!--<a style="text-decoration: underline;"-->
-                       <!--href="{% url 'auth_login' %}?next={{request.path}}">Login now.</a>-->
-                <!--</h1>-->
-        <!--{% endif %}-->
-    <!--</div>-->
+    <div class="page-header" style="">
+        {% if user.is_authenticated %}
+                <h1>Hello {{ user.username }}!</h1>
+        {% else %}
+                <h1>Hello friend! &nbsp;
+                    <a style="text-decoration: underline;"
+                       href="{% url 'auth_login' %}?next={{request.path}}">Login now.</a>
+                </h1>
+        {% endif %}
+    </div>
 
     <div class="row placeholders">
         <div class="col-xs-12 col-sm-6 placeholder">
