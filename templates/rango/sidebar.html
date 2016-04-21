@@ -3,8 +3,11 @@
     {% if subs %}
         {% for s in subs %}
             {% if s == act_sub %}
-                <li class="active cat" > {% else  %} <li class="cat">
+                <li class="active cat" >
+            {% else  %}
+                <li class="cat">
             {% endif %}
+
             <a href="{% url 'subject'  s.slug %}">
                 <strong>{{ s.school_en }}</strong>
                 <span class="likes">({{ s.likes }} likes)</span><br>
