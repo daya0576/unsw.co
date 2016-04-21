@@ -1,7 +1,9 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
+
 import urllib, urllib2
 import django
+from django.db.models import Q
 django.setup()
 
 from rango.models import Category, Subject
@@ -116,6 +118,7 @@ def populate():
     #         print "- {0} - {1}".format(str(c), str(p))
 
 
+
 def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url = url
@@ -126,13 +129,20 @@ def add_page(cat, title, url, views=0):
 
 
 def add_cat(no, name, level, views, likes, description='', url=''):
+    # c = Category.objects.filter(Q(name=name) | Q(name=(name+" *")))
     c = Category.objects.filter(no=no)
-    if c.count() > 0:
-        c = Category.objects.get(no=no)
-        c.subject = Subject.objects.get(slug="both")
-    else:
-        c = Category(name=name)
 
+    if c.count() > 0:
+        # c = Category.objects.get(Q(name=name) | Q(name=(name+" *")))
+        c = Category.objects.get(no=no)
+
+        if c.subject == Subject.objects.get(slug="cse-postgraduate"):
+            c.subject = Subject.objects.get(slug="both")
+            c.save()
+    else:
+        c = Category()
+
+        c.name = name
         c.no = no
         c.level = level
         c.views = views
@@ -141,7 +151,7 @@ def add_cat(no, name, level, views, likes, description='', url=''):
         c.url = url
         c.subject = Subject.objects.get(slug="cse-undergraduate")
 
-    c.save()
+        c.save()
 
     return c
 
@@ -179,13 +189,13 @@ def undergraduate():
 def delete_under():
     subject = Subject.objects.get(slug="cse-undergraduate")
     Category.objects.filter(subject=subject).delete()
-    subject = Subject.objects.get(slug="both")
-    Category.objects.filter(subject=subject).delete()
+    # subject = Subject.objects.get(slug="both")
+    # Category.objects.filter(subject=subject).delete()
 
 
 # Start execution here!
 if __name__ == '__main__':
     print "Starting Rango population script..."
-    delete_under()
+    # delete_under()
     undergraduate()
 

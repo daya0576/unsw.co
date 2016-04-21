@@ -42,7 +42,7 @@ class Category(models.Model):
     subject = models.ForeignKey(Subject)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = slugify(self.no)
         super(Category, self).save(*args, **kwargs)
 
     def __unicode__(self):
