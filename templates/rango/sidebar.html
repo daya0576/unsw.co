@@ -4,6 +4,8 @@
         {% for s in subs %}
             {% if s == act_sub %}
                 <li class="active cat" >
+            {% elif act_sub.slug == "both" and s.slug != "ueec" %}
+                <li class="active cat" >
             {% else  %}
                 <li class="cat">
             {% endif %}
