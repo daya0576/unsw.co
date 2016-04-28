@@ -8,6 +8,10 @@
     margin-bottom: 5px;
 }
 
+#sub_cats_container {
+    overflow-y: hidden;
+}
+
 .grid.effect-2 {
 	perspective: 1300px;
 }
@@ -16,13 +20,33 @@
 	transform-style: preserve-3d;
 }
 
+/* Effect 2: Move Up */
 .grid.effect-2 li.animate {
-	transform: translateZ(400px) translateY(300px) rotateX(-90deg);
-	animation: fallPerspective .8s ease-in-out forwards;
+	-webkit-transform: translateY(200px);
+	transform: translateY(200px);
+	-webkit-animation: moveUp 0.65s ease forwards;
+	animation: moveUp 0.65s ease forwards;
 }
 
-@keyframes fallPerspective {
-	100% { transform: translateZ(0px) translateY(0px) rotateX(0deg); opacity: 1; }
+@-webkit-keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); opacity: 1; }
+}
+
+@keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 1; }
+}
+
+
+@-webkit-keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); opacity: 1; }
+}
+
+@keyframes moveUp {
+	0% { }
+	100% { -webkit-transform: translateY(0); transform: translateY(0); opacity: 1; }
 }
 
 .small_box {
