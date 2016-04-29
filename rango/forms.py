@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from rango.models import Category, CatPage, SubPage, BaiduEditor, UserOOXX
 
-from captcha.fields import ReCaptchaField
+# from captcha.fields import ReCaptchaField
 
 
 class CategoryForm(forms.ModelForm):
@@ -94,12 +94,12 @@ class TestUeditorModelForm(forms.ModelForm):
         fields = ('content',)
 
 
-class FormWithCaptcha(forms.Form):
-    captcha = ReCaptchaField(
-        public_key=settings.RECAPTCHA_PUBLIC_KEY,
-        private_key=settings.RECAPTCHA_PRIVATE_KEY,
-        use_ssl=True
-    )
+# class FormWithCaptcha(forms.Form):
+#     captcha = ReCaptchaField(
+#         public_key=settings.RECAPTCHA_PUBLIC_KEY,
+#         private_key=settings.RECAPTCHA_PRIVATE_KEY,
+#         use_ssl=True
+#     )
 
 
 class UserOOXXForm(forms.ModelForm):
