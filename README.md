@@ -18,11 +18,12 @@ ME_EMAIL_KEY = ""
 ```
 
 ### Step2: ###
-
+Installing all the packages. 
+Run it in root directory.
 ```
 #!bash
 
-pip install -r /path/to/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Step3: ###
