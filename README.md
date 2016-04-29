@@ -1,4 +1,4 @@
-## plans(Ordered by urgency) ##
+## Plans(Ordered by urgency) ##
 1. adding undergraduate courses. 
  
 2. custom index page.
@@ -37,8 +37,9 @@ python manage.py runserver 8001
 
 ### Done ###
 Open this url in your browser
-[http://127.0.0.1:8004/](http://127.0.0.1:8004/)
+[http://127.0.0.1:8004/](http://127.0.0.1:8001/)
 
-<br><br>
+###  ###
+###  ###
 If it does not work, sending email to me:
 **me@changchen.me**
