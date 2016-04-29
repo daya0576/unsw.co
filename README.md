@@ -35,7 +35,10 @@ In rango directory:
 python manage.py runserver 8001
 ```
 
-   
-   
+### Done ###
+Open this url in your browser
+[http://127.0.0.1:8004/](http://127.0.0.1:8004/)
+
+<br><br>
 If it does not work, sending email to me:
 **me@changchen.me**
