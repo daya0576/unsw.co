@@ -21,3 +21,8 @@
 .filter_search_box{
     display:none;
 }
+
+#sub_search_loading{
+    text-align: center;
+    display: none;
+}
