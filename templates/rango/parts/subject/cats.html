@@ -1,12 +1,5 @@
 {% load staticfiles %}
 
-<head>
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'js_plugins/gridloading/css/default.css' %}" />-->
-    <link rel="stylesheet" type="text/css" href="{% static 'js_plugins/gridloading/css/component.css' %}" />
-    <script src="{% static 'js_plugins/gridloading/js/modernizr.custom.js' %}"></script>
-    <link href="{% static 'css/parts/subs_cats.css' %}" rel="stylesheet">
-</head>
-
     <div id="sub_cats_container">
         <ul class="grid effect-2" id="grid">
             <!--{% if user.is_authenticated %}
@@ -49,14 +42,6 @@
         </ul>
     </div>
 
-
-
-
-
-<script src="{% static 'js_plugins/gridloading/js/masonry.pkgd.min.js' %}"></script>
-<script src="{% static 'js_plugins/gridloading/js/imagesloaded.js' %}"></script>
-<script src="{% static 'js_plugins/gridloading/js/classie.js' %}"></script>
-<script src="{% static 'js_plugins/gridloading/js/AnimOnScroll.js' %}"></script>
 <script>
     new AnimOnScroll( document.getElementById( 'grid' ), {
         minDuration : 0.4,

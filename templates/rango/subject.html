@@ -7,6 +7,17 @@
 {% block body_block %}
     <link href="{% static 'css/parts/sub_filter.css' %}" rel="stylesheet">
     <script src="{% static 'js/parts/sub_filter.js' %}" type="text/javascript"></script>
+        <!--<link rel="stylesheet" type="text/css" href="{% static 'js_plugins/gridloading/css/default.css' %}" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'js_plugins/gridloading/css/component.css' %}" />
+    <script src="{% static 'js_plugins/gridloading/js/modernizr.custom.js' %}"></script>
+    <link href="{% static 'css/parts/subs_cats.css' %}" rel="stylesheet">
+
+
+    <script src="{% static 'js_plugins/gridloading/js/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'js_plugins/gridloading/js/imagesloaded.js' %}"></script>
+    <script src="{% static 'js_plugins/gridloading/js/classie.js' %}"></script>
+    <script src="{% static 'js_plugins/gridloading/js/AnimOnScroll.js' %}"></script>
+
 
     <div class="blur" style="height:100%"></div>
     <div class="cat_content">
@@ -40,6 +51,15 @@
 
     </div>
 
+
+    <script>
+        new AnimOnScroll( document.getElementById( 'grid' ), {
+            minDuration : 0.4,
+            maxDuration : 0.7,
+            viewportFactor : 0.2
+        } );
+
+    </script>
 
     <script src="{% static 'js/parts/sub_search.js' %}"></script>
 
