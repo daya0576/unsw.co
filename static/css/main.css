@@ -70,3 +70,7 @@ body{
 .profile_list{
     padding-top: 5px;
 }
+
+a.list-group-item, button.list-group-item{
+    color: #337ab7;
+}

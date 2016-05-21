@@ -18,53 +18,53 @@
 
     <div class="row placeholders">
         <div class="col-xs-12 col-sm-6 placeholder">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Major</h3>
-                </div>
-            </div>
+            <div class="list-group">
+                <a class="list-group-item active">
+                    <h4 class="list-group-item-heading"><b>Major</b></h4>
+                    <p class="list-group-item-text">Click to see all courses</p>
+                </a>
 
-            {% if subs %}
-                <ul  class="list-group">
+                {% if subs %}
                     {% for sub in subs %}
-                        <li class="list-group-item">
-                            <a href="{% url 'subject' sub.slug %}">{{ sub.name }}</a>
-                        </li>
+                        <a class="list-group-item" href="{% url 'subject' sub.slug %}">
+                            <b>{{ sub.name }}</b>
+                        </a>
                     {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no Majors present.</strong>
-            {% endif %}
+                {% else %}
+                    <strong>There are no Majors present.</strong>
+                {% endif %}
+            </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 placeholder">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Courses(Order by answers)</h3>
-                </div>
-            </div>
-            {% if categories %}
-                <ul class="list-group">
+            <div class="list-group">
+                <a class="list-group-item active">
+                    <h4 class="list-group-item-heading"><b>Courses</b></h4>
+                    <p class="list-group-item-text">Order by answer nums</p>
+                </a>
+
+                {% if categories %}
                     {% for c in categories %}
-                        <li class="list-group-item">
-                            <a href="{% url 'category' c.slug %}">
-                                {{ category.name }}
-                               <strong>{{ c.no }}</strong>
-                                <span class="likes">(
-                                    <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
-                                    &nbsp
-                                    <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
-                                    &nbsp
-                                    lvl {{ c.level }})
-                                </span><br>
-                                    {{ c.name }}
-                            </a>
-                        </li>
+                        <a class="list-group-item" href="{% url 'category' c.slug %}">
+                            {{ category.name }}
+                           <strong>{{ c.no }}</strong>
+                            <span class="likes">(
+                                <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
+                                &nbsp
+                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
+                                &nbsp
+                                lvl {{ c.level }})
+                            </span><br>
+                                {{ c.name }}
+                        </a>
                     {% endfor %}
-                </ul>
-            {% else %}
-                <strong>There are no courses present.</strong>
-            {% endif %}
+                        <a href="#" class="list-group-item">
+                            more..
+                        </a>
+                {% else %}
+                    <strong>There are no courses present.</strong>
+                {% endif %}
+            </div>
         </div>
 
     </div>

@@ -19,65 +19,64 @@
             window.setTimeout("window.open('/', '_self')", 2000);
         </script>
     {% else %}
-        <div style="width:400px; max-width:100%;text-align:center">
-        <div style="">
-            <h1 style="padding:8px 0">Log in to your account</h1>
-            <h3 style="padding-bottom:20px">
-                Don't have an account?
-                <label><a href="{% url 'registration_register' %}" class="accounts-modal__link">
-                    <!--<span class="glyphicon glyphicon-ok"></span>-->
-                    Sign up
-                </a></label>
-            </h3>
+        <div class="" style="width:400px; max-width:100%;margin: 0 auto;text-align: center">
+            <div style="">
+                <h1 style="padding:8px 0">Log in to your account</h1>
+                <h4 style="padding-bottom:20px; color:grey;">
+                    Don't have an account?
+                    <label><a href="{% url 'registration_register' %}" class="accounts-modal__link">
+                        <!--<span class="glyphicon glyphicon-ok"></span>-->
+                        Sign up
+                    </a></label>
+                </h4>
 
-            <div class="login-icons">
-                <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                    <i class="fa fa-facebook-square fa-4x"></i>
-                </a>
-                <a href="{% url 'socialauth_begin' 'github' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                    <i class="fa fa-github-square fa-4x"></i>
-                </a>
-                <a href="{% url 'socialauth_begin' 'google-oauth2' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                    <i class="fa fa-google-plus-square fa-4x"></i>
-                </a>
-                <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
-                    <!--<i class="fa fa-instagram fa-4x"></i>-->
-                <!--</a>-->
-                <a href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                    <i class="fa fa-twitter-square fa-4x"></i>
-                </a>
-                <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                    <i class="fa fa-weibo fa-4x"></i>
-                </a>-->
+                <div class="login-icons">
+                    <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-facebook-square fa-4x"></i>
+                    </a>
+                    <a href="{% url 'socialauth_begin' 'github' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-github-square fa-4x"></i>
+                    </a>
+                    <a href="{% url 'socialauth_begin' 'google-oauth2' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-google-plus-square fa-4x"></i>
+                    </a>
+                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
+                        <!--<i class="fa fa-instagram fa-4x"></i>-->
+                    <!--</a>-->
+                    <a href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-twitter-square fa-4x"></i>
+                    </a>
+                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                        <i class="fa fa-weibo fa-4x"></i>
+                    </a>-->
+                </div>
             </div>
-        </div>
 
-        <div class="accounts-modal__separator">
-            <hr class="account-modal__separate-line">
-            <span class="accounts-modal__separator-text">OR</span>
-        </div>
+            <div class="accounts-modal__separator">
+                <hr class="account-modal__separate-line">
+                <span class="accounts-modal__separator-text">OR</span>
+            </div>
 
-        <div>
-          {% if messages %}
-            {% for msg in messages %}
-                <p class="error">{{ msg.message }} ({{ msg.extra_tags }})</p>
-            {% endfor %}
-          {% endif %}
-          {% if error_msg %}
-            <p>Details:</p>
-            <p class="error">{{ error_msg }}</p>
-            <p>Please try again <a href="/">Home</a></p>
-          {% endif %}
-        </div>
+            <div>
+              {% if messages %}
+                {% for msg in messages %}
+                    <p class="error">{{ msg.message }} ({{ msg.extra_tags }})</p>
+                {% endfor %}
+              {% endif %}
+              {% if error_msg %}
+                <p>Details:</p>
+                <p class="error">{{ error_msg }}</p>
+                <p>Please try again <a href="/">Home</a></p>
+              {% endif %}
+            </div>
 
-        <script>
-            {% if form.message.errors %}
-                alert("{{ form.message.errors }}");
-            {% endif %}
+            <script>
+                {% if form.message.errors %}
+                    alert("{{ form.message.errors }}");
+                {% endif %}
+            </script>
 
-        </script>
-
-        <form method="post" action=".">
+            <form method="post" action=".">
             {% csrf_token %}
             {% bootstrap_form form layout='inline' %}
             {% buttons %}
@@ -90,9 +89,11 @@
                 </button>
             {% endbuttons %}
 
-            <a href="{% url 'auth_password_reset' %}">Forget password?</a><br><br><br>
+            <label><a href="{% url 'auth_password_reset' %}">Forget password?</a></label><br><br><br>
         </form>
 
-    </div>
+        </div>
+
+
     {% endif %}
 {% endblock %}
