@@ -1,7 +1,21 @@
 <!--<a href="#" style="text-align:center" class="btn btn-default btn-block"><span class="glyphicon glyphicon-search"></span> Search</a>-->
+<!--<div class="filter_search">
+    <button id="filter_search_switch" onclick="show_filter_search()" class="btn btn-default" type="button">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+    </button>
+</div>&lt;!&ndash; /.col-lg-6 &ndash;&gt;-->
+
 <div class="filter_search">
-    <button id="filter_search_switch" onclick="show_filter_search()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-</div><!-- /.col-lg-6 -->
+    <div class="input-group" id="search_input">
+        <input id="sub_keyword" type="text" class="form-control" placeholder="Search for...">
+        <input id="sub_name_slug" value="{{ sub_name_slug }}" type="hidden">
+        <span class="input-group-btn">
+            <button onclick="sub_search('{% url 'subject' sub_name_slug %}')" class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </span>
+    </div>
+</div>
 
 <!-- Single button -->
 <div class="btn-group filter_left">

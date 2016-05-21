@@ -235,7 +235,6 @@ def subject(request, sub_name_slug):
                 },
             )
 
-
         if keyword is not '':
             cats = cats.filter(Q(name__contains=keyword) | Q(no__contains=keyword))
             context_dict['keyword'] = keyword
@@ -755,4 +754,48 @@ def member_detail_delete(request, detail_id):
 
     date = {"return_code": returncode}
     return JsonResponse(date)
+
+
+def sub_search(request):
+    cats = []
+    cat_search_keyword = ''
+    if request.method == 'GET':
+        cat_search_keyword = request.GET['suggestion']
+        sub_name_slug = request.GET['sub_name_slug']
+
+        cat_search_keyword = cat_search_keyword.rstrip()
+
+        context_dict = {}
+
+        try:
+            subject = Subject.objects.get(slug=sub_name_slug)
+            subject_both = Subject.objects.get(slug="both")
+
+            if subject.name == "UEEC":
+                cats = Category.objects.\
+                        filter(Q(name__contains=cat_search_keyword) | Q(no__contains=cat_search_keyword)).\
+                        filter(subject=subject).extra(
+
+                    select={
+                        'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+                    },
+                )
+            else:
+                cats = Category.objects. \
+                        filter(Q(name__contains=cat_search_keyword) | Q(no__contains=cat_search_keyword)).\
+                        filter(Q(subject=subject) | Q(subject=subject_both)).extra(
+
+                    select={
+                        'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+                    },
+                )
+
+            context_dict['subject'] = subject
+            context_dict['cats'] = cats
+            context_dict['sub_name_slug'] = sub_name_slug
+            # context_dict['act_sub'] = subject
+        except Subject.DoesNotExist:
+            context_dict = {}
+
+        return render(request, 'rango/parts/subject/cats.html', context_dict)
 

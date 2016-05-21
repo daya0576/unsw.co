@@ -9,11 +9,13 @@
 
 .answer_filter .filter_search{
     float:right;
-    max-width:250px
+    max-width:300px;
+    padding: 3px 7px;
 }
 
 .answer_filter .filter_left{
-    padding-left:7px;
+    /*float: left;*/
+    padding: 3px 7px;
 }
 
 .filter_search_box{

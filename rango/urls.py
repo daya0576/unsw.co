@@ -15,7 +15,10 @@ urlpatterns = patterns('',
     # url(r'^profile/$', views.track_url, name='profile'),
     url(r'^like_category/$', views.like_category, name='like_category'),
     url(r'^dislike_category/$', views.dislike_category, name='dislike_category'),
+
     url(r'^suggest_category/$', views.suggest_category, name='suggest_category'),
+    url(r'^sub_search/$', views.sub_search, name='sub_search'),
+
     # url(r'^ueditor/', include('DjangoUeditor.urls')),
     url(r'^delete_answer/$', views.delete_answer, name='delete_answer'),
     url(r'^category/(?P<cat_name_slug>[\w\-]+)/edit_answer/(?P<answer_id>[\d]+)$', views.edit_answer, name='edit_answer'),

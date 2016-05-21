@@ -9,9 +9,9 @@
 
     <div id="sub_cats_container">
         <ul class="grid effect-2" id="grid">
-            {% if user.is_authenticated %}
+            <!--{% if user.is_authenticated %}
                 <li>
-                    <!--<a href="/rango/subject/{{ sub_name_slug }}/add_category/">-->
+                    &lt;!&ndash;<a href="/rango/subject/{{ sub_name_slug }}/add_category/">&ndash;&gt;
                     <a class="small_box" href="{% url 'add_category' sub_name_slug %}">
                         <strong>Add course</strong>
                     </a>
@@ -22,7 +22,7 @@
                         <strong>Login to add a new course</strong>
                     </a>
                 </li>
-            {% endif %}
+            {% endif %}-->
             {% if cats %}
                 {% for c in cats %}
                     <li>
@@ -40,7 +40,11 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <!--<strong >There are no course present.</strong>-->
+                <li>
+                    <a class="small_box" href="#">
+                        <strong >Find nothing.</strong>
+                    </a>
+                </li>
             {% endif %}
         </ul>
     </div>
