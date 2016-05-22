@@ -40,11 +40,12 @@
                     {% include 'rango/parts/subject/sub_answer_filter.html' %}
                 </div>
 
+                <div id="sub_search_loading" class="padding_10">
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                    <span class="sr-only">Loading...</span>
+                </div>
+
                 <div id="sub_content" class="cats">
-                    <div id="sub_search_loading">
-                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                        <span class="sr-only">Loading...</span>
-                    </div>
                     {% include 'rango/parts/subject/cats.html' %}
                 </div>
             </div>
