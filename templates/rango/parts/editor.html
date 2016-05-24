@@ -13,9 +13,23 @@
             <!--<input type="submit" name="submit" value="Create Category" />-->
             <button class="btn btn-primary" type="submit" name="submit"> Post </button>
         </form>
+    {% elif user.is_superuser %}
+        <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
+            {% csrf_token %}
+            {{ editor.media }}
+
+            {% bootstrap_form editor layout='inline' %}
+            <!--<input type="submit" name="submit" value="Create Category" />-->
+            <button class="btn btn-primary" type="submit" name="submit"> Post </button>
+        </form>
+
     {% else %}
         <h4 style="padding-bottom:10px">Thank you for your answer!</h4>
+        <h4>You can edit your answer directly. </h4>
     {% endif %}
+
+
+
 {% else %}
     <a href="{% url 'auth_login' %}?next={{request.path}}">
         <strong>(Login to Post Your Answer.) </strong>
