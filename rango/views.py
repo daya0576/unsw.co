@@ -238,6 +238,8 @@ def subject(request, sub_name_slug):
         if keyword is not '':
             cats = cats.filter(Q(name__contains=keyword) | Q(no__contains=keyword))
             context_dict['keyword'] = keyword
+        else:
+            context_dict['keyword'] = ""
 
         if order == 0:
             cats = cats.order_by('-answer_count')

@@ -7,7 +7,7 @@
 
 <div class="filter_search">
     <div class="input-group" id="search_input">
-        <input id="sub_keyword" type="text" class="form-control" placeholder="Search for...">
+        <input id="sub_keyword" type="text" class="form-control" placeholder="Search for..." value="{{ keyword }}">
         <input id="sub_name_slug" value="{{ sub_name_slug }}" type="hidden">
         <span class="input-group-btn">
             <button onclick="sub_search('{% url 'subject' sub_name_slug %}')" class="btn btn-default" type="button">
