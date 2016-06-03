@@ -21,7 +21,7 @@
     {% else %}
         <div class="" style="width:400px; max-width:100%;margin: 0 auto;text-align: center">
             <div style="">
-                <h1 style="padding:8px 0">Log in to your account</h1>
+                <h1 style="padding:8px 0">Login to your account</h1>
                 <h4 style="padding-bottom:20px; color:grey;">
                     Don't have an account?
                     <label><a href="{% url 'registration_register' %}" class="accounts-modal__link">
@@ -77,20 +77,21 @@
             </script>
 
             <form method="post" action=".">
-            {% csrf_token %}
-            {% bootstrap_form form layout='inline' %}
-            {% buttons %}
-                <button type="submit" class="btn btn-primary">
-                    {% bootstrap_icon "ok-circle" %} Login
-                </button>
-                <input type="hidden" name="next" value="{{ next }}" />
-                <button type="reset" class="btn btn-default">
-                    {% bootstrap_icon "ok-default" %} Reset
-                </button>
-            {% endbuttons %}
+                {% csrf_token %}
+                {% bootstrap_form form layout='inline' %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {% bootstrap_icon "ok-circle" %} Login
+                    </button>
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <button type="reset" class="btn btn-default">
+                        {% bootstrap_icon "ok-default" %} Reset
+                    </button>
+                {% endbuttons %}
 
-            <label><a href="{% url 'auth_password_reset' %}">Forget password?</a></label><br><br><br>
-        </form>
+                <label><a href="{% url 'auth_password_reset' %}">Forget password?</a></label>
+                <br>
+            </form>
 
         </div>
 

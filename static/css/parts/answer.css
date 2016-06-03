@@ -51,7 +51,7 @@
     overflow: auto;
     word-break: break-all;
     word-wrap: break-word;
-    min-height: 45px;
+    min-height: 80px;
 }
 .answer .edit a{
     color:gray;
