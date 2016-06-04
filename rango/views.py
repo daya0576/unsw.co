@@ -115,6 +115,35 @@ def get_category(request, cat_name_slug):
     context_dict = {}
     return_code = 1
 
+    if request.method == 'POST':
+        editor_form = TestUeditorModelForm(request.POST)
+
+        if editor_form.is_valid():
+            content = editor_form.save(commit=True)
+            content.save()
+
+            cat = Category.objects.get(slug=cat_name_slug)
+            user = request.user
+            content = request.POST.get('content')
+            current_time = timezone.now()
+            # current_time = datetime.now()
+
+            answer = Answers(
+                category=cat,
+                author=user,
+                content=content,
+                post_date=current_time,
+                edit_date=current_time
+            )
+            answer.save()
+            return HttpResponseRedirect('/rango/category/' + cat_name_slug)
+        else:
+            print "form.errors", editor_form.errors
+            return_code = -1
+    else:
+        editor_form = TestUeditorModelForm()
+        return_code = 0
+
     try:
         user = request.user
         if user.is_authenticated():
@@ -140,9 +169,9 @@ def get_category(request, cat_name_slug):
             select={
                 'is_disliked': 'select count(*) from rango_answeruserdislikes where rango_answers.id = rango_answeruserdislikes.answer_id and rango_answeruserdislikes.user_id = ' + str(user_id)
             },
-        )
+        ).order_by("-likes")
 
-        answers.order_by('-edit_date')
+        # answers.order_by('-edit_date')
 
         if user.is_authenticated():
             is_liked = CategoryUserLikes.objects.filter(category=category).filter(user=request.user)
@@ -152,6 +181,7 @@ def get_category(request, cat_name_slug):
         # like persons.
         is_answered = False
         for answer in answers:
+            print answer.likes
             answer.like_users_str = get_answer_like_users(answer)
 
             if answer.author == user:
@@ -163,36 +193,6 @@ def get_category(request, cat_name_slug):
         context_dict['answers'] = answers
         context_dict['category'] = category
         context_dict['cat_name_slug'] = cat_name_slug
-
-        if request.method == 'POST':
-            editor_form = TestUeditorModelForm(request.POST)
-
-            if editor_form.is_valid():
-                content = editor_form.save(commit=True)
-                content.save()
-
-                cat = Category.objects.get(slug=cat_name_slug)
-                user = request.user
-                content = request.POST.get('content')
-                current_time = timezone.now()
-                # current_time = datetime.now()
-
-                answer = Answers(
-                    category=cat,
-                    author=user,
-                    content=content,
-                    post_date=current_time,
-                    edit_date=current_time
-                )
-                answer.save()
-                return HttpResponseRedirect('/rango/category/'+cat_name_slug)
-            else:
-                print "form.errors", editor_form.errors
-                return_code = -1
-        else:
-            editor_form = TestUeditorModelForm()
-            return_code = 0
-
         context_dict['editor'] = editor_form
         context_dict['is_liked'] = is_liked
         context_dict['is_answered'] = is_answered

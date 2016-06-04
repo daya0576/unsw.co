@@ -11,6 +11,7 @@
 .answer a.likes_person{
     color: gray;
     text-decoration: none;
+    font-size: 13px;
 }
 
 .answer .no {
@@ -51,7 +52,7 @@
     overflow: auto;
     word-break: break-all;
     word-wrap: break-word;
-    min-height: 80px;
+    min-height: 65px;
 }
 .answer .edit a{
     color:gray;
