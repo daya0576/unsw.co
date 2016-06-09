@@ -1,8 +1,13 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
 
+import urllib, urllib2
 import django
+from django.db.models import Q
 django.setup()
+
+from rango.models import Category, Subject
+from bs4 import BeautifulSoup
 
 from rango.models import Category, CatPage, User
 
