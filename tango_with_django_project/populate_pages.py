@@ -1,9 +1,10 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
-import django
-from rango.models import Category, CatPage, User
 
+import django
 django.setup()
+
+from rango.models import Category, CatPage, User
 
 
 def add_page(title, cat, url, views, user):
