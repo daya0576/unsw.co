@@ -235,12 +235,14 @@ def subject(request, sub_name_slug):
                 },
             )
 
+        # searching by keyword
         if keyword is not '':
             cats = cats.filter(Q(name__contains=keyword) | Q(no__contains=keyword))
             context_dict['keyword'] = keyword
         else:
             context_dict['keyword'] = ""
 
+        # sort by answers, likes or level
         if order == 0:
             cats = cats.order_by('-answer_count')
         elif order == 1:
@@ -256,7 +258,12 @@ def subject(request, sub_name_slug):
         elif order == 23:
             cats = cats.filter(level=3).order_by('-answer_count')
 
-        # cats = Category.objects.filter(subject=subject)
+        # get the first one useful tips.
+        # for cat in cats:
+        #     if cat.no == "Other useful info":
+        #         context_dict["cat_tips"] = cat
+        #
+        #         break
 
         context_dict['subject'] = subject
         context_dict['cats'] = cats
