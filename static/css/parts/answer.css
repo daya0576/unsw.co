@@ -149,3 +149,8 @@
 .zm-votebar.version-classic .down.pressed .vote-arrow {
     border-top-color: #fff;
 }
+
+
+.fancybox-overlay-fixed {
+    z-index: 10000 !important;
+}
