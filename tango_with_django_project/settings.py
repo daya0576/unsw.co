@@ -192,7 +192,8 @@ UEDITOR_SETTINGS={
             '|', 'insertorderedlist', 'insertunorderedlist',  'cleardoc',
             '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'music', 'attachment',
             '|', 'map', 'gmap',  'insertcode', 'template',
-            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']]
+            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']],
+        "enableAutoSave": "false"
 
 
     },
