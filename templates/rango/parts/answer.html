@@ -18,29 +18,29 @@
         <div class="zm-votebar version-classic" data-version="classic">
             {% if user.is_authenticated %}
                 {% if answer.is_liked > 0 %}
-                    <button onclick="button_up(this)" class="up pressed" data-ans_id="{{ answer.id }}" aria-pressed="true" title="赞同">
+                    <button onclick="button_up(this)" class="up pressed" data-ans_id="{{ answer.id }}" aria-pressed="true" title="Like :)">
                 {% else %}
-                    <button onclick="button_up(this)" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
+                    <button onclick="button_up(this)" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="Like :)">
                 {% endif %}
             {% else %}
-                    <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="赞同">
+                    <button onclick="alert('Login to like this answer');" class="up" data-ans_id="{{ answer.id }}" aria-pressed="false" title="Like :)">
             {% endif %}
                         <i class="icon vote-arrow"></i>
                         <span class="count">{{ answer.likes }}</span>
-                        <span class="label sr-only">赞同</span>
+                        <span class="label sr-only">Like :)</span>
                     </button>
 
             {% if user.is_authenticated %}
                 {% if answer.is_disliked > 0 %}
-                    <button onclick="button_down(this)" class="down pressed" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+                    <button onclick="button_down(this)" class="down pressed" data-ans_id="{{ answer.id }}" aria-pressed="false" title="Dislike, will not show ur name">
                 {% else %}
-                    <button onclick="button_down(this)" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+                    <button onclick="button_down(this)" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="Dislike, will not show ur name">
                 {% endif %}
             {% else %}
-                    <button onclick="alert('Login to like this answer');" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="反对，不会显示你的姓名">
+                    <button onclick="alert('Login to like this answer');" class="down" data-ans_id="{{ answer.id }}" aria-pressed="false" title="Dislike, will not show ur name">
             {% endif %}
                         <i class="icon vote-arrow"></i>
-                        <span class="label sr-only">反对，不会显示你的姓名</span>
+                        <span class="label sr-only">Dislike, will not show ur name</span>
                     </button>
         </div>
 
