@@ -2,9 +2,9 @@
 function delete_answer(answer_id){
     if(window.confirm('Are u sure to delete this answer ?')){
         $.getJSON('/rango/delete_answer/', {answer_id: answer_id}, function(data){
-            return_code = data['return_code']
+            return_code = data['return_code'];
             if(return_code == 1){
-                alert('Answer has been deleted successfully!')
+                alert('Answer has been deleted successfully!');
                 location.reload();
             }else{
                 alert("Something goes wrong, page does not be deleted.")
@@ -74,10 +74,10 @@ function answer_up_off(answer_id, obj){
 
         if(return_code == 1){
             $(obj).children(".count").html(likes_count);
-            $(obj).parents('div[class^="cell"]').find(".likes_person").html(likes_person)
+            $(obj).parents('div[class^="cell"]').find(".likes_person").html(likes_person);
             alert('T^T sad for this decision, but I did it for u.');
         }else{
-            alert("Something goes wrong. Sorry, try again.")
+            alert("Something goes wrong. Sorry, try again.");
             location.reload();
         }
     });

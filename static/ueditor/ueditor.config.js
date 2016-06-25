@@ -35,12 +35,12 @@
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
         , toolbars: [[
             'fullscreen', 'source', '|', 'undo', 'redo',
-            '|','bold', 'italic', 'underline', 'strikethrough', 'autotypeset',
+            '|','bold', 'italic', 'underline', 'strikethrough', //'autotypeset',
             '|', 'forecolor', 'fontfamily', 'fontsize', 'backcolor', 'link',
             '|', 'insertorderedlist', 'insertunorderedlist',  'cleardoc',
-            '|', 'simpleupload', 'insertimage', 'emotion', 'scrawl', 'insertvideo', 'attachment',
-            '|', 'map', 'gmap',  'insertcode', 'template',
-            '|','horizontal', 'date', 'time', 'spechars', 'snapscreen', '|']]
+            '|', 'simpleupload', 'insertimage', 'scrawl', 'attachment',
+            // '|', 'map', 'gmap',  'insertcode', 'template',
+            '|','horizontal', 'date', 'time', 'spechars', '|']]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''
@@ -76,7 +76,7 @@
         //,focus:false //初始化时，是否让编辑器获得焦点true或false
 
         //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
-        ,initialStyle:'font-family: Helvetica Neue'//编辑器层级的基数,可以用来改变字体等
+        ,initialStyle:'p{line-height:1em; font-size: 14px;font-family:Microsoft YaHei;'//编辑器层级的基数,可以用来改变字体等
 
         //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑器内部引入一个css文件
 
@@ -254,7 +254,7 @@
 
         //tab
         //点击tab键时移动的距离,tabSize倍数，tabNode什么字符做为单位
-        //,tabSize:4
+        ,tabSize:2
         //,tabNode:'&nbsp;'
 
         //removeFormat
