@@ -31,8 +31,18 @@
 
 
 {% else %}
+
+    <form id="category_form" method="post" action="/rango/category/{{ cat_name_slug }}/add_answer/">
+        {% csrf_token %}
+        {{ editor.media }}
+
+        {% bootstrap_form editor layout='inline' %}
+        <!--<input type="submit" name="submit" value="Create Category" />-->
+    </form>
+
     <a href="{% url 'auth_login' %}?next={{request.path}}">
-        <strong>(Login to Post Your Answer) </strong>
+        <strong>(Please log in to post your answer ^^) </strong>
     </a>
+
 {% endif %}
 

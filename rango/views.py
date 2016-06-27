@@ -558,36 +558,37 @@ def add_answer(request, cat_name_slug):
 
 @login_required
 def edit_answer(request, cat_name_slug, answer_id):
+    answer = Answers.objects.get(id=int(answer_id))
+    if answer.author == request.user:
+        if request.method == 'POST':
+            form = TestUeditorModelForm(request.POST)
+            # answer_id = request.GET['answer_id']
+            # next_page = request.GET['next']
 
-    if request.method == 'POST':
+            if form.is_valid():
+                answer = Answers.objects.get(id=int(answer_id))
 
-        form = TestUeditorModelForm(request.POST)
-        # answer_id = request.GET['answer_id']
-        # next_page = request.GET['next']
+                content = request.POST.get('content')
+                current_time = timezone.now()
 
-        if form.is_valid():
-            answer = Answers.objects.get(id=int(answer_id))
+                answer.content = content
+                answer.edit_date = current_time
+                answer.save()
 
-            content = request.POST.get('content')
-            current_time = timezone.now()
+                return HttpResponseRedirect('/rango/category/'+cat_name_slug)
 
-            answer.content = content
-            answer.edit_date = current_time
-            answer.save()
+        else:
+            form = TestUeditorModelForm(
+                initial={
+                    'content': answer.content,
+                }
+            )
 
-            return HttpResponseRedirect('/rango/category/'+cat_name_slug)
+        context = {"form": form, "answer_id": answer_id, "cat_name_slug": cat_name_slug}
 
+        return render(request, 'rango/edit-description.html', context)
     else:
-        answer = Answers.objects.get(id=int(answer_id))
-        form = TestUeditorModelForm(
-            initial={
-                'content': answer.content,
-            }
-        )
-
-    context = {"form": form, "answer_id": answer_id, "cat_name_slug": cat_name_slug}
-
-    return render(request, 'rango/edit-description.html', context)
+        return HttpResponse("<h1>Don't do it, stupid!</h1>")
 
 
 def answer_up(request):
