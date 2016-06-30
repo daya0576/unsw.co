@@ -181,7 +181,7 @@ def get_category(request, cat_name_slug):
         # like persons.
         is_answered = False
         for answer in answers:
-            print answer.likes
+            # print answer.likes
             answer.like_users_str = get_answer_like_users(answer)
 
             if answer.author == user:
