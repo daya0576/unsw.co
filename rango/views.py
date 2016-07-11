@@ -423,6 +423,7 @@ def suggest_category(request):
     cat_search_keyword = ''
     if request.method == 'GET':
         cat_search_keyword = request.GET['suggestion']
+        cat_search_keyword = cat_search_keyword.rstrip()
 
         if cat_search_keyword != '' and cat_search_keyword is not None:
             cats = get_category_list(0, cat_search_keyword)
@@ -808,4 +809,8 @@ def sub_search(request):
             context_dict = {}
 
         return render(request, 'rango/parts/subject/cats.html', context_dict)
+
+
+def avatar_doom(request):
+    return render(request, 'rango/doom/avatar.html', {})
 
