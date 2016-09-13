@@ -1,5 +1,4 @@
 ## Plans(Ordered by urgency) ##
-<<<<<<< HEAD
 1. adding undergraduate courses.(done)
 2. custom index page.(done)
 3. attracting users.
