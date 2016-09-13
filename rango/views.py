@@ -27,7 +27,7 @@ def index(request):
     # page_list = CatPage.objects.order_by('-views')[0:5]
     subject_list = Subject.objects.order_by('-likes').filter(~Q(slug="both"))
 
-    context_dict = {'categories': category_list, 'subs': subject_list}
+    context_dict = {'categories': category_list, 'subs': subject_list, 'index': True}
 
     # visits = request.session.get('visits')
     # if not visits:

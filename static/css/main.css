@@ -37,8 +37,8 @@ h1, h2, h3, h4 {
 
 .box {
     /*background-color: #fff;*/
-    background-color: rgba(255,255,255,0.97);
-    border-radius: 3px;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 5px;
     box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid #e2e2e2;
     padding:15px;
@@ -70,12 +70,23 @@ body{
     /*background: linear-gradient(to bottom, #eee, rgba(222,222,222,0.2), #de7006), url(/static/images/bg/1.svg);*/
 
     /*background: #000000;*/
-    background: repeating-linear-gradient(120deg,
-      #000 0,
-      #428bca 1px /* transition from previous blue stripe */,
-      #428bca .25em,
-      #000 calc(.25em + 1px) /* from black to blue */,
-      #000 .75em
+
+    background: repeating-linear-gradient(70deg,
+      #f2f2f2 0,
+      #fff 1px /* transition from previous blue stripe */,
+      #fff .25em,
+      #f2f2f2 calc(.25em + 1px) /* from black to blue */,
+      #f2f2f2 0.75em
+    );
+}
+
+.index_bg{
+    background: repeating-linear-gradient(70deg,
+      #fff 0,
+      #f2f2f2 1px /* transition from previous blue stripe */,
+      #f2f2f2 .25em,
+      #fff calc(.25em + 1px) /* from black to blue */,
+      #fff 1em
     );
 }
 

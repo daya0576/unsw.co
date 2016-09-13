@@ -44,7 +44,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-      background-color: rgba(255,255,255,0.97);
+      background-color: rgba(242,242,242,0.8);
     /*background-color: #f5f5f5;*/
     /*border-right: 1px dashed #eee;*/
   }
@@ -65,6 +65,7 @@ body {
 .nav-sidebar > .active > a:focus {
   color: #fff;
   background-color: #428bca;
+  background-color: #337ab7;
 }
 
 
