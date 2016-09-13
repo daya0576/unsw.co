@@ -45,17 +45,9 @@ python manage.py runserver 8001
 
 ### Done ###
 Open this url in your browser
-<<<<<<< HEAD
-[http://127.0.0.1:8001/](http://127.0.0.1:8001/)
-
-###  ###
-###  ###
-If it does not work, sending email to 
-=======
 [http://127.0.0.1:8004/](http://127.0.0.1:8001/)
 
 ###  ###
 ###  ###
 If it does not work, sending email to me:
->>>>>>> origin/master
 **me@changchen.me**
