@@ -2,7 +2,7 @@
 1. adding undergraduate courses.(done)
 2. custom index page.(done)
 3. attracting users.
-4. 
+4. bg font bugs.
 
 ## Configuration ##
 ### Step1: ###
