@@ -79,12 +79,12 @@ h1, h2, h3, h4 {
       /*#428bca 0.75em*/
     /*);*/
 
-    background: url(/static/images/bg/transp_bg.png) #DFDFDF;
+    background: url(/static/images/bg/transp_bg.png) #fff;
 }
 
 .index_bg{
 
-    background: url(/static/images/bg/wordcloud_C_R.svg) #f2f2f2;
+    background: url(/static/images/bg/wordcloud_C_R.svg) #fff;
 }
 
 .profile_list{
