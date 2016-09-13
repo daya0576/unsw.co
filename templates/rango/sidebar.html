@@ -11,9 +11,9 @@
             {% endif %}
 
             <a href="{% url 'subject'  s.slug %}">
-                <strong>{{ s.school_en }}</strong>
-                <span class="likes">({{ s.likes }} likes)</span><br>
-                {{ s.name }}
+                <strong>{{ s.name }}</strong><br>
+                <!--<span class="likes">({{ s.likes }} likes)</span><br>-->
+                {{ s.school_en }}
             </a></li>
         {% endfor %}
         <li><a class="search_pointer"><strong class="grey">Search for courses..</strong></a>

@@ -44,8 +44,9 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #f5f5f5;
-    border-right: 1px solid #eee;
+      background-color: rgba(255,255,255,0.97);
+    /*background-color: #f5f5f5;*/
+    /*border-right: 1px dashed #eee;*/
   }
 }
 
@@ -76,8 +77,10 @@ body {
 }
 @media (min-width: 768px) {
   .main {
-    padding-right: 40px;
-    padding-left: 40px;
+    /*padding-right: 40px;*/
+    padding-right: 5%;
+    /*padding-left: 40px;*/
+    padding-left: 5%;
   }
 }
 .main .page-header {
