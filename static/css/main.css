@@ -71,27 +71,25 @@ body{
 
     /*background: #000000;*/
 
-    background: repeating-linear-gradient(70deg,
-      #f2f2f2 0,
-      #fff 1px /* transition from previous blue stripe */,
-      #fff .25em,
-      #f2f2f2 calc(.25em + 1px) /* from black to blue */,
-      #f2f2f2 0.75em
-    );
+    /*background: repeating-linear-gradient(45deg,*/
+      /*#428bca 0,*/
+      /*#000 1px !* transition from previous blue stripe *!,*/
+      /*#000 .25em,*/
+      /*#428bca calc(.25em + 1px) !* from black to blue *!,*/
+      /*#428bca 0.75em*/
+    /*);*/
+
+    background: url(/static/images/bg/transp_bg.png) #DFDFDF;
 }
 
 .index_bg{
-    background: repeating-linear-gradient(70deg,
-      #fff 0,
-      #f2f2f2 1px /* transition from previous blue stripe */,
-      #f2f2f2 .25em,
-      #fff calc(.25em + 1px) /* from black to blue */,
-      #fff 1em
-    );
+
+    background: url(/static/images/bg/wordcloud_C_R.svg) #f2f2f2;
 }
 
 .profile_list{
     padding-top: 5px;
+
 }
 
 a.list-group-item, button.list-group-item{
