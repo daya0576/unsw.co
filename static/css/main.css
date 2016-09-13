@@ -64,7 +64,7 @@ h1, h2, h3, h4 {
     height: 26px;
 }
 
-body{
+.other_bg{
     /*background: url(/static/images/bg/noise_fw.gif) #DFDFDF;*/
     /*background: linear-gradient(to bottom, #eee, rgba(222,112,6,0.2), #de7006), url(/static/images/bg/1.svg);*/
     /*background: linear-gradient(to bottom, #eee, rgba(222,222,222,0.2), #de7006), url(/static/images/bg/1.svg);*/
