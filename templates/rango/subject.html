@@ -5,6 +5,9 @@
 {% block title %}{{ subject.name }}{% endblock %}
 
 {% block body_block %}
+    <script>
+        $("body").attr('class', 'index_bg');
+    </script>
     <link href="{% static 'css/parts/sub_filter.css' %}" rel="stylesheet">
     <script src="{% static 'js/parts/sub_filter.js' %}" type="text/javascript"></script>
         <!--<link rel="stylesheet" type="text/css" href="{% static 'js_plugins/gridloading/css/default.css' %}" />-->

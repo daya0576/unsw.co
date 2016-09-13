@@ -5,6 +5,10 @@
 {% block title %}{{ category.no }} - {{ category.name }}{% endblock %}
 
 {% block body_block %}
+    <script>
+        $("body").attr('class', 'index_bg');
+    </script>
+
     <div class="blur" style="height:100%;"></div>
     <div class="cat_content">
         {% if category %}
