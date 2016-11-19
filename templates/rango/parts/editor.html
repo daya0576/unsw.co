@@ -23,8 +23,8 @@
         </form>
 
     {% else %}
-        <h4 style="padding-bottom:10px">Thank you for your answer!</h4>
-        <h4>You can edit your answer directly. </h4>
+        <h4 style="padding-bottom:10px">Thank you for your review!</h4>
+        <h4>You can edit your review directly. </h4>
     {% endif %}
 
 
@@ -40,16 +40,21 @@
 
         {% bootstrap_form editor layout='inline' %}
         <!--<input type="submit" name="submit" value="Create Category" />-->
-        <button class="btn btn-primary" type="submit" name="submit"> Post as Anonymous </button>
+        <button class="btn btn-primary" type="submit" data-toggle="tooltip" data-placement="right"
+                title="Cannot edit ur answer later" name="submit"> Post as Anonymous </button>
+
+        &nbsp;or&nbsp;
+        <a class="btn btn-info" href="{% url 'auth_login' %}?next={{request.path}}">
+            Login first
+        </a>
     </form>
-
-
-    <a style="font-size: 14px" href="{% url 'auth_login' %}?next={{request.path}}">
-         Or <strong> click me to login first </strong>
-    </a>
-
-
-    <br><br>
+    <small>(Send email to <u>me@changchen.me</u> to modify ur anonymous answer)</small>
 
 {% endif %}
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
 
