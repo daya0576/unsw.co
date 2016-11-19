@@ -126,7 +126,9 @@ def get_category(request, cat_name_slug):
             user = request.user
             content = request.POST.get('content')
             current_time = timezone.now()
-            # current_time = datetime.now()
+
+            if user.is_anonymous():
+                user = User.objects.get(username='Anonymous')
 
             answer = Answers(
                 category=cat,
@@ -437,7 +439,6 @@ def suggest_category(request):
         # return HttpResponse({'cat_list': cat_list})
 
 
-@login_required
 def add_answer(request, category_name_slug):
 
     if request.method == 'POST':
