@@ -31,7 +31,7 @@ pip install -r requirements.txt
 In rango directory:   
 
 ``` python
-python manage.py runserver 800   1
+python manage.py runserver 8001
 ```
 
 ### Done ###
