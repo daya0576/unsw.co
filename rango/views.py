@@ -28,7 +28,7 @@ def show_time(date_post):
     # print date_now
     # print date_post
 
-    sub_s = int((date_now - date_post).seconds)
+    sub_s = int((date_now - date_post).total_seconds())
 
     if sub_s < 60:
         time_show = 'just now'
