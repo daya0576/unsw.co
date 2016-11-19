@@ -8,9 +8,7 @@
 ### Step1: ###
 Adding file **keys.py** to rango directory
 keys.py:   
-```
-#!python
-
+``` python
 BING_API_KEY = ''
 G_EMAIL_KEY = ""
 ME_EMAIL_KEY = ""
@@ -20,7 +18,7 @@ ME_EMAIL_KEY = ""
 Installing all the packages. 
 Run it in root directory.
 ```
-#!bash
+#
 
 pip install -r requirements.txt
 ```
@@ -32,7 +30,7 @@ In rango directory:
 ```
 #!python
 
-python manage.py runserver 8001
+python manage.py runserver 800   1
 ```
 
 ### Done ###
