@@ -37,16 +37,35 @@
                     <strong>There are no Majors present.</strong>
                 {% endif %}
             </div>
+
+            <div class="list-group">
+                <a class="list-group-item active">
+                    <h4 class="list-group-item-heading"><b>Latest comments</b></h4>
+                </a>
+
+                {% if answer_list %}
+                    {% for answer in answer_list %}
+                        <a class="list-group-item" href="{% url 'category' answer.category.slug %}">
+                            <b>{{ answer.author }}</b> commented on <br>
+                            <b>{{ answer.category.no }} {{ answer.category.name }}</b> <br>
+                            {{ answer.post_date_text }}
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    <strong>There are no comment present.</strong>
+                {% endif %}
+            </div>
         </div>
 
         <div class="col-xs-12 col-sm-6 placeholder">
             <div class="list-group">
                 <a class="list-group-item active">
                     <h4 class="list-group-item-heading"><b>Courses</b></h4>
-                    <p class="list-group-item-text">Order by answers</p>
+                    <p class="list-group-item-text">Sort by num of comments</p>
                 </a>
 
                 {% if categories %}
+                    <a class="list-group-item">search(todo)</a>
                     {% for c in categories %}
                         <a class="list-group-item" href="{% url 'category' c.slug %}">
                             {{ category.name }}
@@ -61,9 +80,9 @@
                                 {{ c.name }}
                         </a>
                     {% endfor %}
-                        <a href="#" class="list-group-item">
-                            more..
-                        </a>
+{#                        <a href="#" class="list-group-item">#}
+{#                            more..#}
+{#                        </a>#}
                 {% else %}
                     <strong>There are no courses present.</strong>
                 {% endif %}
