@@ -40,11 +40,14 @@
 
         {% bootstrap_form editor layout='inline' %}
         <!--<input type="submit" name="submit" value="Create Category" />-->
+        <button class="btn btn-primary" type="submit" name="submit"> Post as Anonymous </button>
     </form>
 
+
     <a style="font-size: 14px" href="{% url 'auth_login' %}?next={{request.path}}">
-        <strong>(Please log in to post your answer ^^) </strong>
+         Or <strong> click me to login first </strong>
     </a>
+
 
     <br><br>
 
