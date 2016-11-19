@@ -1,5 +1,4 @@
 *.pyc
-rango/migrations
 rango/keys.py
 .idea/
 media/Comment_images/QQ截图20151217221013_20151217225227.jpg
