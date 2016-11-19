@@ -2,10 +2,16 @@
 
 from django.utils import timezone
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+
 from rango.models import Category, CatPage, SubPage, Answers, CategoryUserLikes, Subject, AnswerUserLikes, AnswerUserDislikes, User, UserOOXX
+from django.db.models import Count
+
 from rango.forms import CategoryForm, CatPageForm, SubPageForm, UserForm, TestUeditorModelForm, UserOOXXForm
 from django.contrib.auth.decorators import login_required
+
 from datetime import datetime
+from django.utils.timezone import utc
+
 from django.http import JsonResponse
 from django.db.models import Q
 
@@ -17,17 +23,52 @@ from django.db.models import Q
 #     return HttpResponse("Rango says hey there world<br>"
 #                         "<a href='/rango/about'>About</a>")
 
+def show_time(date_post):
+    date_now = datetime.utcnow().replace(tzinfo=utc)
+    # print date_now
+    # print date_post
+
+    sub_s = int((date_now - date_post).seconds)
+
+    if sub_s < 60:
+        time_show = 'just now'
+    elif sub_s/60 < 60:
+        time_show = '{} minutes ago'.format(sub_s//60)
+    elif sub_s/60/60 < 24:
+        hours = sub_s // 60 // 60
+        time_show = '{} hours ago'.format(hours) if hours != 1 else '{} hour ago'.format(hours)
+    elif sub_s/60/60/24 < 365:
+        day = int(sub_s/60/60/24)
+        if day == 1:
+            time_show = 'YESTERDAY'
+        else:
+            time_show = '{} days ago'.format(day)
+    else:
+        year = int(sub_s / 60 / 60 / 24 / 365)
+        time_show = '{} years ago'.format(year) if year != 1 else '{} year ago'.format(year)
+
+    return time_show
+
 
 def index(request):
-    category_list = Category.objects.extra(
-            select={
-                'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
-            },
-        ).order_by('-answer_count')[0:10]
+    # category_list = Category.objects.extra(
+    #         select={
+    #             'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
+    #         },
+    #     ).order_by('-answer_count')[0:10]
+
+    category_list = Category.objects.annotate(answer_count=Count('answers')).order_by('-answer_count')[0:10]
+
     # page_list = CatPage.objects.order_by('-views')[0:5]
     subject_list = Subject.objects.order_by('-likes').filter(~Q(slug="both"))
 
-    context_dict = {'categories': category_list, 'subs': subject_list, 'index': True}
+    answer_list = Answers.objects.order_by('-post_date')[:5]
+    for answer in answer_list:
+        answer.post_date_text = show_time(answer.post_date)
+        print answer.post_date_text
+
+    context_dict = {'categories': category_list, 'subs': subject_list,
+                    'answer_list': answer_list, 'index': True}
 
     # visits = request.session.get('visits')
     # if not visits:
