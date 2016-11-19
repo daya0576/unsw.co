@@ -1,0 +1,31 @@
+{% for c in courses %}
+    <a class="list-group-item" href="{% url 'category' c.slug %}">
+        {{ category.name }}
+       <strong>{{ c.no }}</strong>
+        <span class="likes">(
+            <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
+            &nbsp
+            <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
+            &nbsp
+            lvl {{ c.level }})
+        </span><br>
+            {{ c.name }}
+    </a>
+{% endfor %}
+
+<a style="cursor: pointer" onclick="show_more_courses(this, {{ courses.start }}, {{ courses.end }})"
+   class="list-group-item">
+    more..
+</a>
+
+<script>
+    function show_more_courses(obj, start, end) {
+        $(obj).text("loading..");
+        $.get("{% url 'index-more-courses' %}", {start: start, end: end}, function(data){
+            $(obj).hide();
+            $('#index-courses-list-group').append(data);
+        });
+    }
+
+
+</script>

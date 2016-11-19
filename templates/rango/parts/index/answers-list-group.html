@@ -1,0 +1,24 @@
+{% for answer in answers %}
+    <a class="list-group-item" href="{% url 'category' answer.category.slug %}">
+        <b>{{ answer.author }}</b> commented on <br>
+        <b>{{ answer.category.no }} {{ answer.category.name }}</b> <br>
+        {{ answer.post_date_text }}
+    </a>
+{% endfor %}
+
+<a style="cursor: pointer" onclick="show_more_comments(this, {{ answers.start }}, {{ answers.end }})"
+   class="list-group-item">
+    more..
+</a>
+
+<script>
+    function show_more_comments(obj, start, end) {
+        $(obj).text("loading..");
+
+        $.get("{% url 'index-more-comments' %}", {start: start, end: end}, function(data){
+            $(obj).hide();
+            $('#index-comments-list-group').append(data);
+        });
+    }
+
+</script>

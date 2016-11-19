@@ -20,70 +20,51 @@
     <!--</div>-->
 
     <div class="row placeholders">
-        <div class="col-xs-12 col-sm-6 placeholder">
-            <div class="list-group">
-                <a class="list-group-item active">
-                    <h4 class="list-group-item-heading"><b>Programs</b></h4>
-                    <p class="list-group-item-text">Choose ur program to see all courses</p>
-                </a>
+        <div class="col-xs-12 col-sm-7 placeholder">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="list-group">
+                    <a class="list-group-item active">
+                        <h4 class="list-group-item-heading"><b>Programs</b></h4>
+                        <p class="list-group-item-text">Choose ur program to see all courses</p>
+                    </a>
 
-                {% if subs %}
-                    {% for sub in subs %}
-                        <a class="list-group-item" href="{% url 'subject' sub.slug %}">
-                            <b>{{ sub.name }}</b>
-                        </a>
-                    {% endfor %}
-                {% else %}
-                    <strong>There are no Majors present.</strong>
-                {% endif %}
+                    {% if subs %}
+                        {% for sub in subs %}
+                            <a class="list-group-item" href="{% url 'subject' sub.slug %}">
+                                <b>{{ sub.name }}</b>
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <strong>There are no Majors present.</strong>
+                    {% endif %}
+                </div>
             </div>
 
-            <div class="list-group">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                <div class="list-group" id="index-comments-list-group">
                 <a class="list-group-item active">
                     <h4 class="list-group-item-heading"><b>Latest comments</b></h4>
                 </a>
 
-                {% if answer_list %}
-                    {% for answer in answer_list %}
-                        <a class="list-group-item" href="{% url 'category' answer.category.slug %}">
-                            <b>{{ answer.author }}</b> commented on <br>
-                            <b>{{ answer.category.no }} {{ answer.category.name }}</b> <br>
-                            {{ answer.post_date_text }}
-                        </a>
-                    {% endfor %}
-                    <a class="list-group-item">more..(todo)</a>
+                {% if answers %}
+                    {% include "rango/parts/index/answers-list-group.html" %}
                 {% else %}
                     <strong>There are no comment present.</strong>
                 {% endif %}
             </div>
+            </div>
         </div>
 
-        <div class="col-xs-12 col-sm-6 placeholder">
-            <div class="list-group">
+        <div class="col-xs-12 col-sm-5 placeholder">
+            <div class="list-group" id="index-courses-list-group">
                 <a class="list-group-item active">
                     <h4 class="list-group-item-heading"><b>Courses</b></h4>
-                    <p class="list-group-item-text">Sort by num of comments</p>
+                    <p class="list-group-item-text">Sort by sum of comments</p>
                 </a>
 
-                {% if categories %}
+                {% if courses %}
                     <a class="list-group-item">search(todo)</a>
-                    {% for c in categories %}
-                        <a class="list-group-item" href="{% url 'category' c.slug %}">
-                            {{ category.name }}
-                           <strong>{{ c.no }}</strong>
-                            <span class="likes">(
-                                <i class="fa fa-commenting-o"></i> {{ c.answer_count }}
-                                &nbsp
-                                <i class="fa fa-thumbs-o-up"></i> {{ c.likes }}
-                                &nbsp
-                                lvl {{ c.level }})
-                            </span><br>
-                                {{ c.name }}
-                        </a>
-                    {% endfor %}
-                    <a href="#" class="list-group-item">
-                        more..(todo)
-                    </a>
+                    {% include "rango/parts/index/courses-list-group.html" %}
                 {% else %}
                     <strong>There are no courses present.</strong>
                 {% endif %}
@@ -93,3 +74,4 @@
     </div>
 
 {% endblock %}
+

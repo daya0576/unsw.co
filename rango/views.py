@@ -50,25 +50,66 @@ def show_time(date_post):
     return time_show
 
 
-def index(request):
+def get_courses_by_sum(start=0, end=10):
     # category_list = Category.objects.extra(
     #         select={
     #             'answer_count': 'select count(*) from rango_answers where rango_answers.category_id = rango_category.id'
     #         },
     #     ).order_by('-answer_count')[0:10]
+    category_list = Category.objects.annotate(answer_count=Count('answers')).order_by('-answer_count')[start:end]
+    # category_list = category_list[start, end]
+    category_list.start = end
+    category_list.end = end - start + category_list.start
 
-    category_list = Category.objects.annotate(answer_count=Count('answers')).order_by('-answer_count')[0:10]
+    return category_list
 
-    # page_list = CatPage.objects.order_by('-views')[0:5]
-    subject_list = Subject.objects.order_by('-likes').filter(~Q(slug="both"))
 
-    answer_list = Answers.objects.order_by('-post_date')[:5]
+def index_more_courses(request):
+    if "start" in request.GET and "end" in request.GET:
+        start = int(request.GET['start'])
+        end = int(request.GET['end'])
+    else:
+        start = end = 0
+
+    courses = get_courses_by_sum(start, end)
+    context_dict = {'courses': courses}
+
+    return render(request, 'rango/parts/index/courses-list-group.html', context_dict)
+
+
+def get_latest_answers(start, end):
+    answer_list = Answers.objects.order_by('-post_date')[start:end]
     for answer in answer_list:
         answer.post_date_text = show_time(answer.post_date)
-        print answer.post_date_text
+        # print answer.post_date_text
 
-    context_dict = {'categories': category_list, 'subs': subject_list,
-                    'answer_list': answer_list, 'index': True}
+    answer_list.start = end
+    answer_list.end = end - start + answer_list.start
+
+    return answer_list
+
+
+def index_more_comments(request):
+    if "start" in request.GET and "end" in request.GET:
+        start = int(request.GET['start'])
+        end = int(request.GET['end'])
+    else:
+        start = end = 0
+
+    answers = get_latest_answers(start, end)
+    context_dict = {'answers': answers}
+
+    return render(request, 'rango/parts/index/answers-list-group.html', context_dict)
+
+
+def index(request):
+    category_list = get_courses_by_sum(0, 8)
+    # page_list = CatPage.objects.order_by('-views')[0:5]
+    subject_list = Subject.objects.order_by('-likes').filter(~Q(slug="both"))
+    answer_list = get_latest_answers(0, 5)
+
+    context_dict = {'courses': category_list, 'subs': subject_list,
+                    'answers': answer_list, 'index': True}
 
     # visits = request.session.get('visits')
     # if not visits:
