@@ -30,7 +30,7 @@ function show_filter_search(){
     if($(".filter_search_box").is(':hidden')){
         $(".filter_search_box").show();
         $("#sub_keyword").focus();
-        $("#filter_search_switch").css("background-color", "")
+        $("#filter_search_switch").css("background-color", "");
         $("#filter_search_switch").addClass("active");
 
     }else{
@@ -40,3 +40,7 @@ function show_filter_search(){
     }
 
 }
+
+// $(function() {
+//     $("#sub_keyword").focus();
+// });

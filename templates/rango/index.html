@@ -19,6 +19,8 @@
         <!--{% endif %}-->
     <!--</div>-->
 
+
+
     <div class="row placeholders">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8 placeholder">
             <div class="col-md-12 col-lg-6">
@@ -63,7 +65,10 @@
                 </a>
 
                 {% if courses %}
-                    <a class="list-group-item">search(todo)</a>
+{#                    <a class="list-group-item">#}
+{#                        <input type="text" class="form-control" placeholder="Search..">#}
+{#                    </a>#}
+
                     {% include "rango/parts/index/courses-list-group.html" %}
                 {% else %}
                     <strong>There are no courses present.</strong>

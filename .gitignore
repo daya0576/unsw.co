@@ -1,9 +1,6 @@
 *.pyc
 rango/keys.py
 .idea/
-media/Comment_images/QQ截图20151217221013_20151217225227.jpg
-media/IMG_0000_20151217225908_771.mp4
-media/scrawl_20151217211705_582.png
-media/Comment_images/009_20160217172933.JPG
-media/Comment_images/011_20160217180120.PNG
+media/
 db.sqlite3
+
