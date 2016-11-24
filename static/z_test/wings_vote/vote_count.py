@@ -21,9 +21,9 @@ def get_html(url):
 
 def get_vote_shot(html_result):
     vote_list = re.findall(r"displayValue='(.+?)'", html_result)
-    # final_result = str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    now = datetime.now().strftime("%m-%d %H:%M")
 
-    final_result = {"time": str(datetime.now())}
+    final_result = {"time": str(now)}
     vote_result = {}
 
     for item in vote_list:
@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
         print(len(final_result))
 
-        time.sleep(60*30)
+        # time.sleep(60*30)
 
 
 

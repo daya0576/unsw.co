@@ -27,19 +27,20 @@ def get_y(data):
     y2 = [vote[u'邹市明（拳击） '] for vote in vote_result]
     y3 = [vote[u'柯洁（围棋） '] for vote in vote_result]
 
-    y = [y1, y2, y3]
-    return y
+    return y1, y2, y3
 
 
 def get_data(request):
     voting_data = get_voting_data()
 
     x = get_x(voting_data)
-    y = get_y(voting_data)
+    y1, y2, y3 = get_y(voting_data)
 
-    return JsonResponse({'label': x, 'data': y})
+    return JsonResponse({'label': x, 'data': y1})
 
 
+from django.views.generic import TemplateView
+line_chart = TemplateView.as_view(template_name='z_lab/wings_vote.html')
 
 
 if __name__ == "__main__":
