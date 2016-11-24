@@ -58,7 +58,7 @@ if __name__ == '__main__':
 
         print(len(final_result))
 
-        time.sleep(60*5)
+        time.sleep(60*30)
 
 
 
