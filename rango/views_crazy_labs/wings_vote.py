@@ -36,7 +36,7 @@ def get_data(request):
     x = get_x(voting_data)
     y1, y2, y3 = get_y(voting_data)
 
-    return JsonResponse({'label': x, 'data': y1})
+    return JsonResponse({'label': x, 'y1': y1, 'y2': y2, 'y3': y3})
 
 
 from django.views.generic import TemplateView
