@@ -6,17 +6,55 @@
             <script src="{% static 'js/excanvas.js' %}"></script>
         <![endif]-->
     </head>
-    <body>
-        <h1>Wings voting data trend!</h1>
+    <body style="padding-left: 50px">
+        <h1 style="padding-left: 150px">
+            Wings voting data trend!
+            <a href="http://survey.sports.sina.com.cn/result/115601.html">(sina source)</a>
+        </h1>
 
         <canvas id="myChart" width="800" height="500"></canvas>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         <script type="text/javascript">
-            $.get('{% url "wings_vote_data" %}', function(data) {
+            $.get('{% url "wings_vote_get_data" %}', function(data) {
+                alert(data['label']);
                 var ctx = $("#myChart").get(0).getContext("2d");
-                new Chart(ctx).Line(data);
+                var chart_data = {
+                    labels: data['label'],
+                    datasets: [
+                        {
+                            label: "Wings",
+                            fill: false,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba(75,192,192,0.4)",
+                            borderColor: "rgba(75,192,192,1)",
+                            borderCapStyle: 'butt',
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba(75,192,192,1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: data['data'],
+                            spanGaps: false
+                        }
+                    ]
+                };
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: chart_data,
+                    options: {
+                        responsive: false
+                    }
+                });
+
             });
         </script>
     </body>

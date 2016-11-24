@@ -21,7 +21,7 @@ from django.views.generic import TemplateView
 from rango import views
 from registration.forms import RegistrationFormUniqueEmail
 
-from rango.views_crazy_labs.wings_vote import line_chart, line_chart_json
+from rango.views_crazy_labs import wings_vote
 
 
 # Create a new class that redirects the user to the index page, if successful at logging
@@ -47,8 +47,7 @@ urlpatterns = patterns('',
 
     url(r'', include('social_auth.urls')),
 
-    url(r'^wings/$', line_chart, name='wings'),
-    url(r'^wings_vote_data/$', line_chart_json, name='wings_vote_data'),
+    url(r'^wings/$', wings_vote.get_data, name='wings_vote_get_data'),
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:

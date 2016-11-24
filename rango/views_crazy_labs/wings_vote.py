@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from random import randint
 import os
 import json
-
-from django.views.generic import TemplateView
-from chartjs.views.lines import BaseLineChartView
-
+from django.shortcuts import render
+from django.http import JsonResponse
 from tango_with_django_project.settings import BASE_DIR
 
 
@@ -20,14 +17,11 @@ def get_voting_data():
     return final_result
 
 
-def get_x():
-    data = get_voting_data()
-    x = [shot['time'] for shot in data]
-    return x
+def get_x(data):
+    return [shot['time'] for shot in data]
 
 
-def get_y():
-    data = get_voting_data()
+def get_y(data):
     vote_result = [shot['vote_result'] for shot in data]
     y1 = [vote[u'WINGS战队（电竞） '] for vote in vote_result]
     y2 = [vote[u'邹市明（拳击） '] for vote in vote_result]
@@ -37,22 +31,15 @@ def get_y():
     return y
 
 
-class LineChartJSONView(BaseLineChartView):
-    def get_labels(self):
-        """Return 7 labels."""
-        # return ["January", "February", "March", "April", "May", "June", "July"]
-        return get_x()
+def get_data(request):
+    voting_data = get_voting_data()
 
-    def get_data(self):
-        """Return 3 datasets to plot."""
-        # return [[75, 44, 92, 11, 44, 95, 35],
-        #         [41, 92, 18, 3, 73, 87, 92],
-        #         [87, 21, 94, 3, 90, 13, 65]]
-        return get_y()
+    x = get_x(voting_data)
+    y = get_y(voting_data)
+
+    return JsonResponse({'label': x, 'data': y})
 
 
-line_chart = TemplateView.as_view(template_name='z_lab/wings_vote.html')
-line_chart_json = LineChartJSONView.as_view()
 
 
 if __name__ == "__main__":
