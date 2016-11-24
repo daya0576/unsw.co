@@ -48,7 +48,8 @@ INSTALLED_APPS = (
     'DjangoUeditor',
     'bootstrap3',
     # 'captcha',
-    'social_auth'
+    'social_auth',
+    'chartjs',
 )
 
 MIDDLEWARE_CLASSES = (
