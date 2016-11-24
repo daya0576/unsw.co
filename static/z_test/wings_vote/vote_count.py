@@ -56,6 +56,8 @@ if __name__ == '__main__':
         with open('vote_trend.json', 'w') as f:
             json.dump(final_result, f)
 
+        print(len(final_result))
+
         time.sleep(60*5)
 
 
