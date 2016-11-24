@@ -253,9 +253,7 @@ def get_category(request, cat_name_slug):
             select={
                 'is_disliked': 'select count(*) from rango_answeruserdislikes where rango_answers.id = rango_answeruserdislikes.answer_id and rango_answeruserdislikes.user_id = ' + str(user_id)
             },
-        ).order_by("-likes")
-
-        # answers.order_by('-edit_date')
+        ).order_by("-likes", "-edit_date")
 
         if user.is_authenticated():
             is_liked = CategoryUserLikes.objects.filter(category=category).filter(user=request.user)
