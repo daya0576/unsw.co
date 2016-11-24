@@ -12,7 +12,7 @@
         <canvas id="myChart" width="800" height="500"></canvas>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-        <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         <script type="text/javascript">
             $.get('{% url "wings_vote_data" %}', function(data) {
                 var ctx = $("#myChart").get(0).getContext("2d");
