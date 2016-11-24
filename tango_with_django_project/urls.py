@@ -21,8 +21,6 @@ from django.views.generic import TemplateView
 from rango import views
 from registration.forms import RegistrationFormUniqueEmail
 
-from rango.views_crazy_labs.wings_vote import line_chart, line_chart_json
-
 
 # Create a new class that redirects the user to the index page, if successful at logging
 class MyRegistrationView(RegistrationView):
@@ -42,13 +40,8 @@ urlpatterns = patterns('',
     url(r'^accounts/profile/', TemplateView.as_view(template_name='profile.html'), name='profile'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^ueditor/', include('DjangoUeditor.urls')),
-
     url(r'^doom/', views.avatar_doom),
-
     url(r'', include('social_auth.urls')),
-
-    url(r'^wings/$', line_chart, name='wings'),
-    url(r'^wings_vote_data/$', line_chart_json, name='wings_vote_data'),
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:
