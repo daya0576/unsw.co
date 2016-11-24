@@ -3,4 +3,4 @@ rango/keys.py
 .idea/
 media/
 db.sqlite3
-
+vote_trend.json
