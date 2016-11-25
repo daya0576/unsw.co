@@ -88,9 +88,11 @@ def get_final_chart_data():
         persons_dict[item] = persons[i]
     # print persons_dict
 
+    ''' generate colors'''
+    colors = ['75,192,192', '192,75,192', '192,192,75', '75,75,192', '192,75,75']
 
     return {'labels': labels, 'final_result': final_result, 'voting_items': voting_items,
-            'persons': persons, 'persons_dict': persons_dict}
+            'persons': persons, 'persons_dict': persons_dict, 'colors': colors}
 
 
 if __name__ == "__main__":

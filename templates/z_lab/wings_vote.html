@@ -3,28 +3,39 @@
 {% load get_item %}
 <html>
     <head>
-        <title>django-chartjs line chart demo</title>
+        <title>2016中国十佳劳伦斯冠军奖</title>
         <!--[if lte IE 8]>
             <script src="{% static 'js/excanvas.js' %}"></script>
         <![endif]-->
+        <link rel="icon" href="{% static 'images/favicon.ico' %}">
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
     </head>
-    <body style="padding-left: 50px">
-        <h1>
-            Voting data trend!
-            <a href="http://survey.sports.sina.com.cn/result/115601.html">(sina source)</a>
-        </h1>
+    <body style="padding-top: 0px">
+        <div class="container">
+            <h1>
+                2016中国十佳劳伦斯冠军奖 投票趋势!
+                <a href="http://survey.sports.sina.com.cn/result/115601.html">(sina source)</a>
+            </h1>
 
-        {% for voting_item in voting_items %}
-            <a href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a>
-            <br>
-        {% endfor %}
-        <br>
+            <div style="max-width: 800px;">
+                <ul class="list-inline">
+                {% for voting_item in voting_items %}
+                    <li>
+                        <a href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
 
-        {% for voting_item in voting_items %}
-            <a id="voting_item{{ forloop.counter0 }}">{{ voting_item }}</a>
-            <canvas id="myChart{{ forloop.counter0 }}" width="800" height="500"></canvas>
-            <br>
-        {% endfor %}
+            {% for voting_item in voting_items %}
+                <hr>
+                <h4 href="javascript:;" id="voting_item{{ forloop.counter0 }}">{{ voting_item }}</h4>
+                <canvas id="myChart{{ forloop.counter0 }}"></canvas>
+            {% endfor %}
+
+        </div>
+
 
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
@@ -40,22 +51,22 @@
                         label: '{{ person }}',
                         fill: false,
                         lineTension: 0.1,
-                        backgroundColor: "rgba(75,192,192,0.4)",
-                        borderColor: "rgba(75,192,192,1)",
+                        backgroundColor: "rgba({{ colors|index:forloop.counter0 }},0.4)",
+                        borderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
                         borderCapStyle: 'butt',
                         borderDashOffset: 0.0,
                         borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba(75,192,192,1)",
+                        pointBorderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
                         pointBackgroundColor: "#fff",
                         pointBorderWidth: 1,
                         pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                        pointHoverBackgroundColor: "rgba({{ colors|index:forloop.counter0 }},1)",
                         pointHoverBorderColor: "rgba(220,220,220,1)",
                         pointHoverBorderWidth: 2,
                         pointRadius: 1,
                         pointHitRadius: 10,
                         data: {{ final_result|get_item:voting_item|get_item:person }},
-                        spanGaps: false
+                        spanGaps: false,
                     },
                     {% endfor %}
                 ]
@@ -65,7 +76,7 @@
                 type: 'line',
                 data: chart_data,
                 options: {
-                    responsive: false
+                    responsive: true
                 }
             });
 
