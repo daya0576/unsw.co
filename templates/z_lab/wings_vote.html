@@ -4,33 +4,40 @@
 <html>
     <head>
         <title>2016中国十佳劳伦斯冠军奖</title>
-        <!--[if lte IE 8]>
-            <script src="{% static 'js/excanvas.js' %}"></script>
-        <![endif]-->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
         <link rel="icon" href="{% static 'images/favicon.ico' %}">
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+        <link href="{% static 'z_test/wings_vote/wings.css' %}" rel="stylesheet">
     </head>
 
     <body style="padding-top: 0px">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar" style="top:0">
+                <div class="col-sm-3 col-md-2 sidebar" style="top:0; transition: all 0.5s ease;">
                     <ul class="nav nav-sidebar">
+                        <li class="sidebar-brand">
+                            <a href="#"> 奖项: </a>
+                        </li>
                         {% for voting_item in voting_items %}
-                            <li><a href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a></li>
+                            <li><a style="color: #000; font-weight: 600;" href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
 
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-sm-offset-2 main">
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1>
                         2016中国十佳劳伦斯冠军奖 投票趋势!
-                        <small href="http://survey.sports.sina.com.cn/result/115601.html">(source)</small>
+                        <small><a href="http://survey.sports.sina.com.cn/result/115601.html" target="_blank">(source)</a></small>
                     </h1>
                     {% for voting_item in voting_items %}
-                        <hr>
-                        <h4 href="javascript:;" id="voting_item{{ forloop.counter0 }}">{{ voting_item }}</h4>
+                        <hr id="voting_item{{ forloop.counter0 }}">
+                        <h4 href="javascript:;">{{ voting_item }}</h4>
                         <canvas id="myChart{{ forloop.counter0 }}"></canvas>
                     {% endfor %}
                 </div>
@@ -41,6 +48,7 @@
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
         {% for voting_item in voting_items %}
         <script type="text/javascript">
             var ctx = $("#myChart{{ forloop.counter0 }}").get(0).getContext("2d");

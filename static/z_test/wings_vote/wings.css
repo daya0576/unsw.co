@@ -1,0 +1,13 @@
+.sidebar-brand {
+    font-size: 18px;
+}
+
+.sidebar-brand a {
+    color: #000;
+}
+
+.sidebar-brand a:hover {
+    color: #000;
+    /*background: rgba(242,242,242,0.93);*/
+}
+
