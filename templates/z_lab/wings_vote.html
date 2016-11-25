@@ -11,29 +11,30 @@
         <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
         <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
     </head>
+
     <body style="padding-top: 0px">
-        <div class="container">
-            <h1>
-                2016中国十佳劳伦斯冠军奖 投票趋势!
-                <a href="http://survey.sports.sina.com.cn/result/115601.html">(sina source)</a>
-            </h1>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-md-2 sidebar" style="top:0">
+                    <ul class="nav nav-sidebar">
+                        {% for voting_item in voting_items %}
+                            <li><a href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
 
-            <div style="max-width: 800px;">
-                <ul class="list-inline">
-                {% for voting_item in voting_items %}
-                    <li>
-                        <a href="#voting_item{{ forloop.counter0 }}">{{ voting_item }}</a>
-                    </li>
-                {% endfor %}
-                </ul>
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-sm-offset-2 main">
+                    <h1>
+                        2016中国十佳劳伦斯冠军奖 投票趋势!
+                        <small href="http://survey.sports.sina.com.cn/result/115601.html">(source)</small>
+                    </h1>
+                    {% for voting_item in voting_items %}
+                        <hr>
+                        <h4 href="javascript:;" id="voting_item{{ forloop.counter0 }}">{{ voting_item }}</h4>
+                        <canvas id="myChart{{ forloop.counter0 }}"></canvas>
+                    {% endfor %}
+                </div>
             </div>
-
-            {% for voting_item in voting_items %}
-                <hr>
-                <h4 href="javascript:;" id="voting_item{{ forloop.counter0 }}">{{ voting_item }}</h4>
-                <canvas id="myChart{{ forloop.counter0 }}"></canvas>
-            {% endfor %}
-
         </div>
 
 
@@ -82,5 +83,6 @@
 
         </script>
         {% endfor %}
+
     </body>
 </html>
