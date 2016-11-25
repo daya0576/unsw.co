@@ -6,7 +6,7 @@
         <title>2016中国十佳劳伦斯冠军奖</title>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=0.7, maximum-scale=1.0, user-scalable=no">
         <meta name="description" content="">
         <meta name="author" content="">
 
@@ -35,11 +35,14 @@
                         2016中国十佳劳伦斯冠军奖 投票趋势!
                         <small><a href="http://survey.sports.sina.com.cn/result/115601.html" target="_blank">(source)</a></small>
                     </h1>
-                    {% for voting_item in voting_items %}
-                        <hr id="voting_item{{ forloop.counter0 }}">
-                        <h4 href="javascript:;">{{ voting_item }}</h4>
-                        <canvas id="myChart{{ forloop.counter0 }}"></canvas>
-                    {% endfor %}
+                    <div>
+                        {% for voting_item in voting_items %}
+                            <hr id="voting_item{{ forloop.counter0 }}">
+                            <h4 href="javascript:;">{{ voting_item }}</h4>
+                            <canvas width="800" height="400" id="myChart{{ forloop.counter0 }}"></canvas>
+                        {% endfor %}
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -51,43 +54,46 @@
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         {% for voting_item in voting_items %}
         <script type="text/javascript">
-            var ctx = $("#myChart{{ forloop.counter0 }}").get(0).getContext("2d");
-            var chart_data = {
-                labels: {{ labels|safe }},
-                datasets: [
-                    {% for person in persons|index:forloop.counter0 %}
-                    {
-                        label: '{{ person }}',
-                        fill: false,
-                        lineTension: 0.1,
-                        backgroundColor: "rgba({{ colors|index:forloop.counter0 }},0.4)",
-                        borderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
-                        borderCapStyle: 'butt',
-                        borderDashOffset: 0.0,
-                        borderJoinStyle: 'miter',
-                        pointBorderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
-                        pointBackgroundColor: "#fff",
-                        pointBorderWidth: 1,
-                        pointHoverRadius: 5,
-                        pointHoverBackgroundColor: "rgba({{ colors|index:forloop.counter0 }},1)",
-                        pointHoverBorderColor: "rgba(220,220,220,1)",
-                        pointHoverBorderWidth: 2,
-                        pointRadius: 1,
-                        pointHitRadius: 10,
-                        data: {{ final_result|get_item:voting_item|get_item:person }},
-                        spanGaps: false,
-                    },
-                    {% endfor %}
-                ]
-            };
+            $(function() {
+                var ctx = $("#myChart{{ forloop.counter0 }}").get(0).getContext("2d");
+                var chart_data = {
+                    labels: {{ labels|safe }},
+                    datasets: [
+                        {% for person in persons|index:forloop.counter0 %}
+                        {
+                            label: '{{ person }}',
+                            fill: false,
+                            lineTension: 0.1,
+                            backgroundColor: "rgba({{ colors|index:forloop.counter0 }},0.4)",
+                            borderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
+                            borderCapStyle: 'butt',
+                            borderDashOffset: 0.0,
+                            borderJoinStyle: 'miter',
+                            pointBorderColor: "rgba({{ colors|index:forloop.counter0 }},1)",
+                            pointBackgroundColor: "#fff",
+                            pointBorderWidth: 1,
+                            pointHoverRadius: 5,
+                            pointHoverBackgroundColor: "rgba({{ colors|index:forloop.counter0 }},1)",
+                            pointHoverBorderColor: "rgba(220,220,220,1)",
+                            pointHoverBorderWidth: 2,
+                            pointRadius: 1,
+                            pointHitRadius: 10,
+                            data: {{ final_result|get_item:voting_item|get_item:person }},
+                            spanGaps: false,
+                        },
+                        {% endfor %}
+                    ]
+                };
 
-            new Chart(ctx, {
-                type: 'line',
-                data: chart_data,
-                options: {
-                    responsive: true
-                }
+                new Chart(ctx, {
+                    type: 'line',
+                    data: chart_data,
+                    options: {
+                        responsive: true,
+                    }
+                });
             });
+
 
         </script>
         {% endfor %}
