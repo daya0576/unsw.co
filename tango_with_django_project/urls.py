@@ -47,8 +47,7 @@ urlpatterns = patterns('',
 
     url(r'', include('social_auth.urls')),
 
-    url(r'^wings/$', wings_vote.line_chart, name='wings'),
-    url(r'^wings_voting_data/$', wings_vote.get_data, name='wings_voting_data'),
+    url(r'^wings/$', wings_vote.get_data, name='wings'),
 
 )
 

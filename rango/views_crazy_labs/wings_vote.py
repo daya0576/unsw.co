@@ -2,56 +2,98 @@
 
 import os
 import json
+import re
 from django.shortcuts import render
 from django.http import JsonResponse
 from tango_with_django_project.settings import BASE_DIR
 
 
-FILE = os.path.join(BASE_DIR, "static/z_test/wings_vote/vote_trend.json")
+FILE = os.path.join(BASE_DIR, "static/z_test/wings_vote/vote_trend_all")
+
+
+def get_files_in(FILE):
+    files = [str(f) for f in os.listdir(FILE)]
+
+    # sort by filename
+    convert = lambda text: int(text) if text.isdigit() else text
+    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
+    files.sort(key=alphanum_key)
+
+    return files
 
 
 def get_voting_data():
-    with open(FILE) as f:
-        final_result = json.load(f)
+    files = get_files_in(FILE)
+
+    final_result = []
+    for file in files:
+        file_path = os.path.join(FILE, file)
+        with open(file_path) as f:
+            final_result.append(json.load(f))
 
     return final_result
 
 
-def get_x(data):
-    return [shot['time'] for shot in data]
-
-
-def get_y(data):
-    vote_result = [shot['vote_result'] for shot in data]
-    y1 = [vote[u'WINGS战队（电竞） '] for vote in vote_result]
-    y2 = [vote[u'邹市明（拳击） '] for vote in vote_result]
-    y3 = [vote[u'柯洁（围棋） '] for vote in vote_result]
-
-    return y1, y2, y3
+def get_labels():
+    return get_files_in(FILE)
 
 
 def get_data(request):
-    voting_data = get_voting_data()
-
-    x = get_x(voting_data)
-    y1, y2, y3 = get_y(voting_data)
-
-    return JsonResponse({'label': x, 'y1': y1, 'y2': y2, 'y3': y3})
+    return render(request, 'z_lab/wings_vote.html', get_final_chart_data())
 
 
-from django.views.generic import TemplateView
-line_chart = TemplateView.as_view(template_name='z_lab/wings_vote.html')
+def get_final_chart_data():
+    labels = get_labels()
+    data = [[[] for x in range(5)] for y in range(11)]
+    voting_items = []
+    persons = []
+
+    final_result = get_voting_data()
+
+    ''' handle each file  '''
+    for shot_result in final_result:
+        # print shot_result
+        keys = sorted(shot_result.keys(), key=lambda i: int(re.search(r'^(\d+)', i).group(1)))
+        voting_items = keys
+
+        ''' handle each voting item, e.g. 1、最佳男运动员奖 '''
+        for i_item, k_item in enumerate(keys):
+            # print k_item
+            voting_item = k_item
+
+            ''' handle each person(sort by name first) '''
+            keys_name = sorted(shot_result[k_item].keys())
+            persons.append(keys_name)
+
+            for i_name, k_name in enumerate(keys_name):
+                # handle voting data: e.g. 孙杨（游泳） 0.2450
+                count = shot_result[k_item][k_name].strip(' ')
+                data[i_item][i_name].append(float(count))
+
+    # print labels
+    # print data
+    # print voting_items
+    # print persons
+
+    final_result = {}
+    for i, item in enumerate(voting_items):
+        final_result[item] = {}
+        for j, person in enumerate(persons[i]):
+            # print item, person
+            final_result[item][person] = data[i][j]
+    # print "final_result: ", final_result
+
+    persons_dict = {}
+    for i, item in enumerate(voting_items):
+        persons_dict[item] = persons[i]
+    # print persons_dict
+
+
+    return {'labels': labels, 'final_result': final_result, 'voting_items': voting_items,
+            'persons': persons, 'persons_dict': persons_dict}
 
 
 if __name__ == "__main__":
-    data = get_voting_data()
-    print(data)
-    x = [shot['time'] for shot in data]
-    print(x)
+    get_final_chart_data()
 
-    vote_result = [shot['vote_result'] for shot in data]
-    y1 = [vote[u'WINGS战队（电竞） '] for vote in vote_result]
-    y2 = [vote[u'邹市明（拳击） '] for vote in vote_result]
-    y3 = [vote[u'柯洁（围棋） '] for vote in vote_result]
 
-    y = [y1, y2, y3]
