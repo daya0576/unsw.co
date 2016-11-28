@@ -9,6 +9,7 @@ from tango_with_django_project.settings import BASE_DIR
 
 
 FILE = os.path.join(BASE_DIR, "static/z_test/wings_vote/mate_data")
+# FILE = os.path.join(BASE_DIR, "static/z_test/wings_vote/vote_trend_all")
 
 
 def get_files_in(FILE):
@@ -19,7 +20,13 @@ def get_files_in(FILE):
     alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
     files.sort(key=alphanum_key)
 
-    return files
+    # sparse files
+    files_to_display = []
+    for i, f in enumerate(files):
+        if i % 4 == 0:
+            files_to_display.append(f)
+
+    return files_to_display
 
 
 def get_voting_data():
