@@ -70,6 +70,6 @@ def get_arguments():
 if __name__ == "__main__":
     args = get_arguments()
     sqlite3_backup(args.db_file, args.backup_dir)
-    clean_data(args.backup_dir)
+    # clean_data(args.backup_dir)
 
     print ("\nBackup update has been successful.")

@@ -21,11 +21,14 @@ def get_files_in(FILE):
     files.sort(key=alphanum_key)
 
     # sparse files
-    # files_to_display = []
-    # for i, f in enumerate(files):
-    #     if i % 4 == 0:
-    #         files_to_display.append(f)
     files_to_display = files
+
+    files_len = len(files) / 20
+    files_to_display = []
+    for i, f in enumerate(files[:-1]):
+        if i % files_len == 0:
+            files_to_display.append(f)
+    files_to_display += files[-1:]
 
     return files_to_display
 
