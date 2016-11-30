@@ -32,8 +32,14 @@
 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h1>
-                        2016中国十佳劳伦斯冠军奖 投票趋势!
-                        <small><a href="http://survey.sports.sina.com.cn/result/115601.html" target="_blank">(source)</a></small>
+                        2016中国十佳劳伦斯冠军奖 投票趋势
+                        <small style="display:inline-block">(=・ω・=)</small><br>
+                        <small style="display:inline-block; display: block; padding-top: 5px;">
+                            <a style="color: #777"
+                               href="http://survey.sports.sina.com.cn/result/115601.html" target="_blank">
+                                新浪投票结果主页
+                            </a>
+                        </small>
                     </h1>
                     <div>
                         {% for voting_item in voting_items %}
@@ -49,9 +55,9 @@
 
 
 
-        <script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.10.0/jquery.min.js"></script>
-{#        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>#}
-        <script type="text/javascript" src="https://cdn.staticfile.org/Chart.js/2.4.0/Chart.min.js"></script>
+{#        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.0.min.js"></script>#}
+        <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
         <script src="{% static 'js/bootstrap.min.js' %}"></script>
         {% for voting_item in voting_items %}
         <script type="text/javascript">
