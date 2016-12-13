@@ -93,7 +93,7 @@
                             pointRadius: 1,
                             pointHitRadius: 10,
                             data: {{ final_result|get_item:voting_item|get_item:person }},
-                            spanGaps: false,
+                            spanGaps: false
                         },
                         {% endfor %}
                     ]
@@ -103,7 +103,7 @@
                     type: 'line',
                     data: chart_data,
                     options: {
-                        responsive: true,
+                        responsive: true
                     }
                 });
             });
