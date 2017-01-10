@@ -1,6 +1,6 @@
 #!/bin/sh
 
-d='/home/henry/repo/unswco_develope/'
+d='/home/daya0576/unsw-it-8543-courses/'
 
 echo $d
 
