@@ -13,6 +13,8 @@ import sqlite3
 import shutil
 import time
 import os
+import glob
+import pprint
 
 DESCRIPTION = """
               Create a timestamped SQLite database backup, and
@@ -22,6 +24,9 @@ DESCRIPTION = """
 # How old a file needs to be in order
 # to be considered for being removed
 NO_OF_DAYS = 7
+
+pp = pprint.PrettyPrinter(indent=4)
+
 
 def sqlite3_backup(dbfile, backupdir):
     """Create timestamped database copy"""
@@ -67,9 +72,32 @@ def get_arguments():
                               'file should be saved')
     return parser.parse_args()
 
+
+def get_current_size(f):
+    return os.path.getsize(f)
+
+
+def get_latest_size(d):
+    db_backups = glob.glob(os.path.join(d, 'db.sqlite3-*'))
+    db_backups = sorted(db_backups)
+    # pp.pprint(db_backups)
+    return os.path.getsize(db_backups[-1])
+
+
 if __name__ == "__main__":
     args = get_arguments()
-    sqlite3_backup(args.db_file, args.backup_dir)
+
+    # sqlite3_backup(args.db_file, args.backup_dir)
     # clean_data(args.backup_dir)
 
-    print ("\nBackup update has been successful.")
+    f_size_now = get_current_size(args.db_file)
+    print("f_size_now: ", f_size_now)
+
+    f_size_latest = get_latest_size(args.backup_dir)
+    print("f_size_latest_backup: ", f_size_latest)
+
+    if f_size_now != f_size_latest:
+        sqlite3_backup(args.db_file, args.backup_dir)
+        print ("\nBackup update has been successful.")
+    else:
+        print("\nBackup not necessary.")
