@@ -24,7 +24,7 @@
         <a onclick="sub_filter(1)" id="filter_btn_1" class="btn btn-default" href="{% url 'subject' sub_name_slug %}?order=1" role="button">likes</a>
         <!--<a onclick="sub_filter(2)" id="filter_btn_2" class="btn btn-default" href="{% url 'subject' sub_name_slug %}?order=2" role="button">level</a>-->
 
-        {% if subject.slug == "cse-postgraduate-courses" %}
+        {% if subject.id == 1 %}
         <div class="btn-group">
           <button id="filter_btn_2" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             level&nbsp <span class="caret"></span>
