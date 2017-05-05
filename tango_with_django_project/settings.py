@@ -49,7 +49,7 @@ INSTALLED_APPS = (
     'bootstrap3',
     # 'captcha',
     'social_auth',
-    'chartjs',
+    # 'chartjs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -217,18 +217,37 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
+        'file': {
             'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'rango.log'),
         },
     },
     'loggers': {
-        'django.db.backends': {
-            # 'handlers': ['console'],
+        'django': {
+            'handlers': ['file'],
             'level': 'DEBUG',
+            'propagate': True,
         },
-    }
+    },
 }
+
+#  LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             # 'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#     }
+# }
 
 
 AUTHENTICATION_BACKENDS = (
@@ -243,9 +262,9 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FACEBOOK_APP_ID              = '1102179053146223'
-FACEBOOK_API_SECRET          = '09d3ec01c107ec3d5ffb798c503e5562'
-FACEBOOK_EXTENDED_PERMISSIONS = ['email']
+FACEBOOK_APP_ID              = '1500609339969857'
+FACEBOOK_API_SECRET          = 'a0a55d0b412237c4e2def7ae97aac87f'
+# FACEBOOK_EXTENDED_PERMISSIONS = ['email']
 
 GITHUB_APP_ID                = '756187cfe31e4902b1dc'
 GITHUB_API_SECRET            = 'ec97c8c8c2493a2ff14467dbf5f3a8db709c273d'
