@@ -25,9 +25,9 @@ TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = '#931l#hlt@!kkp-z1u&(kzyn_z(i7ngf-=&85ex#z97vcf=3yf'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["u.changchen.me", "http://127.0.0.1:8003/", "unsw.co"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -115,12 +115,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-STATIC_PATH = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    STATIC_PATH,
-)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -262,12 +258,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-FACEBOOK_APP_ID              = '1500609339969857'
-FACEBOOK_API_SECRET          = 'a0a55d0b412237c4e2def7ae97aac87f'
-# FACEBOOK_EXTENDED_PERMISSIONS = ['email']
-
-GITHUB_APP_ID                = '756187cfe31e4902b1dc'
-GITHUB_API_SECRET            = 'ec97c8c8c2493a2ff14467dbf5f3a8db709c273d'
+FACEBOOK_APP_ID              = '1102179053146223'
+FACEBOOK_API_SECRET          = '09d3ec01c107ec3d5ffb798c503e5562'
 GITHUB_EXTENDED_PERMISSIONS  = ['email']
 
 GOOGLE_OAUTH2_CLIENT_ID          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
