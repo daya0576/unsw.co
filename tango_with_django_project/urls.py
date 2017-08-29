@@ -45,10 +45,11 @@ urlpatterns = patterns('',
 
     url(r'^doom/', views.avatar_doom),
 
-    url(r'', include('social_auth.urls')),
+    # url(r'', include('social_auth.urls')),
+    # url('', include('social_django.urls', namespace='social')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 
     url(r'^wings/$', wings_vote.get_data, name='wings'),
-
 )
 
 # UNDERNEATH your urlpatterns definition, add the following two lines:

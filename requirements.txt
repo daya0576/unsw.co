@@ -5,3 +5,4 @@ DjangoUeditor==1.8.143
 django-social-auth==0.7.28
 django-recaptcha==1.0.5
 django-registration==2.2
+social-auth-app-django
