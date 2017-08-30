@@ -21,24 +21,21 @@
             <h1 style="padding:8px 0">Log in to your account</h1>
             <div style="">
                 <div class="login-icons">
-                    <a href="{% url 'socialauth_begin' 'facebook' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+                    <a href="{% url 'social:begin' 'facebook' %}">
                         <i class="fa fa-facebook-square fa-4x"></i>
                     </a>
-                    <a href="{% url 'socialauth_begin' 'github' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                        <i class="fa fa-github-square fa-4x"></i>
+
+                    <a href="{% url 'social:begin' 'github' %}">
+                        <i class="fa fa-github fa-4x"></i>
                     </a>
-                    <a href="{% url 'socialauth_begin' 'google-oauth2' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                        <i class="fa fa-google-plus-square fa-4x"></i>
+
+                    <a href="{% url "social:begin" "google-oauth2" %}">
+                        <i class="fa fa-google fa-4x"></i>
                     </a>
-                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">-->
-                        <!--<i class="fa fa-instagram fa-4x"></i>-->
-                    <!--</a>-->
-                    <a href="{% url 'socialauth_begin' 'twitter' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
+
+                    <a href="{% url 'social:begin' 'twitter' %}">
                         <i class="fa fa-twitter-square fa-4x"></i>
                     </a>
-                    <!--<a href="{% url 'socialauth_begin' 'instagram' %}{% if request.GET.next %}?next={{request.GET.next}}{% endif %}">
-                        <i class="fa fa-weibo fa-4x"></i>
-                    </a>-->
                 </div>
             </div>
 

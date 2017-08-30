@@ -254,10 +254,7 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
-
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
+    'social_core.backends.google.GoogleOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
 )
@@ -277,8 +274,8 @@ SOCIAL_AUTH_GITHUB_KEY                = '756187cfe31e4902b1dc'
 SOCIAL_AUTH_GITHUB_SECRET            = 'ec97c8c8c2493a2ff14467dbf5f3a8db709c273d'
 GITHUB_EXTENDED_PERMISSIONS  = ['email']
 
-GOOGLE_OAUTH2_CLIENT_ID          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET       = 'SWJZlsVUT_kleTsIHD8lhvOo'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET       = 'SWJZlsVUT_kleTsIHD8lhvOo'
 GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = True
 
 INSTAGRAM_CLIENT_ID = 'be1ad52887c0478eb42b003470070f83'
