@@ -1,8 +1,3 @@
-## Plans(Ordered by urgency) ##
-1. adding undergraduate courses.(done)
-2. custom index page.(done)
-3. attracting users.
-4. bg font bugs.
 
 ## Configuration ##
 ### Step1: ###
@@ -43,3 +38,11 @@ Open this url in your browser
 ###  ###
 If it does not work, sending email to me:
 **me@changchen.me**
+
+## Plans(Ordered by urgency) ##
+1. adding undergraduate courses.(done)
+2. custom index page.(done)
+3. attracting users.
+4. bg font bugs.
+
+

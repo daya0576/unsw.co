@@ -5,3 +5,4 @@ media/
 vote_trend.json
 DB_backups/
 vote_trend_all/ 
+db.sqlite3
