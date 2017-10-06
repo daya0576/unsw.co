@@ -1,0 +1,156 @@
+.answer .cell {
+    padding: 10px 0 5px 0;
+    border-top: 1px solid #e2e2e2;
+}
+
+.answer a.dark:link, a.dark:visited, a.dark:active {
+    color: #222;
+    text-decoration: none;
+}
+
+.answer a.likes_person{
+    color: gray;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.answer .no {
+    font-size: 9px;
+    line-height: 9px;
+    font-weight: 500;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #ccc;
+    padding: 2px 5px 2px 5px;
+}
+
+.answer .fr {
+    float: right;
+    text-align: right;
+}
+
+.answer .sep5 {
+    height: 5px;
+}
+.answer .fade_answer {
+    color: #aaa;
+}
+
+.answer p{
+    margin-bottom:0px;
+}
+
+.answer .reply_content img{
+    max-width: 100%;
+    max-height:480px;
+    height: auto !important;
+}
+
+.reply_content{
+    width:100%;
+    overflow: auto;
+    word-break: break-all;
+    word-wrap: break-word;
+    min-height: 65px;
+}
+.answer .edit a{
+    color:gray;
+}
+.answer .edit a:hover{
+    color:#269abc;
+    text-decoration:underline
+}
+.answer .edit{
+    margin: 10px 0 0 0;
+}
+
+
+
+.answer{
+    margin-left: 48px;
+}
+
+.answer .zh-answers-title {
+    position: relative;
+    padding: 10px 0;
+    line-height: 24px;
+}
+
+.answer .zh-answers-title h3 {
+    margin: 0;
+    display: inline;
+}
+
+
+.zm-votebar.version-classic {
+    float: left;
+    margin-left: -48px;
+}
+.zm-votebar.version-classic .up {
+    padding-top: 18px;
+    height: 44px;
+}
+.zm-votebar.version-classic .up,.down{
+    display: block;
+    color: #337ab7;;
+    line-height: 24px;
+    width: 38px;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    background: #efefef;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+}
+
+.zm-votebar.version-classic .up .vote-arrow {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    margin-left: -6px;
+    border-top-width: 0;
+    border-bottom-color: #337ab7;;
+    border-top-style: solid;
+}
+.zm-votebar.version-classic .vote-arrow {
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    font-size: 0;
+    _border-style: dashed;
+}
+.zm-votebar.version-classic .down .vote-arrow {
+    border-bottom-width: 0;
+    border-top-color: #337ab7;
+}
+.zm-votebar.version-classic .down {
+    margin: 5px 0 0;
+}
+
+.zm-votebar.version-classic button:hover {
+    background-color:#337ab7;
+    color: white;
+}
+.zm-votebar.version-classic button:hover .vote-arrow{
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+}
+
+
+.zm-votebar.version-classic .up.pressed, .down.pressed {
+    background-color: #337ab7;
+    color: white;
+}
+.zm-votebar.version-classic .up.pressed .vote-arrow {
+    border-bottom-color: #fff;
+}
+.zm-votebar.version-classic .down.pressed .vote-arrow {
+    border-top-color: #fff;
+}
+
+
+.fancybox-overlay-fixed {
+    z-index: 10000 !important;
+}

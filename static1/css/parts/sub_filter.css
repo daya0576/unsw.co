@@ -1,0 +1,32 @@
+.answer_filter{
+
+}
+
+.sep10{
+    height:10px;
+}
+
+
+.answer_filter .filter_search{
+    float:right;
+    max-width:300px;
+    padding: 3px 7px;
+}
+
+.answer_filter .filter_left{
+    /*float: left;*/
+    padding: 3px 7px;
+}
+
+.filter_search_box{
+    display:none;
+}
+
+#sub_search_loading{
+    text-align: center;
+    display: none;
+}
+
+.padding_10{
+    padding: 20px 0;
+}

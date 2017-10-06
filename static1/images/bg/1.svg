@@ -1,0 +1,12 @@
+<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='400' height='400'>
+	<defs id='defs4'>
+		<filter color-interpolation-filters='sRGB' id='filter3115'>
+			<feTurbulence type='fractalNoise' numOctaves='1' baseFrequency='0.9' id='feTurbulence3117' />
+			<feColorMatrix result='result5' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 6 -3.75 ' id='feColorMatrix3119' />
+			<feComposite in2='result5' operator='in' in='SourceGraphic' result='result6' id='feComposite3121' />
+			<feMorphology in='result6' operator='dilate' radius='10' result='result3' id='feMorphology3123' />
+		</filter>
+	</defs>
+	<rect width='100%' height='100%' x='0' y='0' id='rect2985' fill='#fff'/>
+	<rect width='100%' height='100%' x='0' y='0' id='rect2985' style='fill:#337ab7;filter:url(#filter3115)' />
+</svg>

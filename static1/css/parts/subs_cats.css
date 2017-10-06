@@ -1,0 +1,64 @@
+
+#sub_cats_container a {
+    font-size: 16px;
+    padding: 15px;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    display:block;
+    //width: 100%; height: auto;
+    margin-bottom: 5px;
+}
+
+#sub_cats_container {
+    overflow-y: hidden;
+}
+
+.grid.effect-2 {
+	perspective: 1300px;
+}
+
+.grid.effect-2 li {
+	transform-style: preserve-3d;
+}
+
+/* Effect 8:  */
+.grid.effect-2 {
+	-webkit-perspective: 1300px;
+	perspective: 1300px;
+}
+
+.grid.effect-2 li.animate {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: scale(0.4);
+	transform: scale(0.4);
+	-webkit-animation: popUp .8s ease-in forwards;
+	animation: popUp .8s ease-in forwards;
+}
+
+@-webkit-keyframes popUp {
+	0% { }
+	70% { -webkit-transform: scale(1.1); opacity: .8; -webkit-animation-timing-function: ease-out; }
+	100% { -webkit-transform: scale(1); opacity: 1; }
+}
+
+@keyframes popUp {
+	0% { }
+	70% { -webkit-transform: scale(1.1); transform: scale(1.1); opacity: .8; -webkit-animation-timing-function: ease-out; animation-timing-function: ease-out; }
+	100% { -webkit-transform: scale(1); transform: scale(1); opacity: 1; }
+}
+
+@media screen and (max-width: 900px) {
+	.grid li {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.grid li {
+		width: 100%;
+	}
+}
+
+.small_box {
+    background: #fff;
+}

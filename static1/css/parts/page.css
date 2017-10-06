@@ -1,0 +1,19 @@
+.more{
+    color: inherit;
+    font-size: inherit;
+    display: inline-block!important;
+    font-size: .9em;
+    color: #999;
+}
+
+.page{
+    margin-top: 5px;
+}
+
+.list-group{
+    margin-bottom: 8px;
+}
+
+.cat_content .likes{
+    padding:4px 0 8px 0;
+}
