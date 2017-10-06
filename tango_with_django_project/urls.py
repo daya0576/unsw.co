@@ -29,8 +29,9 @@ from django.conf.urls.static import static
 class MyRegistrationView(RegistrationView):
     form_class = RegistrationFormUniqueEmail
 
-    def get_success_url(self, request, user):
+    def get_success_url(self, *args):
         return '/rango/'
+
 
 urlpatterns = patterns('',
 
