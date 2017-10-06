@@ -1,0 +1,39 @@
+
+<script>
+    $(function() {
+{#        console.log($.cookie('alreadyShow'));#}
+        if($.cookie('alreadyShow') === undefined) {
+            $('#welcomeModal').modal();
+            $.cookie('alreadyShow', true, {expires: 1});
+        }
+    });
+</script>
+
+
+<!-- Large modal -->
+<div id="welcomeModal" class="modal fade" role="dialog" style="z-index: 10000">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>This website is open sourced!!! <i class="fa fa-github" aria-hidden="true"></i> </h2>
+            </div>
+            <div class="modal-body">
+
+                <h3>You are welcome to post issues here:</h3>
+                <h5><a href="https://github.com/daya0576/unsw.co" target="_blank">https://github.com/daya0576/unsw.co</a></h5>
+
+                <br>
+                <h3>About me:</h3>
+                <p>Blog: <a href="https://changchen.me/" target="_blank">https://changchen.me/</a><br>
+                Email: me@changchen.me<br>
+                WeChat: daya0576</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
