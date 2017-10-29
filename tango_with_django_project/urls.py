@@ -49,7 +49,7 @@ urlpatterns = patterns('',
 
     # url(r'', include('social_auth.urls')),
     # url('', include('social_django.urls', namespace='social')),
-    url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
+    # url(r'^oauth/', include('social_django.urls', namespace='social')),  # <--
 
     url(r'^wings/$', wings_vote.get_data, name='wings'),
 )

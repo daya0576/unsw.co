@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-import raven
 
 from rango import keys
 
@@ -53,9 +52,9 @@ INSTALLED_APPS = (
     # 'captcha',
     # 'social_auth',
     # 'chartjs',
-    'social_django',
+    # 'social_django',
 
-    'raven.contrib.django.raven_compat',
+    # 'raven.contrib.django.raven_compat',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,7 +67,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'tango_with_django_project.urls'
@@ -86,8 +84,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 "django.core.context_processors.request",
 
-                'social_django.context_processors.backends',  # <--
-                'social_django.context_processors.login_redirect', # <--
+                # 'social_django.context_processors.backends',  # <--
+                # 'social_django.context_processors.login_redirect', # <--
             ],
         },
     },
@@ -215,14 +213,6 @@ UEDITOR_SETTINGS={
 }
 
 
-# ReCapthcha
-RECAPTCHA_PUBLIC_KEY = '6LcWThUTAAAAAKS7B2Ox16ylUCTQ72Dls9__aLva'
-RECAPTCHA_PRIVATE_KEY = '6LcWThUTAAAAAEF-nGUHbmuQ0XdwLqc5a7RBFsPw'
-
-NOCAPTCHA = True
-RECAPTCHA_USE_SSL = True
-
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -257,57 +247,5 @@ LOGGING = {
 #             'level': 'DEBUG',
 #         },
 #     }
+
 # }
-
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.google.GoogleOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-
-SOCIAL_AUTH_FACEBOOK_KEY              = '1102179053146223'
-SOCIAL_AUTH_FACEBOOK_SECRET           = '09d3ec01c107ec3d5ffb798c503e5562'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
-  'locale': 'ru_RU',
-  'fields': 'id, name, email'
-}
-
-
-SOCIAL_AUTH_GITHUB_KEY                = '756187cfe31e4902b1dc'
-SOCIAL_AUTH_GITHUB_SECRET            = 'ec97c8c8c2493a2ff14467dbf5f3a8db709c273d'
-GITHUB_EXTENDED_PERMISSIONS  = ['email']
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY          = '434471433839-cprbr5jgr916hvo2mfjrme3evk2rh91v.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET       = 'SWJZlsVUT_kleTsIHD8lhvOo'
-GOOGLE_OAUTH2_USE_UNIQUE_USER_ID = True
-
-INSTAGRAM_CLIENT_ID = 'be1ad52887c0478eb42b003470070f83'
-INSTAGRAM_CLIENT_SECRET = '4b33213387f94b5db985822e9532e29f'
-
-SOCIAL_AUTH_TWITTER_KEY = 'B5NUwuqDN825BxTEkA2LRJ7jC'
-SOCIAL_AUTH_TWITTER_SECRET = 'TKmKl94NyPO9P3hkOr7jYHpjHq7sepokHnXroedrJiIhHFVGTI'
-
-SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
-SOCIAL_AUTH_UID_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
-SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-
-USE_X_FORWARDED_HOST = True
-REDIRECT_IS_HTTPS = True
-
-
-RAVEN_CONFIG = {
-    'dsn': 'https://59dc20c3f4014b2186848afd9ec7be6c:632be23c6aa64b39bdd87e90875c2e87@sentry.io/210985',
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
-}
