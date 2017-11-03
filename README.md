@@ -1,9 +1,6 @@
 # [UNSW.CO](http://www.unsw.co)
 
 ### A UNSW CSE Course **experience sharing website** based on Django.   
-![](http://opetwnn9x.bkt.clouddn.com/unswco/3.jpg)
-![](http://opetwnn9x.bkt.clouddn.com/unswco/2.jpg)
-![](http://opetwnn9x.bkt.clouddn.com/unswco/1.jpg)
 
 ### Quick Links:
 
@@ -47,3 +44,9 @@ If it does not work, sending email to me:
 * [ ] attracting users.
 * [ ] bg font bug.
 
+---
+
+# ScreenShots:
+![](http://opetwnn9x.bkt.clouddn.com/unswco/3.jpg)
+![](http://opetwnn9x.bkt.clouddn.com/unswco/2.jpg)
+![](http://opetwnn9x.bkt.clouddn.com/unswco/1.jpg)
