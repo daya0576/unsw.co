@@ -1,52 +1,46 @@
-# [UNSW.CO](http://www.unsw.co)
+# unsw.co — Archived
 
-### A UNSW CSE Course **experience sharing website** based on Django.   
+> ⚠️ This project is archived. The website is no longer actively maintained.
 
-### Quick Links:
+**unsw.co** was a community-driven course review platform for UNSW students, primarily serving Chinese-speaking postgraduate and undergraduate students in the CSE faculty.
 
-- [Index](https://www.unsw.co)   
-- [All postgraduate courses: ](https://www.unsw.co/rango/subject/cse-postgraduate-coursework-eg-it-8543/)   
-- [Check comments of specific course such as COMP9021](https://www.unsw.co/rango/category/comp9021/)    
-- [Login with your Facebook, Github, Google account:](https://www.unsw.co/accounts/login/)    
+## Course Reviews
 
----
+All course comments have been migrated to GitHub Issues for preservation:
 
-# Quickstart
+👉 **[Browse all course reviews](https://github.com/daya0576/unsw.co/issues)**
 
-### Install requirements.   
-``` bash
-pip2 install -r requirements.txt
-```
+| Label | Description |
+|---|---|
+| `CSE-Postgrad` | CSE Postgraduate Coursework courses |
+| `CSE-Undergraduate-Courses` | CSE Undergraduate courses |
+| `UEEC` | University English Entry Course |
 
-`If you are in mainland China, try this one:`   
-```
-pip2 install  -i  https://pypi.doubanio.com/simple/  --trusted-host pypi.doubanio.com -r /requirements.txt
-```
-
-### Start the server  
-
-``` bash
-python2 manage.py runserver 
-```
-
-### Here we go 😀😃😄😁
-Open this url in your browser: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
-
-If it does not work, sending email to me:
-**me@changchen.me**
+- **65 courses** with at least one review
+- **129 comments** migrated, preserved with original author, date, and likes
 
 ---
 
-# TODO(Ordered by urgency) 
+## Original Setup (for reference)
 
-* [x] adding undergraduate courses.(done)
-* [x] customize index page.(done)
-* [ ] attracting users.
-* [ ] bg font bug.
+### Step 1
+Add `keys.py` to the `rango/` directory:
+```python
+BING_API_KEY = ""
+G_EMAIL_KEY = ""
+ME_EMAIL_KEY = ""
+```
 
----
+### Step 2
+Install dependencies from the root directory:
+```bash
+pip install -r requirements.txt
+```
 
-# ScreenShots:
-![](http://opetwnn9x.bkt.clouddn.com/unswco/3.jpg)
-![](http://opetwnn9x.bkt.clouddn.com/unswco/2.jpg)
-![](http://opetwnn9x.bkt.clouddn.com/unswco/1.jpg)
+### Step 3
+```bash
+cd rango
+python manage.py runserver 8001
+```
+
+Open [http://127.0.0.1:8001/](http://127.0.0.1:8001/) in your browser.
