@@ -1,4 +1,4 @@
-django==1.8.3
+django==2.2.24
 django-bootstrap-toolkit==2.15.0
 django-bootstrap3==6.2.2
 DjangoUeditor==1.8.143
