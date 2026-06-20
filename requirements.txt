@@ -4,4 +4,4 @@ django-bootstrap3==6.2.2
 DjangoUeditor==1.8.143
 django-social-auth==0.7.28
 django-recaptcha==1.0.5
-django-registration==2.2
+django-registration==3.1.2
